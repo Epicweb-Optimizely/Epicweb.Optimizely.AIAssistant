@@ -22,10 +22,19 @@ Feedback and Issues
 
 Write your text, get suggestion automatically, or by spinning the wheel
 
+
+
 ![Epicweb Optimizely AIAssistant_Scenario_Suggestion](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5c77b604-ccb3-4d3b-be48-59a8c885dae2)
 
 
+
 ### Translates your text into other languages
+
+**Scenario 1:** English page exists with text in the property "page description", change to Swedish context of the page, spinn the button and it translates the field.
+
+**Scenatio 2:** Go to Swedish context of the page, paste in the English text, spinn the button and it translates the field to Swedish automatically.
+
+**Scenatio 3:** Translate text to any language
 
 ### Generates new text
 
