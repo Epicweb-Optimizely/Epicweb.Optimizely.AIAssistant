@@ -29,7 +29,7 @@ Write your text, get suggestion automatically, or by spinning the wheel
 | ![Epicweb Optimizely AIAssistant_Scenario_Suggestion](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5c77b604-ccb3-4d3b-be48-59a8c885dae2) |
 |-|
 
-
+<br /><br />
 
 ### Translates your text into other languages
 
@@ -38,28 +38,37 @@ Write your text, get suggestion automatically, or by spinning the wheel
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations1](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/ebf3fa2f-fe97-4634-8bf7-81279a6c8a87) |
 |-|
 
+<br /><br />
 
 **Scenatio 2:** Go to Swedish context of the page, paste in the English text, spinn the wheel and it translates the field to Swedish automatically.
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations2](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5aad3ba0-fcff-4a98-be15-ac1b855e9083) |
 |-|
 
+<br /><br />
 
 **Scenatio 3:** Translate text to any language
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations3](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/938b1f81-c57d-4ea3-8e4c-a21beabeb030) |
 |-|
 
+<br /><br />
 
 ### Generates new text
 
 | ![Epicweb Optimizely AIAssistant_Scenario_GenerateTexts](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/3454e14c-af6a-4ea0-8ed0-70ea5db76acf) |
 |-|
 
+<br /><br />
+
+
 ### Extracts keywords from your text
 
 | ![Epicweb Optimizely AIAssistant_Scenario_ExtractKeywords](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/4052fa47-bb11-4fe2-95d1-ebceadb1af92) |
 |-|
+
+<br /><br />
+
 
 ### Run your own commands to ChatGPT 
 
