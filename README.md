@@ -72,6 +72,9 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 <br /><br />
 
+### Summeraze texts and other propertyfields on page
+
+![Epicweb Optimizely AIAssistant_Scenario_Summerize](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/614ca6cc-4cda-46a0-8842-18229e6f80e0)
 
 ### Run your own commands to ChatGPT 
 
@@ -81,7 +84,11 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 ![Epicweb Optimizely AIAssistant_Scenario_ChatGPT_SEO](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/3a525986-47ec-4f78-a948-8c0779c620a4)
 
+<br /><br />
+
 #generate lorem ipsum
 
 ![Epicweb Optimizely AIAssistant_Scenario_ChatGPT_explain_stuff](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/66df1610-cc40-40f7-8b1a-aba07d889fc4)
+
+<br /><br />
 
