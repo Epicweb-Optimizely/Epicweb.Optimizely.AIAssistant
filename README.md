@@ -6,7 +6,7 @@ The plugin provides assistance with suggestions, spell-checking, translations, a
 CMS 12 and Commerce 14
 
 ## Links (todo)
-- [Installation]([installation.md)
+- [Installation](installation.md)
 - License (Free for evaluation, premium plan for Production use)
 - Payment plans
 - Documentation
