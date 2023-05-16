@@ -2,7 +2,7 @@
 
 Install it thru nuget package management:  https://nuget.optimizely.com/package/?id=Epicweb.Optimizely.AIAssistant
 
-For demo and evaluation, no config needed is add UIHINT on property
+For demo and evaluation, the only required configuration is to include the UIHINT attribute for the property.
 
 [UIHint(AiHint.Textarea)]
 
