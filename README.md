@@ -18,6 +18,7 @@ The plugin provides assistance with suggestions, spell-checking, translations, a
 - Spell-checking
 - Extracts keywords from your text
 - Run your own commands to ChatGPT 
+- Summeraze texts and other propertyfields on page
 - Use ChatGPT as inline help
 
 ### Provides suggestions or alternatives for your text
