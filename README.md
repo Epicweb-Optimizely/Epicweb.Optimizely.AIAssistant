@@ -7,11 +7,11 @@ CMS 12 and Commerce 14
 
 ## Links (todo)
 - [Installation](installation.md)
-- License (Free for evaluation, premium plan for Production use)
+- [License](license.md) (Free for evaluation, premium plan for Production use)
 - Payment plans
-- Documentation
-- FAQ
-- Feedback and Issues
+- Documentation (see installation)
+- [FAQ](faq.md)
+- [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
 
 ## Feature list
 - Provides suggestions or alternatives for your text
@@ -20,7 +20,7 @@ CMS 12 and Commerce 14
 - Spell-checking
 - Extracts keywords from your text
 - Run your own commands to ChatGPT 
-- Summeraze texts and other propertyfields on page
+- Summerize texts and other propertyfields on page
 - Use ChatGPT as inline help
 
 ### Provides suggestions or alternatives for your text
