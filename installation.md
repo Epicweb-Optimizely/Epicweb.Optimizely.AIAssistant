@@ -6,6 +6,11 @@ For demo and evaluation, the only required configuration is to include the UIHIN
 
 [UIHint(AiHint.Textarea)]
 
+## Dependencies
+
+Episerver.CMS > 12
+Episerver.Commerce > 14
+
 ## Discussions and feedback
 
 This can be discussed in Github discussions (https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
