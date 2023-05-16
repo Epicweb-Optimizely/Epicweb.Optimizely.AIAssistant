@@ -56,4 +56,4 @@ IN NO EVENT SHALL THE PROVIDER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
 
 7.7 Relationship of the Parties: Nothing in this agreement shall create a partnership, joint venture, agency, or employment relationship between You and the Provider. You agree that you are an independent contractor and shall not represent yourself as an agent or representative of the Provider.
 
-By using Epicweb.Otpimizely.AIAssistant Service within the Optimizely UI, You acknowledge that you have read, understood, and agreed to be bound by these terms of use. If you do not agree with any part of these terms, you should not use the Service.
+By using Epicweb.Optimizely.AIAssistant Service within the Optimizely UI, You acknowledge that you have read, understood, and agreed to be bound by these terms of use. If you do not agree with any part of these terms, you should not use the Service.
