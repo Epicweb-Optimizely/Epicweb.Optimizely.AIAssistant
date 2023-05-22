@@ -6,7 +6,7 @@ For demo and evaluation, the only required configuration is to include the **AI*
 
 1. add to startup.cs: services.AddAIAssistant();
 
-2. decorate your string property with [UIHint(AiHint.Textarea)]
+2. decorate your string property with [UIHint(**AI**Hint.Textarea)]
 
 ## Dependencies
 
