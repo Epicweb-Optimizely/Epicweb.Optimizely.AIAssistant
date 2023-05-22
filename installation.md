@@ -2,9 +2,11 @@
 
 Install it thru nuget package management:  https://nuget.optimizely.com/package/?id=Epicweb.Optimizely.AIAssistant
 
-For demo and evaluation, the only required configuration is to include the UIHINT attribute for the property.
+For demo and evaluation, the only required configuration is to include the **AI**HINT attribute for the property.
 
-[UIHint(AiHint.Textarea)]
+1. add to startup.cs: services.AddAIAssistant();
+
+2. decorate your string property with [UIHint(AiHint.Textarea)]
 
 ## Dependencies
 
