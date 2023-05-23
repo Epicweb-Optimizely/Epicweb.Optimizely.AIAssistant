@@ -1,7 +1,7 @@
 # FAQ
 
 ## How does it work? 
-The AI Assistant provides automatic suggestions and alternative wording for your text. 
+The AI Assistant offers automated **suggestions** and alternative wording for your text, while also providing **translation** capabilities for texts and properties on pages and blocks.
 
 Additionally, you can command the AI Assistant by initiating the text with the symbol "#"
 
