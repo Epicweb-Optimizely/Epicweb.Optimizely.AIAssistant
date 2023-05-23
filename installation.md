@@ -10,7 +10,7 @@ For demo and evaluation, the only required configuration is to include the **AI*
 
 ## Dependencies
 
-Episerver.CMS > 12
+Episerver.CMS > 12.18
 Episerver.Commerce > 14
 
 ## Discussions and feedback
