@@ -13,19 +13,20 @@ Examples:
 - #generate a really short text about cats
 - #Can you provide me with examples of article titles related to paint brushes?
 
+Its really powerfull and intuitive
 
 ## Is it free?
 No, it's free for evaluation purposes, but you may encounter limitations and receive license messages.
 
-## What is included in Premium? 
+## What is included in Premium subscription? 
 You get 
-- priority
-- setup and choose AI-Models
-- email support
+- Priority Usage
 - Increased Usage Limits
+- Email Support
+- Optional Setup like AI-Models
 
-## How do i get Premium?
-For the moment we got a waiting list, so please email ai-waiting-list@optimizely.guru
+## How do i get Premium subscription?
+We currently have a waiting list for Premium subscriptions. To join the waiting list and receive information about the pricing for Premium, please email our support team at ai-waiting-list@optimizely.guru
 
-## What does Premium cost?
-
+## What does Premium subscription cost?
+The pricing for Premium subscriptions is currently under evaluation. To get the most accurate and up-to-date information regarding the cost of Premium, we kindly request you to email our support team at premium-quote@optimizely.guru
