@@ -1,5 +1,7 @@
 # License
 
+**The License is currently undergoing continuous updates**
+
 ## In short
 
 The Epicweb.Optimizely.AIAssistant Service is available for free evaluation within the Optimizely UI. When used in production, there may be a license message displayed, or usage may be limited. Premium users receive priority access, email support, and additional configuration options. Users must comply with laws, refrain from unauthorized use or redistribution, and not reverse engineer the Service. The Provider retains ownership of the Service and may incorporate user feedback. The agreement can be terminated by either party, and the Provider disclaims warranties and limits liability. The agreement is governed by the laws of a specific jurisdiction. Any changes to the terms will be communicated, and users are considered independent contractors. By using the Service, users agree to these terms.
