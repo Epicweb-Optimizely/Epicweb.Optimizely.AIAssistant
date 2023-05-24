@@ -1,5 +1,7 @@
 # The OpenAI ChatGPT AI Assistant for Optimizely Content Cloud (CMS)
 
+**The documentation is currently undergoing continuous updates**
+
 ## Epicweb.Optimizely.AIAssistant Plugin
 The plugin provides assistance with suggestions, spell-checking, translations, and much more for input fields in an intuitive way within the Optimizely CMS and Customizable Commerce platform
 
@@ -8,7 +10,7 @@ CMS 12 and Commerce 14
 ## Links (todo)
 - [Installation](installation.md)
 - [License](license.md) (Free for evaluation, premium plan for Production use)
-- Payment plans
+- Payment plans (coming soon, read FAQ)
 - Documentation (see installation)
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
@@ -28,8 +30,7 @@ CMS 12 and Commerce 14
 Write your text, get suggestion automatically, or by spinning the wheel
 
 
-
-| ![Epicweb Optimizely AIAssistant_Scenario_Suggestion](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5c77b604-ccb3-4d3b-be48-59a8c885dae2) |
+| ![Epicweb Optimizely AIAssistant_Scenario_Suggestion](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/1edc64b4-701c-40e5-a587-13358ef6c732) |
 |-|
 
 <br /><br />
@@ -38,28 +39,28 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 **Scenario 1:** English page exists with text in the property "page description", change to Swedish context of the page, spinn the wheel and it translates the field.
 
-| ![Epicweb Optimizely AIAssistant_Scenario_Translations1](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/ebf3fa2f-fe97-4634-8bf7-81279a6c8a87) |
+| ![Epicweb Optimizely AIAssistant_Scenario_Translations1](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5973da64-f645-43f0-93eb-6769bb1170fb) |
 |-|
 
 <br /><br />
 
 **Scenario 2:** Go to Swedish context of the page, paste in the English text, spinn the wheel and it translates the field to Swedish automatically.
 
-| ![Epicweb Optimizely AIAssistant_Scenario_Translations2](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5aad3ba0-fcff-4a98-be15-ac1b855e9083) |
+| ![Epicweb Optimizely AIAssistant_Scenario_Translations2](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/110e46a3-0538-462e-adde-ea0e47ca0d98) |
 |-|
 
 <br /><br />
 
 **Scenario 3:** Translate text to any language
 
-| ![Epicweb Optimizely AIAssistant_Scenario_Translations3](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/938b1f81-c57d-4ea3-8e4c-a21beabeb030) |
+| ![Epicweb Optimizely AIAssistant_Scenario_Translations3](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/96da3776-8fde-4e4e-b81a-cb076d6ea8ae) |
 |-|
 
 <br /><br />
 
 ### Generates new text
 
-| ![Epicweb Optimizely AIAssistant_Scenario_GenerateTexts](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/3454e14c-af6a-4ea0-8ed0-70ea5db76acf) |
+| ![Epicweb Optimizely AIAssistant_Scenario_GenerateTexts](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/c7b3c62b-76c2-411b-83b5-57a67ea34848) |
 |-|
 
 <br /><br />
@@ -67,14 +68,19 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 ### Extracts keywords from your text
 
-| ![Epicweb Optimizely AIAssistant_Scenario_ExtractKeywords](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/4052fa47-bb11-4fe2-95d1-ebceadb1af92) |
+| ![Epicweb Optimizely AIAssistant_Scenario_ExtractKeywords](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/72bb00b3-ec62-44c8-91e7-33fac6c1b7ef) |
 |-|
 
 <br /><br />
 
 ### Summeraze texts and other propertyfields on page
 
-![Epicweb Optimizely AIAssistant_Scenario_Summerize](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/614ca6cc-4cda-46a0-8842-18229e6f80e0)
+
+| ![Epicweb Optimizely AIAssistant_Scenario_Summerize](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/73c84d7a-5ab9-4b06-82b8-7e1a24fd10d9) |
+|-|
+
+
+<br /><br />
 
 ### Run your own commands to ChatGPT 
 
@@ -82,13 +88,16 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 #what does SEO mean?
 
-![Epicweb Optimizely AIAssistant_Scenario_ChatGPT_SEO](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/3a525986-47ec-4f78-a948-8c0779c620a4)
+| ![Epicweb Optimizely AIAssistant_Scenario_ChatGPT_SEO](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/6cc36306-dc33-4c0a-9ca6-724a03643070) |
+|-|
+
 
 <br /><br />
 
 #generate lorem ipsum
 
-![Epicweb Optimizely AIAssistant_Scenario_ChatGPT_explain_stuff](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/66df1610-cc40-40f7-8b1a-aba07d889fc4)
+| ![Epicweb Optimizely AIAssistant_Scenario_ChatGPT_explain_stuff](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/63e7ab1c-3c9c-4bed-a38e-e6caf0ff9eea) |
+|-|
 
 <br /><br />
 
