@@ -15,7 +15,7 @@ Examples:
 - #generate a really short text about cats
 - #Can you provide me with examples of article titles related to paint brushes?
 
-Its really powerfull and intuitive
+It's really powerful and intuitive
 
 ## Is it free?
 No, it's free for evaluation purposes, but you may encounter limitations and receive license messages.
@@ -28,7 +28,7 @@ You get
 - Optional Setup like AI-Models
 
 ## How do i get Premium subscription?
-We currently have a waiting list for Premium subscriptions. To join the waiting list and receive information about the pricing for Premium, please email our support team at ai-waiting-list@optimizely.guru
+We currently have a waiting list for Premium subscriptions. To join the waiting list and receive information about the pricing for Premium, please email our support team at support@epicweb.se
 
 ## What does Premium subscription cost?
-The pricing for Premium subscriptions is currently under evaluation. To get the most accurate and up-to-date information regarding the cost of Premium, we kindly request you to email our support team at premium-quote@optimizely.guru
+The pricing for Premium subscriptions is currently under evaluation. To get the most accurate and up-to-date information regarding the cost of Premium, we kindly request you to email our support team at support@epicweb.se
