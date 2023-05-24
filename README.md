@@ -43,14 +43,14 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 <br /><br />
 
-**Scenatio 2:** Go to Swedish context of the page, paste in the English text, spinn the wheel and it translates the field to Swedish automatically.
+**Scenario 2:** Go to Swedish context of the page, paste in the English text, spinn the wheel and it translates the field to Swedish automatically.
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations2](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5aad3ba0-fcff-4a98-be15-ac1b855e9083) |
 |-|
 
 <br /><br />
 
-**Scenatio 3:** Translate text to any language
+**Scenario 3:** Translate text to any language
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations3](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/938b1f81-c57d-4ea3-8e4c-a21beabeb030) |
 |-|
