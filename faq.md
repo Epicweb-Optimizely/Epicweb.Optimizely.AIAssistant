@@ -1,5 +1,7 @@
 # FAQ
 
+**The FAQ is currently undergoing continuous updates**
+
 ## How does it work? 
 The AI Assistant offers automated **suggestions** and alternative wording for your text, while also providing **translation** capabilities for texts and properties on pages and blocks.
 
