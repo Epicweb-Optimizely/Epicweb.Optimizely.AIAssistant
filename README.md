@@ -17,7 +17,7 @@ CMS 12 and Commerce 14
 
 ## Feature list
 - Provides suggestions or alternatives for your text
-- Translates your text into other languages
+- Translates your text into any languages
 - Generates new text
 - Spell-checking
 - Extracts keywords from your text
