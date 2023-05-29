@@ -8,6 +8,8 @@ The Epicweb.Optimizely.AIAssistant Service is available for free evaluation with
 
 ## Terms of use Epicweb.Optimizely.AIAssistant Service within Optimizely UI
 
+The Provider referred to in this agreement is Epicweb AB, a company registered in Sweden under registration number SE5561375618 and located in the City of Norrkoping, Sweden. Any references to "Provider" in this agreement shall be understood to mean Epicweb AB.
+
 ### License Grant
 1.1 Evaluation Use: The Service is provided free of charge for evaluation purposes. During the evaluation period, You may access and use the Service to assess its suitability for your needs.
 
@@ -36,6 +38,16 @@ The Epicweb.Optimizely.AIAssistant Service is available for free evaluation with
 
 4.2 Termination by Provider: Provider reserves the right to terminate this agreement and suspend or terminate your access to the Service at any time, with or without cause or notice.
 
+### Dependency on OpenAI Service and Performance
+
+5.1 OpenAI Service Dependency: The Epicweb.Optimizely.AIAssistant Service within the Optimizely UI relies heavily on the OpenAI service for its functionality and performance. It is important to note that the quality, availability, and performance of the Service may be impacted by the performance and availability of the underlying OpenAI service.
+
+5.2 Performance Limitations: The Provider acknowledges that there may be instances where the OpenAI service experiences downtime, latency, or other performance issues that could affect the functionality or responsiveness of the Epicweb.Optimizely.AIAssistant Service. While the Provider will make reasonable efforts to minimize any disruptions, the Provider cannot guarantee uninterrupted or error-free operation of the Service due to factors beyond its control.
+
+5.3 No Liability for OpenAI Service Performance: The Provider shall not be held liable for any performance issues, interruptions, delays, or other problems arising from or related to the performance or availability of the OpenAI service. The User acknowledges that any such issues arising from the OpenAI service are beyond the Provider's control and agrees that the Provider shall not be responsible or accountable for any damages, losses, or liabilities incurred as a result.
+
+By continuing to use the Epicweb.Optimizely.AIAssistant Service within the Optimizely UI, You acknowledge and accept that the Service's performance is subject to the performance and availability of the underlying OpenAI service, and You release the Provider from any liability or responsibility for any issues arising from the OpenAI service's performance.
+
 ### Disclaimer of Warranty
 THE SERVICE IS PROVIDED "AS IS" WITHOUT ANY WARRANTY, WHETHER EXPRESS, IMPLIED, OR STATUTORY. THE PROVIDER DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
 
@@ -46,7 +58,7 @@ IN NO EVENT SHALL THE PROVIDER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
 
 7.1 Entire Agreement: This agreement constitutes the entire agreement between You and the Provider concerning the Service and supersedes all prior or contemporaneous communications and proposals, whether oral, written, or electronic.
 
-7.2 Governing Law: This agreement shall be governed by and construed in accordance with the laws of [Jurisdiction]. Any disputes arising out of or relating to this agreement shall be subject to the exclusive jurisdiction of the courts located within [Jurisdiction].
+7.2 Governing Law: This agreement shall be governed by and construed in accordance with the laws of Sweden. Any disputes arising out of or relating to this agreement shall be subject to the exclusive jurisdiction of the courts located within Sweden.
 
 7.3 Severability: If any provision of this agreement is held to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.
 
