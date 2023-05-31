@@ -1,5 +1,7 @@
 # Installation Epicweb.Optimizely.AIAssistant
 
+The installation should be done by a developer who has access to the source code of your solution.
+
 Install it thru nuget package management:  https://nuget.optimizely.com/package/?id=Epicweb.Optimizely.AIAssistant
 
 For demo and evaluation, the only required configuration is to include the **AI**HINT attribute for the property.
