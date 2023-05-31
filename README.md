@@ -1,4 +1,4 @@
-# The OpenAI ChatGPT AI Assistant for Optimizely Content Cloud (CMS)
+# The OpenAI ChatGPT AI Assistant for Optimizely Content Cloud (CMS) and Customized Commerce
 
 **The documentation is currently undergoing continuous updates**
 
