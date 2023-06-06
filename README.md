@@ -14,6 +14,7 @@ CMS 12 and Commerce 14
 - Documentation (see installation)
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
+- [Example Customizable Commerce](Example Commerce work with SEO and translations on a product.md)
 
 ## Feature list
 - Provides suggestions or alternatives for your text
@@ -73,7 +74,7 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 <br /><br />
 
-### Summeraze texts and other propertyfields on page
+### Summerize texts and other propertyfields on page
 
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Summerize](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/73c84d7a-5ab9-4b06-82b8-7e1a24fd10d9) |
