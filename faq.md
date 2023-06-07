@@ -32,3 +32,9 @@ We currently have a waiting list for Premium subscriptions. To join the waiting 
 
 ## What does Premium subscription cost?
 The pricing for Premium subscriptions is currently under evaluation. To get the most accurate and up-to-date information regarding the cost of Premium, we kindly request you to email our support team at support@epicweb.se
+
+## Will the data be used as part of the learning data for ChatGPT? 
+No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/policies/api-data-usage-policies
+
+## Do you offer EU data residency?
+Not presently. OpenAI continue to explore the feasibility and impact of enabling localized data storage.
