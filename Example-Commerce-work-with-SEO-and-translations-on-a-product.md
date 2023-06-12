@@ -1,4 +1,4 @@
-# Example AI-Assistant and Commerce, how to work with SEO and translations on a product
+# Example AI-Assistant and Optimizely Commerce, how to work with SEO and translations on a product
 
 In this example, we showcase the remarkable speed at which you can handle SEO content and localization.
 
