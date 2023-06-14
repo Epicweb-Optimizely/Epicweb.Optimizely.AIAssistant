@@ -66,6 +66,13 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 <br /><br />
 
+### Spell-check text
+
+| ![Epicweb Optimizely AIAssistant_spellcheck](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/1dd94fdb-65d3-4b54-bc15-a34bbb620cf8) |
+|-|
+
+<br /><br />
+
 
 ### Extracts keywords from your text
 
