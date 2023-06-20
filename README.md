@@ -76,7 +76,7 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 ### Extracts keywords from your text
 
-| ![Epicweb Optimizely AIAssistant_Scenario_ExtractKeywords](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/72bb00b3-ec62-44c8-91e7-33fac6c1b7ef) |
+| ![Epicweb Optimizely AIAssistant-keywords-extraction](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/acd4868b-9e9a-48d0-9c76-eae93deaa1fd) |
 |-|
 
 <br /><br />
