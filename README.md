@@ -22,8 +22,8 @@ CMS 12 and Commerce 14
 - Generates new text
 - Spell-checking
 - Extracts keywords from your text
-- Run your own commands to ChatGPT 
-- Summerize texts and other propertyfields on page
+- Run your own prompt to ChatGPT 
+- Summarize texts and other propertyfields on page/site
 - Use ChatGPT as inline help
 
 ### Provides suggestions or alternatives for your text
@@ -81,7 +81,7 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 <br /><br />
 
-### Summerize texts and other propertyfields on page
+### Summarize texts and other propertyfields on page
 
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Summerize](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/73c84d7a-5ab9-4b06-82b8-7e1a24fd10d9) |
