@@ -12,13 +12,17 @@
 
 ### [AIUseToAnalyzeContent]
 
-You can use prompts with the placeholder ::this:: which means the it understands and integrate with the context of the page, block, product, or any object the user is currently interacting with.
+You can utilize prompts with the placeholder ::this::. This means it can comprehend and integrate with the context of the page, block, product, or any other object the user is currently engaging with.
 
-For this to work properly, you need to decorate the models property with [AIUseToAnalyzeContent], but do not add it to every property, only the once that makes since for the context of the object. 
+To ensure this functions correctly, you should annotate the model's property with [AIUseToAnalyzeContent]. However, it's important not to apply it to every property—only those that are relevant to the context of the object.
+
+## TinyMCE (XHtmlString-properties)
+
+Add "ai_assistant_execute ai_assistant_image" to Toolbar in TinyMceConfiguration
 
 ## Image Generation
 
-todo
+Add [UIHint(AIHint.Image)] for image fields (ContentReference or Url)
 
 ### OpenAI Api key
 
