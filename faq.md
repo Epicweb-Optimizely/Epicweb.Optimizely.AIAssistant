@@ -9,10 +9,12 @@ Additionally, you can command the AI Assistant by initiating the text with the s
 
 Examples: 
 
-- #summerize "a long text"
-- #summerize ::Main body::  (this will refer to the property "Main body", if you have such)
+- #summarize "a long text"
+- #summarize ::Main body::  (this will refer to the property "Main body", if you have such)
+- #summarize in a selling way ::this::  (this will refer to all content on the page/block/product)
 - #check spelling "a long text with misspelling"
 - #generate a really short text about cats
+- #Can you provide me with examples of article titles related to paint brushes?
 - #Can you provide me with examples of article titles related to paint brushes?
 
 It's really powerful and intuitive
@@ -28,13 +30,21 @@ You get
 - Optional Setup like AI-Models
 
 ## How do i get Premium subscription?
-We currently have a waiting list for Premium subscriptions. To join the waiting list and receive information about the pricing for Premium, please email our support team at support@epicweb.se
+Please fill in this form on this page https://aiassistant.optimizely.blog or email support@epicweb.se to get started
 
 ## What does Premium subscription cost?
-The pricing for Premium subscriptions is currently under evaluation. To get the most accurate and up-to-date information regarding the cost of Premium, we kindly request you to email our support team at support@epicweb.se
+Pricing is $500/month for US companies
+500€/month for European
+
+We offer 6 month or 12 month payment plans. Your satisfaction is our priority, and we are committed to delivering excellence every step of the way, therefor we offer a three-month money-back policy to ensure customer satisfaction. 
 
 ## Will the data be used as part of the learning data for ChatGPT? 
 No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/policies/api-data-usage-policies
 
 ## Do you offer EU data residency?
 Not presently. OpenAI continue to explore the feasibility and impact of enabling localized data storage.
+
+## Can I use/sell the images I create with the AI-Assistant Image Generation Tool?
+
+Subject to the Content Policy and Terms of OpenAI DALL·E, you own the images you create with the AI-Assistant (DALL·E), including the right to reprint, sell, and merchandise. 
+Source:  https://help.openai.com/en/articles/6425277-can-i-sell-images-i-create-with-dall-e 
