@@ -6,9 +6,29 @@ Install it thru nuget package management:  https://nuget.optimizely.com/package/
 
 For demo and evaluation, the only required configuration is to include the **AI**HINT attribute for the property.
 
-1. add to startup.cs: services.AddAIAssistant(); (using Epicweb.Optimizely.AIAssistant)
+1. Add to startup.cs: services.AddAIAssistant();
 
-2. decorate your string property with [UIHint(**AI**Hint.Textarea)] (using Epicweb.Optimizely.AIAssistant)
+2. Decorate your string property with [UIHint(AIHint.Image)], [UIHint(AIHint.Textarea)] or [UIHint(AIHint.Input)] for single line strings
+
+3. Decorate properties with [AIUseToAnalyzeContent] - used to analyze a page or block for important content if referred - add this only on properties that give meaning for the context
+
+4. Add "ai_assistant_execute ai_assistant_image" to Toolbar in TinyMceConfiguration
+
+5. For image generations to work, you need to register an account and create a api-key https://platform.openai.com/account/api-keys => then add it to appsettings.json "Epicweb": { "AIAssistant": { "ApiKey": "sk-4ks...." }}
+
+For more information, see up to date documentation here: https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant
+
+**Key features of the add-on:**
+
+- Provides suggestions or alternatives for your text
+- Translates your text into other languages
+- Image Generation
+- Generates new text
+- Spell-checking
+- Extracts keywords from your text
+- Run your own prompts to ChatGPT
+- Summarize texts and other propertyfields on page/site
+- Use ChatGPT as inline help
 
 ## Dependencies
 
