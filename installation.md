@@ -16,7 +16,9 @@ For demo and evaluation, the only required configuration is to include the **AI*
 
 5. For image generations to work, you need to register an account and create a api-key https://platform.openai.com/account/api-keys => then add it to appsettings.json "Epicweb": { "AIAssistant": { "ApiKey": "sk-4ks...." }}
 
-For more information, see up to date documentation here: https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant
+For Premium Subscription: https://aiassistant.optimizely.blog
+
+For a free evaluation without any licensing messages in the production environment, please complete the form at https://aiassistant.optimizely.blog
 
 **Key features of the add-on:**
 
