@@ -9,12 +9,19 @@ CMS 12 and Commerce 14
 
 ## Links 
 - [Installation](installation.md)
+- [Configuration](configuration.md)
 - [License](license.md) (Free for evaluation, premium plan for Production use)
 - Payment plans (coming soon, read FAQ)
-- Documentation (see installation)
+- [Documentation](documentation.md)
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
 - [Example Customizable Commerce](Example-Commerce-work-with-SEO-and-translations-on-a-product.md)
+
+### GET STARTED
+
+For Premium Subscription: https://aiassistant.optimizely.blog
+
+For a free evaluation without any licensing messages in the production environment, please complete the form at https://aiassistant.optimizely.blog
 
 ## Feature list
 - Provides suggestions or alternatives for your text
