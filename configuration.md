@@ -24,7 +24,9 @@ Add "ai_assistant_execute ai_assistant_image" to Toolbar in TinyMceConfiguration
 
 Add [UIHint(AIHint.Image)] for image fields (ContentReference or Url)
 
-Files are automatically saved in "For this page" - except for Product or other object that do not have "For this page", then it saved to the Global Root Asset folder. This default behavior can be modified either by implementing the IFolderResolver interface or by overriding the DefaultFolderResolver.
+Add "ai_assistant_image" to Toolbar in TinyMceConfiguration
+
+Files are automatically saved in "For this page" - except for Commerce products or other object that do not have "For this page", then it saved to the Global Root Asset folder. This default behavior can be modified either by implementing the IFolderResolver interface or by overriding the DefaultFolderResolver.
 
 ### OpenAI Api key
 
