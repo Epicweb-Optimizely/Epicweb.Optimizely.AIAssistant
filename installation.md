@@ -32,6 +32,10 @@ For a free evaluation without any licensing messages in the production environme
 - Summarize texts and other propertyfields on page/site
 - Use ChatGPT as inline help
 
+## Configuration
+
+[More configuration](configuration.md)
+
 ## Dependencies
 
 Episerver.CMS > 12.18
