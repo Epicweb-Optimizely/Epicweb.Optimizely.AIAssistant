@@ -12,7 +12,7 @@ CMS 12 and Commerce 14
 - [Configuration](configuration.md)
 - [License](license.md) (Free for evaluation, premium plan for Production use)
 - Payment plans (coming soon, read FAQ)
-- [Documentation](documentation.md)
+- [User Manual](user-manual.md)
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
 - [Example Customizable Commerce](Example-Commerce-work-with-SEO-and-translations-on-a-product.md)
