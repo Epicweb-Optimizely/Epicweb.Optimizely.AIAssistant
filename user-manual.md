@@ -2,8 +2,10 @@
 
 ## Input fields and text areas
 
-Se tutorials here:
+See video tutorials here:
 https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/README.md#provides-suggestions-or-alternatives-for-your-text
+
+
 
 ## Rich Text Editor (TinyMCE)
 
