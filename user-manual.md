@@ -1,10 +1,26 @@
-## User Manual
+# User Manual
 
-### Input fields and text areas
+## Input fields and text areas
 
 Se tutorials here:
 https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/README.md#provides-suggestions-or-alternatives-for-your-text
 
-### Rich text editor (TinyMCE)
+## Rich Text Editor (TinyMCE)
 
-todo
+### Using the AI Enhancement
+
+1. Editing Text: Before making any changes with the AI feature, ensure you highlight or select the specific text you wish to modify. Once selected, click the 'AI' button. The default action will replace your text with a suggested, correctly spelled version.
+
+2. Comparing Changes: To view the differences between the original text and the AI-modified version, use the Ctrl+z shortcut to undo the change and view the original, and Ctrl+y to redo and view the AI's suggestion.
+
+### Using Prompts
+
+1. Commanding the AI: When giving commands to the AI, always begin with a # followed by your specific instruction. Ensure you select both the hashtag and any accompanying text, table, or list you want the AI to process.
+
+2. Processing the Command: Once your instruction and content are selected, click the 'AI' button.
+
+3. Reviewing Changes: As before, if you wish to compare the before and after versions, toggle between them using the Ctrl+z and Ctrl+y shortcuts.
+
+### Translating Text
+
+1. Automated Translation: If you have a text segment that needs translation and an equivalent exists in another language within the same field, simply press the 'AI' button. The system will prioritize translating from the master language. If the master language version isn't available, it will use another available language to translate the text into the desired context language.
