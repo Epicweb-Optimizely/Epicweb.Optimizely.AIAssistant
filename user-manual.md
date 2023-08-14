@@ -23,11 +23,33 @@ https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master
 
 2. Contextual Translation: If you're on a Spanish context page/block/product, you can paste English text into the property field. Click the blue AI logo button to initiate translation. The AI will then suggest a Spanish version of the content.
 
-3. Prompt Translation: Alternatively, you can use a prompt to specify the desired translation. For example, input #Translate to Spanish: "<your English text here>" and then click the blue AI logo button to get the translated content.
+3. Prompt Translation: Alternatively, you can use a prompt to specify the desired translation. For example, input #Translate to Spanish: "your English text here" and then click the blue AI logo button to get the translated content.
 
 ### Spell-checking
 
+1. Prompt spell checking:  Start your instruction with a # symbol followed by the specific command
+   
+  Examples
+
+#check spelling: "your text here"
+
+BLOG: https://optimizely.blog/2023/06/spell-checking-with-ai-assistant/
+
 ### Summarization 
+
+1. Prompt summarization:  Start your instruction with a # symbol followed by the specific command
+
+  Examples
+
+  #summarize from field ::Main body::
+   
+  #summarize in a selling way ::this::
+  
+  #suggest a 20 words SEO meta description for ::this::
+
+ #summarize in a strict and polite way "your text here"
+
+BLOG: https://optimizely.blog/2023/06/text-summarization-with-ai-assistant/ 
 
 ## Rich Text Editor (TinyMCE)
 
