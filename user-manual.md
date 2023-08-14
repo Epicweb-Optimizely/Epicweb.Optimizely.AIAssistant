@@ -11,7 +11,7 @@ https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master
 
 ### Using the AI Enhancement
 
-1. Editing Text: Before making any changes with the AI feature, ensure you highlight or select the specific text you wish to modify. Once selected, click the 'AI' button. The default action will replace your text with a suggested, correctly spelled version.
+1. Getting Suggestions: Ensure you highlight or select the specific text you wish to modify. Once selected, click the 'AI' button. The default action will replace your text with a suggested, correctly spelled version.
 
 2. Comparing Changes: To view the differences between the original text and the AI-modified version, use the Ctrl+z shortcut to undo the change and view the original, and Ctrl+y to redo and view the AI's suggestion.
 
