@@ -25,15 +25,7 @@ https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master
 
 3. Prompt Translation: Alternatively, you can use a prompt to specify the desired translation. For example, input #Translate to Spanish: "your English text here" and then click the blue AI logo button to get the translated content.
 
-### Spell-checking
-
-1. Prompt spell checking:  Start your instruction with a # symbol followed by the specific command
-   
-  Examples
-
-#check spelling: "your text here"
-
-BLOG: https://optimizely.blog/2023/06/spell-checking-with-ai-assistant/
+BLOG: https://optimizely.blog/2023/06/breaking-language-barriers-with-multilingual-text-translation/
 
 ### Summarization 
 
@@ -49,7 +41,20 @@ BLOG: https://optimizely.blog/2023/06/spell-checking-with-ai-assistant/
 
  #summarize in a strict and polite way "your text here"
 
+ #Summarize with 255 characters this SEO description for brand ::brand::, texts: ::Long description:: and ::Product teaser:: 
+
 BLOG: https://optimizely.blog/2023/06/text-summarization-with-ai-assistant/ 
+
+
+### Spell-checking
+
+1. Prompt spell checking:  Start your instruction with a # symbol followed by the specific command
+   
+  Examples
+
+#check spelling: "your text here"
+
+BLOG: https://optimizely.blog/2023/06/spell-checking-with-ai-assistant/
 
 ## Rich Text Editor (TinyMCE)
 
