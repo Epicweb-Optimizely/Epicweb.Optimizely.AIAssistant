@@ -11,6 +11,8 @@ https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master
 
 2. Implementing the Suggested Text: To accept and replace your original text with the AI's suggestion, click on "Use this suggestion".
 
+BLOG: https://optimizely.blog/2023/05/enhance-your-writing-with-suggestions-and-alternatives/
+
 ### Using Prompts
 
 1. Commanding the AI: Start your instruction with a # symbol followed by the specific command you wish to give.
