@@ -85,6 +85,7 @@
 
 #give me popular SEO keywords in coma separated list for ::Long description:: ::Product teaser:: 
 
+#generate SEO keywords in coma separated list from content in :: this::
 
 #extract keywords: SEO stands for search engine optimization, which is a set of practices designed to improve the appearance and positioning of web pages in organic search results. Because organic search is the most prominent way for people to discover and access online content, a good SEO strategy is essential for improving the quality and quantity of traffic to your website.
 
