@@ -33,7 +33,7 @@ To ensure this functions correctly, you should annotate the model's property wit
 
 #### For Image fields (ContentReference or Url)
 
-**[AIAssistant(ImageGenerationSize = "")]** => ImageSize to generate Image in, Small is 256x256, Medium is 512x512, Large is 1024x1024
+**[AIAssistant(ImageGenerationSize = ImageSize.Large)]** => ImageSize to generate Image in, Small is 256x256, Medium is 512x512, Large is 1024x1024
 
 
 ## TinyMCE (XHtmlString-properties)
@@ -88,6 +88,27 @@ public string GetInstructions()
     return null;
 }
 ```
+### IAITinyMceTemplateResolver
+
+Override the IAITinyMceTemplateResolver to implement your own image-tag implementation in the rich text editor
+
+```
+public interface IAITinyMceTemplateResolver
+{
+    /// <summary>
+    /// By overriding, building a custom html image template to AI-Assistant insert in tinymce
+    /// </summary>
+    /// <param name="contentReference">What image to use</param>
+    /// <param name="insertingToContentReference">if you want to do some custom html depending on type of block or page</param>
+    /// <param name="propname">The property on IContent used</param>
+    /// <param name="lang">The context lang "en"</param>
+    /// <param name="width">The max size</param>
+    /// <returns>Some custom imagetag</returns>
+    string GetHtml(ContentReference contentReference, string? insertingToContentReference = null, string? propname = null, string? lang = null, int? width = 0);
+}
+```
+
+Remember to register your service =>  services.AddSingleton<IAITinyMceTemplateResolver, XTinyMceTemplateResolver>();
 
 ### IPlaceholderResolver
 
