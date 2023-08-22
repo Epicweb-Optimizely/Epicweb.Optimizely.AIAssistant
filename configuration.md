@@ -76,7 +76,7 @@ public interface IAssistantInstructionsResolver
 }
 ```
 
-Remember to register you implementation => services.AddSingleton<IAssistantInstructionsResolver, ...>();
+Remember to register your implementation => services.AddSingleton<IAssistantInstructionsResolver, ...>();
 
 ```
 public string GetInstructions()
