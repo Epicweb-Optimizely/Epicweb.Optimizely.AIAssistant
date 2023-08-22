@@ -61,3 +61,56 @@ add the key to your appsettings:
 
 ## Overide default behaviors
 
+You can override these implementations if you want to implement different logic
+
+### IAssistantInstructionsResolver
+
+This allows for the implementation of global 'Assistant Instructions'.
+
+The default setup dictates that if the Startpage contains a field named 'AssistantInstructions', that field's content will be sent to AI ChatGPT. This approach is recommended, as it enables site editors to easily alter and optimize the instruction.
+
+```
+public interface IAssistantInstructionsResolver
+{
+    string GetInstructions();
+}
+```
+
+```
+public string GetInstructions()
+{
+    ContentReference start = ContentReference.StartPage;
+    if (contentLoader.TryGet(start, out PageData startpage) && startpage.Property.TryGetPropertyValue<string>("AssistantInstructions", out string value)) {
+        return value;
+    }
+    return null;
+}
+```
+
+### IPlaceholderResolver
+
+Create your custom placeholders. Within a text field, you can use patterns like ::this:: or ::pageid:5:main body:: and the text will automatically be substituted with the relevant content. The 'IPlaceholderResolver' interface allows you to define your own logic for these placeholders.
+
+```
+    public interface IPlaceholderResolver
+    {
+        /// <summary>
+        /// Order of the resolver agaist other, build in has -100 if needed to override
+        /// </summary>
+        int SortOrder { get; } 
+
+        /// <summary>
+        /// Will replace keywords like contentid within ::contentid:5:mainbody:: or ::this::
+        /// </summary>
+        /// <param name="placeholder">the complete placeholder => example "::contentid:5:mainbody::"</param>
+        /// <param name="value">the content of placeholder => example "contentid:5:mainbody"</param>
+        /// <param name="currentContent">The current content</param>
+        /// <param name="currentCulture">The current culture</param>
+        /// <param name="property">The current property</param>
+        /// <param name="text">the text sent from UI</param>
+        /// <returns>string or null if not appicable</returns>
+        /// <exception cref="ArgumentException"></exception>
+        string ReplacePlaceholder(string placeholder, string value, IContent currentContent, CultureInfo currentCulture, string currentProperty, string text);
+    }
+```
+
