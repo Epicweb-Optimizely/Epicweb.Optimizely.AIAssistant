@@ -114,3 +114,78 @@ Create your custom placeholders. Within a text field, you can use patterns like 
     }
 ```
 
+## Example Placeholder "productcode"
+
+Here is an example for Optimizely Commerce, you want to use the pattern ::code:P-15254:: to point to the product with productcode "P-15254"
+
+```
+using Epicweb.Optimizely.AIAssistant;
+using Epicweb.Optimizely.AIAssistant.Services;
+using System.Globalization;
+
+namespace Foundation.Infrastructure
+{
+    public class ProductCodeAIPlaceholder: IPlaceholderResolver
+    {
+        
+        public ProductCodeAIPlaceholder(IContentLoader contentLoader, ReferenceConverter referenceConverter)
+        {
+            _contentLoader = contentLoader;
+            _referenceConverter = referenceConverter;
+        }
+        private readonly string[] keywords = { "code", "productcode" };
+        private readonly IContentLoader _contentLoader;
+        private readonly ReferenceConverter _referenceConverter;
+
+        public int SortOrder => 100;
+        /// <summary>
+        /// Will replace keywords like code within ::code:P-654987:: or ::productcode:P-654987::
+        /// </summary>
+        /// <param name="placeholder">the complete placeholder => example "::code:P-654987::"</param>
+        /// <param name="value">the content of placeholder => example "code:P-654987"</param>
+        /// <param name="currentContent">The current content</param>
+        /// <param name="currentCulture">The current culture</param>
+        /// <param name="property">The current property</param>
+        /// <param name="text">the text sent from UI</param>
+        /// <returns>string or null if not appicable</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public string ReplacePlaceholder(string placeholder, string value, IContent currentContent, CultureInfo currentCulture, string property, string text)
+        {
+            if (value == null)
+            {
+                return value;
+            }
+
+            string productCode = null;
+            bool startsWithKeyword = false;
+            string propname = null;
+
+            string[] parts = value.Split(':');
+            if (parts.Length > 0)
+            {
+                value = value.Trim().ToLower();
+                startsWithKeyword = keywords.Any(keyword => value.StartsWith(keyword));
+
+                if (startsWithKeyword && parts.Length > 1)
+                {
+                    productCode = parts[1];
+                }
+                else
+                    startsWithKeyword = false;
+            }
+
+            if (startsWithKeyword && !string.IsNullOrEmpty(productCode))
+            {
+                var reference = _referenceConverter.GetContentLink(productCode);
+                if (_contentLoader.TryGet<IContent>(reference, currentCulture, out currentContent))
+                {
+                    return AIHelperService.GetContentFromObject(currentContent);
+                }
+            }
+
+            return null;
+        }
+    }
+}
+```
+
