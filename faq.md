@@ -42,7 +42,7 @@ We offer 6 month or 12 month payment plans. Your satisfaction is our priority, a
 No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/policies/api-data-usage-policies
 
 ## Do you offer EU data residency?
-Not presently. OpenAI continue to explore the feasibility and impact of enabling localized data storage.
+Yes but not presently. We are looking into integrating the Add-on service info Azure OpenAI Service which are offering AI api from differents parts of Europe (France Central, Switzerland North, UK South as of August 2023) and enables localized data storage. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
 
 ## Can I use/sell the images I create with the AI-Assistant Image Generation Tool?
 
