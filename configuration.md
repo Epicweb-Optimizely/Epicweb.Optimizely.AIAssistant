@@ -195,6 +195,12 @@ namespace Foundation.Infrastructure
                 }
                 else
                     startsWithKeyword = false;
+
+                if (value.ToUpper().StartsWith("P-"))
+                {
+                    startsWithKeyword = true;
+                    productCode = parts[0];
+                }
             }
 
             if (startsWithKeyword && !string.IsNullOrEmpty(productCode))
