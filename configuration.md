@@ -131,9 +131,10 @@ Create your custom placeholders. Within a text field, you can use patterns like 
         /// <param name="currentCulture">The current culture</param>
         /// <param name="property">The current property</param>
         /// <param name="text">the text sent from UI</param>
+        /// <param name="isHtml">If it is comming from Rich Text Editor</param>
         /// <returns>string or null if not appicable</returns>
         /// <exception cref="ArgumentException"></exception>
-        string ReplacePlaceholder(string placeholder, string value, IContent currentContent, CultureInfo currentCulture, string currentProperty, string text);
+        string ReplacePlaceholder(string placeholder, string value, IContent currentContent, CultureInfo currentCulture, string currentProperty, string text, bool isHtml = false);
     }
 ```
 
@@ -162,7 +163,7 @@ namespace Foundation.Infrastructure
 
         public int SortOrder => 100;
         /// <summary>
-        /// Will replace keywords like code within ::code:P-654987:: or ::productcode:P-654987::
+        /// Will replace keywords like code within ::code:P-654987:: or ::productcode:P-654987:: and all that starts with "P-" eg ::P-654987::
         /// </summary>
         /// <param name="placeholder">the complete placeholder => example "::code:P-654987::"</param>
         /// <param name="value">the content of placeholder => example "code:P-654987"</param>
@@ -170,9 +171,10 @@ namespace Foundation.Infrastructure
         /// <param name="currentCulture">The current culture</param>
         /// <param name="property">The current property</param>
         /// <param name="text">the text sent from UI</param>
+        /// <param name="isHtml">If it is comming from Rich Text Editor</param>
         /// <returns>string or null if not appicable</returns>
         /// <exception cref="ArgumentException"></exception>
-        public string ReplacePlaceholder(string placeholder, string value, IContent currentContent, CultureInfo currentCulture, string property, string text)
+        public string ReplacePlaceholder(string placeholder, string value, IContent currentContent, CultureInfo currentCulture, string property, string text, bool isHtml = false)
         {
             if (value == null)
             {
