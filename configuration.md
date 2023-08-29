@@ -269,7 +269,7 @@ remember to register your shortcut =>  services.AddSingleton<IPromptShortcut, My
 
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on a property
 
-Disable shortcuts globaly => add in appsetting:  
+#### Disable shortcuts globaly => add in appsetting:  
 
 ```
  "Epicweb": {
@@ -279,6 +279,10 @@ Disable shortcuts globaly => add in appsetting:
     }
 ```
 
-Disable a specific shortcut 
+#### Disable a specific shortcut 
+
+ServiceLocator.Current.GetAllInstances<IPromptShortcut>().FirstOrDefault(x => x.Name == "Summarize Short")?.Enabled = false;
+
+
 
 
