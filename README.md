@@ -118,6 +118,8 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 ### Shortcut examples
 
+With Shortcuts, you can programmatically commonly used prompts for quick and easy access.
+
 - Suggestion: will suggest an alternate text of the content in the textarea
 - Translate: will translate if field is filled in an other language
 - Summarize Short: will condence the page content into 20 words
