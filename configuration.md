@@ -53,11 +53,13 @@ Files are automatically saved in "For this page" - except for Commerce products 
 You need your own API key for the Image Generation to work, you can obtain a key by registering and create an key here => https://platform.openai.com/account/api-keys 
 
 add the key to your appsettings: 
-'  "Epicweb": {
+```
+ "Epicweb": {
     "AIAssistant": {
       "ApiKey": "sk-NpPD....jrwm"
       }
-    }'
+    }
+```
 
 ## Overide default behaviors
 
@@ -140,7 +142,7 @@ Create your custom placeholders. Within a text field, you can use patterns like 
 
 ## Example Placeholder "productcode"
 
-Here is an example for Optimizely Commerce, you want to use the pattern ::code:P-15254:: to point to the product with productcode "P-15254"
+Here is an example for Optimizely Commerce, if you want to use the pattern ::code:P-15254:: to point to the product with productcode "P-15254"
 
 ```
 using Epicweb.Optimizely.AIAssistant;
@@ -219,4 +221,64 @@ namespace Foundation.Infrastructure
     }
 }
 ```
+
+## IPromptShortcut
+
+![image](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/bc57c229-802d-45bb-a59a-f07613070a6f)
+
+As a developer you can add Shortcut prompts, this is perfect if your organization reuse prompts on many places. The default shortcuts can be disabled. And you can disable shortcuts per property. 
+
+```
+namespace Epicweb.Optimizely.AIAssistant
+{
+    public interface IPromptShortcut
+    {
+        /// <summary>
+        /// Order of the Shortcut agaist other, build in has -100 if needed to override
+        /// </summary>
+        int SortOrder { get; }
+
+        /// <summary>
+        /// Order of the resolver agaist other, build in has -100 if needed to override
+        /// </summary>
+        string Name { get; }
+
+        bool Enabled { get; set; }
+
+        /// <summary>
+        /// The message to send to the user if couldnt generate any prompt (maybe missing input text)
+        /// </summary>
+        string EmptyMessage { get; set; }
+
+        /// <summary>
+        /// When implementing this method you implement shortcuts and in this method you need to implement the logic of the prompt
+        /// </summary>
+        /// <param name="textContent"></param>
+        /// <param name="currentContent"></param>
+        /// <param name="currentCulture"></param>
+        /// <param name="currentProperty"></param>
+        /// <returns>the textContent preferably starting with #</returns>
+        string GeneratePrompt(string textContent, IContent currentContent, CultureInfo currentCulture, string currentProperty);
+    }
+}
+```
+
+remember to register your shortcut =>  services.AddSingleton<IPromptShortcut, MyPromptShortcut>();
+
+### Disable shortcuts
+
+**[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on a property
+
+Disable shortcuts globaly => add in appsetting:  
+
+```
+ "Epicweb": {
+    "AIAssistant": {
+      "DisableShortcuts": false
+      }
+    }
+```
+
+Disable a specific shortcut 
+
 
