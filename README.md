@@ -118,6 +118,14 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 ### Shortcut examples
 
+- Suggestion: will suggest an alternate text of the content in the textarea
+- Translate: will translate if field is filled in an other language
+- Summarize Short: will condence the page content into 20 words
+- Summarize Sales Pitch: will condence the page content into a sales pitch
+- Spell-check: Will suggest the text in textarea without any spelling errors
+
+You can add your most commonly used prompts for quick and easy access
+
 | ![Epicweb Optimizely AIAssistant-shorcuts](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/bce3581f-0039-45b5-8fc1-b9ec8705d5a0) |
 |-|
 
