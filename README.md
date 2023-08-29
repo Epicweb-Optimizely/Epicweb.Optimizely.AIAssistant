@@ -116,3 +116,10 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 <br /><br />
 
+### Shortcut examples
+
+| ![Epicweb Optimizely AIAssistant-shorcuts](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/bce3581f-0039-45b5-8fc1-b9ec8705d5a0) |
+|-|
+
+<br /><br />
+
