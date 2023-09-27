@@ -142,3 +142,14 @@ You can add your most commonly used prompts for quick and easy access
 
 <br /><br />
 
+#### ‘Change Tone’ Shortcut
+
+- Sales and Provocative: Perfect for crafting compelling marketing pitches.
+- Formal and Serious: Ideal for professional and official documents.
+- Informal and Humoristic: Suitable for creating light-hearted and engaging content.
+- Empathetic and Optimistic: Best for generating content that resonates emotionally and radiates positivity.
+- Confident and Passionate: Excellent for delivering strong, fervent messages.
+- Simplistic: Recommended for crafting content that’s easy to comprehend.
+
+https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/17a28949-a590-4eeb-88a4-a149a74164ca
+
