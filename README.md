@@ -1,6 +1,6 @@
 # The OpenAI ChatGPT AI Assistant for Optimizely Content Cloud (CMS) and Customized Commerce
 
-**The documentation is currently undergoing continuous updates**
+**The documentation is currently undergoing continuous updates** version 1.2
 
 ## Epicweb.Optimizely.AIAssistant Plugin
 The plugin provides assistance with suggestions, spell-checking, translations, and much more for input fields in an intuitive way within the Optimizely CMS and Customizable Commerce platform
@@ -25,13 +25,22 @@ For a free evaluation without any licensing messages in the production environme
 
 ## Feature list
 - Provides suggestions or alternatives for your text
-- Translates your text into any languages
+- Translates your text into other languages
+- Image Generation
 - Generates new text
 - Spell-checking
+- Change tone of writing
 - Extracts keywords from your text
-- Run your own prompt to ChatGPT 
+- Run your own prompts to ChatGPT
 - Summarize texts and other propertyfields on page/site
+- Add your own shortcut prompts
 - Use ChatGPT as inline help
+
+## Choose provider:
+- Use OpenAI in USA
+- Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France)
+
+## Examples
 
 ### Provides suggestions or alternatives for your text
 
