@@ -19,17 +19,33 @@ To ensure this functions correctly, you should annotate the model's property wit
 ### [AIAssistant]
 
 #### For text fields
-**[AIAssistant(Model = "gpt-3.5-turbo-16k")]** => The model to use => https://platform.openai.com/docs/models
+**[AIAssistant(Model = "gpt-3.5-turbo-16k")]** => The model to use => https://platform.openai.com/docs/models 
+
+For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(AssistantInstructions = "You are a selling professional sales assistant")]** => It's designed to set the behavior of the assistant. You might use the message to specify a role or provide some context for the assistant.
 
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
+
+**[AIAssistant(Shortcuts = new[] {
+        typeof(SuggestPromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.TranslatePromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.ShortenPromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.ElaboratePromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.SummarizeShortPromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.SummarizePromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.ChangeTonePromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.HumorPromptShortcut),//you need to add all subprompts for "Change tone" if you want to use them
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.SeriousPromptShortcut),
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.CheckSpellingPromptShortcut) })]** => Only specify the ones you want to use on this property
 
 #### For XHtmlString fields (Rich text editor)
 
 **[AIAssistant(QueryParameters = "")]** => Additional querystring appended to imageurl into XHtmlString (TinyMCE) eg width=100&height=300&format=webp&quality=75
 
 **[AIAssistant(ImageWidth = "")]** => Default Imagewidth added to attribute width on img-tag into XHtmlString (TinyMCE)
+
+**[AIAssistant(Shortcuts = new[] { ... })] => same as above, only specify the ones you want to use on this property
 
 #### For Image fields (ContentReference or Url)
 
@@ -38,7 +54,7 @@ To ensure this functions correctly, you should annotate the model's property wit
 
 ## TinyMCE (XHtmlString-properties)
 
-Add "ai_assistant_execute ai_assistant_image" to Toolbar in TinyMceConfiguration
+Add "ai_assistant_execute ai_assistant_choices ai_assistant_image" to Toolbar in TinyMceConfiguration
 
 ## Image Generation
 
@@ -231,35 +247,45 @@ As a developer you can add Shortcut prompts, this is perfect if your organizatio
 ```
 namespace Epicweb.Optimizely.AIAssistant
 {
-    public interface IPromptShortcut
-    {
-        /// <summary>
-        /// Order of the Shortcut agaist other, build in has -100 if needed to override
-        /// </summary>
-        int SortOrder { get; }
+   public interface IPromptShortcut
+ {
+     /// <summary>
+     /// Order of the Shortcut agaist other, build in has -100 if needed to override
+     /// </summary>
+     int SortOrder { get; }
 
-        /// <summary>
-        /// Order of the resolver agaist other, build in has -100 if needed to override
-        /// </summary>
-        string Name { get; }
+     /// <summary>
+     /// Order of the resolver agaist other, build in has -100 if needed to override
+     /// </summary>
+     string Name { get; }
+     /// <summary>
+     /// Only implement this one if it should be visible like a submenu to a shortcut
+     /// </summary>
+     string ParentName { get; }
+     /// <summary>
+     /// Enabled Visible in Input and Textarea
+     /// </summary>
+     bool Enabled { get; set; }
+     /// <summary>
+     /// Enabled and visible in RichTextEditor
+     /// </summary>
+     bool EnabledInRichTextEditor { get; set; }
 
-        bool Enabled { get; set; }
+     /// <summary>
+     /// The message to send to the user if couldn't generate any prompt (maybe missing input text)
+     /// </summary>
+     string EmptyMessage { get; set; }
 
-        /// <summary>
-        /// The message to send to the user if couldnt generate any prompt (maybe missing input text)
-        /// </summary>
-        string EmptyMessage { get; set; }
-
-        /// <summary>
-        /// When implementing this method you implement shortcuts and in this method you need to implement the logic of the prompt
-        /// </summary>
-        /// <param name="textContent"></param>
-        /// <param name="currentContent"></param>
-        /// <param name="currentCulture"></param>
-        /// <param name="currentProperty"></param>
-        /// <returns>the textContent preferably starting with #</returns>
-        string GeneratePrompt(string textContent, IContent currentContent, CultureInfo currentCulture, string currentProperty);
-    }
+     /// <summary>
+     /// When implementing this method you implement shortcuts and in this method you need to implement the logic of the prompt
+     /// </summary>
+     /// <param name="textContent"></param>
+     /// <param name="currentContent"></param>
+     /// <param name="currentCulture"></param>
+     /// <param name="currentProperty"></param>
+     /// <param name="isRichTextEditor">If the shortcut is used in the RTE</param>
+     /// <returns>the textContent preferably starting with #</returns>
+     string GeneratePrompt(string textContent, IContent currentContent, CultureInfo currentCulture, string currentProperty, bool isRichTextEditor);
 }
 ```
 
@@ -281,8 +307,24 @@ remember to register your shortcut =>  services.AddSingleton<IPromptShortcut, My
 
 #### Disable a specific shortcut 
 
-ServiceLocator.Current.GetAllInstances<IPromptShortcut>().FirstOrDefault(x => x.Name == "Summarize Short")?.Enabled = false;
+ServiceLocator.Current.GetAllInstances<IPromptShortcut>().FirstOrDefault(x => x.Name == SalesPromptShortcut.GetName)?.Enabled = false;
 
 
+## Azure Open AI Provider
+
+Version 1.2 has the posibility to use Azure OpenAI Services. To use the service you need to set up your own service in your Azure instance. For the moment Azure Models are available in Australia East, Canada East, East US, East US 2, France Central, Japan East, North Central US, Sweden Central, Switzerland North, UK South. Read up to date information here: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
+
+```
+  "Epicweb": {
+    "AIAssistant": {
+      "ApiUrl": "", //azure service url provided by Epicweb upon registration of add-on
+      "ApiKeyImage": "sk-NpPD*****", //open ai key for Images (if used)
+      "ApiKey": "06de6816f*****", //azure key
+      "ServiceUrl": "https://[changethis].openai.azure.com/",
+      "ProviderName": "AzureOpenAI",
+      "AIModel": "gpt-35-turbo-16k",//the default model if nothing else is specified on property
+      }
+    }
+```
 
 
