@@ -12,25 +12,34 @@ For demo and evaluation, the only required configuration is to include the **AI*
 
 3. Decorate properties with [AIUseToAnalyzeContent] - used to analyze a page or block for important content if referred - add this only on properties that give meaning for the context
 
-4. Add "ai_assistant_execute ai_assistant_image" to Toolbar in TinyMceConfiguration
+4. Add "ai_assistant_execute ai_assistant_choices ai_assistant_image" to Toolbar in TinyMceConfiguration
 
-5. For image generations to work, you need to register an account and create a api-key https://platform.openai.com/account/api-keys => then add it to appsettings.json "Epicweb": { "AIAssistant": { "ApiKey": "sk-4ks...." }}
+5. Use [AIAssistant]-attribute to configure properties and give assistant instruction => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#aiassistant
+
+6. For image generations to work, you need to register an account and create a api-key https://platform.openai.com/account/api-keys => then add it to appsettings.json "Epicweb": { "AIAssistant": { "ApiKey": "sk-4ks...." }}
+
+7. For global instructions to AI Assistant => implement IAssistantInstructionsResolver => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#iassistantinstructionsresolver
+
 
 For Premium Subscription: https://aiassistant.optimizely.blog
 
 For a free evaluation without any licensing messages in the production environment, please complete the form at https://aiassistant.optimizely.blog
-
-**Key features of the add-on:**
 
 - Provides suggestions or alternatives for your text
 - Translates your text into other languages
 - Image Generation
 - Generates new text
 - Spell-checking
+- Change tone of writing
 - Extracts keywords from your text
 - Run your own prompts to ChatGPT
 - Summarize texts and other propertyfields on page/site
+- Add your own shortcut prompts
 - Use ChatGPT as inline help
+
+Choose provider:
+- Use OpenAI in USA
+- Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France) => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#azure-open-ai-provider
 
 ## Configuration
 
