@@ -150,6 +150,7 @@ You can add your most commonly used prompts for quick and easy access
 - Empathetic and Optimistic: Best for generating content that resonates emotionally and radiates positivity.
 - Confident and Passionate: Excellent for delivering strong, fervent messages.
 - Simplistic: Recommended for crafting content that’s easy to comprehend.
+  
+https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/33b81741-4334-4fe5-a3de-12cca418a645
 
-https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/17a28949-a590-4eeb-88a4-a149a74164ca
 
