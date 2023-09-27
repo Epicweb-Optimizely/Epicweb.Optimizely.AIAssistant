@@ -312,7 +312,7 @@ ServiceLocator.Current.GetAllInstances<IPromptShortcut>().FirstOrDefault(x => x.
 
 ## Azure Open AI Provider
 
-Version 1.2 has the posibility to use Azure OpenAI Services. To use the service you need to set up your own service in your Azure instance. For the moment Azure Models are available in Australia East, Canada East, East US, East US 2, France Central, Japan East, North Central US, Sweden Central, Switzerland North, UK South. Read up to date information here: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
+Version 1.2 now supports the utilization of Azure OpenAI Services. In order to use this service, you must establish your own service within your Azure instance. Currently, Azure Models are accessible in the following regions: Australia East, Canada East, East US, East US 2, France Central, Japan East, North Central US, Sweden Central, Switzerland North, and UK South. For the most recent information, please refer to the following resource: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
 
 ```
   "Epicweb": {
