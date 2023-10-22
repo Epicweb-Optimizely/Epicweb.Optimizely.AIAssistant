@@ -1,6 +1,6 @@
 # Information about the Epicweb.Optimizely.AIAssistant.LanguageManager Package
 
-Coming in next version 1.2.1
+Version 1.3.0
 
 Add the AI-Assistant Translation Provider in Admin Settings => Language Manager => Choose AI-Assistant (no need to add Subscription Key nor Region)
 
