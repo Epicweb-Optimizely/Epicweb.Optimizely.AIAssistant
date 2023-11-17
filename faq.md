@@ -3,7 +3,7 @@
 **The FAQ is currently undergoing continuous updates**
 
 ## How does it work? 
-The AI Assistant offers automated **suggestions** and alternative wording for your text, while also providing **translation** capabilities for texts and properties on pages and blocks.
+In short, the AI Assistant offers automated **suggestions** and alternative wording for your text, while also providing **translation** capabilities for texts and properties on pages and blocks.
 
 Additionally, you can command the AI Assistant by initiating the text with the symbol "#"
 
@@ -14,7 +14,6 @@ Examples:
 - #summarize in a selling way ::this::  (this will refer to all content on the page/block/product)
 - #check spelling "a long text with misspelling"
 - #generate a really short text about cats
-- #Can you provide me with examples of article titles related to paint brushes?
 - #Can you provide me with examples of article titles related to paint brushes?
 
 It's really powerful and intuitive
