@@ -16,7 +16,7 @@ You can utilize prompts with the placeholder ::this::. This means it can compreh
 
 To ensure this functions correctly, you should annotate the model's property with [AIUseToAnalyzeContent]. However, it's important not to apply it to every property—only those that are relevant to the context of the object.
 
-### [AIAssistant]
+### [AIAssistant]-attribute
 
 #### For text fields
 **[AIAssistant(Model = "gpt-3.5-turbo-16k")]** => The model to use => https://platform.openai.com/docs/models 
@@ -47,9 +47,20 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(Shortcuts = new[] { ... })] => same as above, only specify the ones you want to use on this property
 
+**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - dall-e-2: 256x256, 512x512 or 1024x1024, defaults to 1024x1024
+
+**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
+
+**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or dall-e-2), default to dall-e-3 on latest version
+
 #### For Image fields (ContentReference or Url)
 
-**[AIAssistant(ImageGenerationSize = ImageSize.Large)]** => ImageSize to generate Image in, Small is 256x256, Medium is 512x512, Large is 1024x1024
+**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - dall-e-2: 256x256, 512x512 or 1024x1024, defaults to 1024x1024
+   
+
+**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
+
+**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or dall-e-2), default to dall-e-3 on latest version
 
 
 ## TinyMCE (XHtmlString-properties)
@@ -73,6 +84,18 @@ add the key to your appsettings:
  "Epicweb": {
     "AIAssistant": {
       "ApiKey": "sk-NpPD....jrwm"
+      }
+    }
+```
+
+### Image Properties
+
+If you need to change default behavior, these fields kan be override by AIAssistantAttribute on each property 
+```
+ "Epicweb": {
+    "AIAssistant": {
+        "ImageModel": "dall-e-3", // or dall-e-2
+        "ImageStyle": null // vivid or natural, Defaults to vivid
       }
     }
 ```
