@@ -1,4 +1,4 @@
- # Setup Azure OpenAI models and use with the AI Assitant for Optimizely
+ # Setup Azure OpenAI models and use with the AI Assistant for Optimizely
 
 1. **Create an Azure Account**:
    - If you don't already have an Azure account, you'll need to sign up for one at [Azure's website](https://azure.microsoft.com/).
