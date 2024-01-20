@@ -363,4 +363,6 @@ Version 1.2 now supports the utilization of Azure OpenAI Services. In order to u
     }
 ```
 
+### Setup Azure OpenAI service models
 
+Read more here https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration-azure-openai.md
