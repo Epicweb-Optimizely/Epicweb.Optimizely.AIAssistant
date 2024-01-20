@@ -28,7 +28,8 @@ For Azure, use only the models you deployed in your azure instance.
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
 
 **[AIAssistant(Shortcuts = new[] {
-        typeof(SuggestPromptShortcut),
+        typeof(PromptShortcut), //prompt version 1.5
+        typeof(SuggestPromptShortcut), //refine
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.TranslatePromptShortcut),
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.ShortenPromptShortcut),
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.ElaboratePromptShortcut),
@@ -38,6 +39,18 @@ For Azure, use only the models you deployed in your azure instance.
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.HumorPromptShortcut),//you need to add all subprompts for "Change tone" if you want to use them
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.SeriousPromptShortcut),
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.CheckSpellingPromptShortcut) })]** => Only specify the ones you want to use on this property
+
+**Additional shortcut of value: **
+
+SeoTitlePromptShortcut (for creation of SEO titles based on page content) 
+
+SEOKeywordsPromptShortcut (for creation of keywords based on page content)
+
+you need to add them to services => 
+```
+services.AddSingleton<IPromptShortcut, SEOKeywordsPromptShortcut>();
+services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
+```
 
 #### For XHtmlString fields (Rich text editor)
 
