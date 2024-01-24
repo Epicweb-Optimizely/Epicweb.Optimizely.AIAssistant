@@ -2,6 +2,7 @@
 
 ## 1.5 - 2024-01-24
 - Ask AI new prompt window
+- Epicweb.Optimizely.AIAssistant.LanguageManager is released version 1.1 => bugfix when translating "Questions" 
 
 ## 1.4 - 2023-11-19
 - Introducing Dalle-3
