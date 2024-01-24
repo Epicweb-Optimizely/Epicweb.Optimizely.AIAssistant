@@ -1,5 +1,12 @@
 # Change log
 
+## 1.5 - 2024-01-24
+- Ask AI new prompt window
+
+## 1.4 - 2023-11-19
+- Introducing Dalle-3
+- Add more shortcuts out of the box (SEO Title Prompt)
+
 ## 1.3 - 2023-10-23
 - Compatibility with Episerver.Labs.LanguageManager
 - Epicweb.Optimizely.AIAssistant.LanguageManager is released version 1.0
