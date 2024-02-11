@@ -4,6 +4,7 @@
 - NEW FEATURE: Image Variation with GPT-4-Vision and Dalle-3
 - NEW FEATURE: Post process images
 - Support for custom Edit UI path
+- End of support for Dalle-2
 
 ## 1.5 - 2024-01-24
 - NEW FEATURE: Ask AI new prompt window
@@ -18,9 +19,9 @@
 - Epicweb.Optimizely.AIAssistant.LanguageManager is released version 1.0
 
 ## 1.2 - 2023-09-27
-- Add Provider for Azure OpenAI Services
+- NEW FEATURE: Add Provider for Azure OpenAI Services
 - Add more shortcuts out of the box (Change tone)
 
 ## 1.1 - 2023-08-29
-- Add AI to Rich Text Editor
-- Add shortcuts
+- NEW FEATURE: Add AI to Rich Text Editor
+- NEW FEATURE: Add shortcuts
