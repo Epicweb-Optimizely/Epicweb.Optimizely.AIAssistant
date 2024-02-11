@@ -24,18 +24,25 @@ No, it's free for evaluation purposes, but you may encounter limitations and rec
 ## What is included in Premium subscription? 
 You get 
 - Priority Usage
+   - Latest and new models will be available for you
 - Increased Usage Limits
+   - GPT-4 Models and models that can handle more text (16k and 32k)
 - Email Support
-- Optional Setup like AI-Models
+   - We answer within 24h
+- Optional Setup with different AI-Models
+   - Setup your own models in Azure and finetune them
 
 ## How do i get Premium subscription?
 Please fill in this form on this page https://aiassistant.optimizely.blog or email support@epicweb.se to get started
 
 ## What does Premium subscription cost?
-Pricing is $500/month for US companies
-500€/month for European
+Pricing begins at 
+- $250/month for US companies 
+- 250€/month for European companies
 
-We offer 6 month or 12 month payment plans. Your satisfaction is our priority, and we are committed to delivering excellence every step of the way, therefor we offer a three-month money-back policy to ensure customer satisfaction. 
+Please note, traffic costs are not included.
+
+We offer 6 month or 12 month payment plans. Your satisfaction is our priority, and we are committed to delivering excellence every step of the way, therefor we offer a three-month money-back policy to ensure customer satisfaction.
 
 ## Will the data be used as part of the learning data for ChatGPT? 
 No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/policies/api-data-usage-policies
@@ -48,7 +55,7 @@ Data privacy and compliance are crucial in the current GDPR and data protection 
 
 ## Do you offer AI assistance on your own data?
 
-Will be possible, let's talk! 
+Will be possible, let's talk! for now you can setup your own models in Azure and finetune them.
 
 ## Can I use/sell the images I create with the AI-Assistant Image Generation Tool?
 
