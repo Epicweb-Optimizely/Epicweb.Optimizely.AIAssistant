@@ -15,6 +15,10 @@ BLOG: https://optimizely.blog/2023/05/enhance-your-writing-with-suggestions-and-
 
 ### Using Prompts
 
+There are two ways, use the "Ask AI Assistant" prompt window which is very user friendly, and second way, using hashtag way into all fields. 
+
+#### hashtag prompting
+
 1. Commanding the AI: Start your instruction with a # symbol followed by the specific command you wish to give.
 
 2. Processing the Command: Click the blue AI logo button to initiate the AI's response. Think of it as "spinning the wheel" to see what the AI produces based on your prompt.
