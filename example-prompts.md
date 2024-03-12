@@ -147,4 +147,32 @@ Example prompt:
 
 Answer: confirm("Are you sure you want to hide the cookie element?") ? document.getElementById("cookie").style.display = "none" : "";
 
+## Scenarios Add Alloy WORKWEAR
 
+#generate information about a fictive "Alloy workwear" for drivers
+
+#create list of activities or jobs where you might require workwear add a H2
+
+#create table sizes for men for workwear add a h2
+
+#create a photo realistic image of workwear clothing well folded zoomed out on white 3D background platform
+
+USP: Comfortable Fit, Durable Materials, Safety Features, Reliable Protection
+
+#generate 5 FAQ and answers about how our workwear, add H2/H3 appropriately
+
+#photo realistic image female swedish mechanical worker with workwear clothing beside a volvo truck with the volvo front 
+
+## Scenarios Add Alloy Exchange services
+
+#generate information about a fictive global "Alloy Exchange" money transfer service
+
+#generate information about how money transfer work and add H2 appropriately
+
+#generate 5 FAQ about how money transfer could work, add H3 foreach Question and add answers to the questions appropriately, Add H2 "FAQ"
+
+#create table of top 5 most popular currencies and the exchange rate against US dollar
+
+#create illustration of global money transfer exchange service without text, finacial district New York
+
+photo realistic image of finacial district New York from helicopter perspective
