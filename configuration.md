@@ -25,6 +25,10 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(AssistantInstructions = "You are a selling professional sales assistant")]** => It's designed to set the behavior of the assistant. You might use the message to specify a role or provide some context for the assistant.
 
+**[AIAssistant(MinimalMode = true)]** => Default is false, hides the "AI Wheel" by default
+
+**[AIAssistant(AutoSuggest = false)]** => Default is true, When you leave the field, it will execute the AI to AutoSuggest an alternative suggestion
+
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
 
 **[AIAssistant(Shortcuts = new[] {
