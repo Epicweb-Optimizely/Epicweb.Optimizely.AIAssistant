@@ -79,6 +79,36 @@ services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 
 **[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or dall-e-2), default to dall-e-3 on latest version
 
+## Appsettings
+
+### Disable AutoSuggest behavior
+
+**[AIAssistant(AutoSuggest = false)]** => Disable Auto Suggest on leavning the field
+
+#### Disable Auto Suggest globaly => add in appsetting:  
+
+```
+ "Epicweb": {
+    "AIAssistant": {
+      "AutoSuggest": false //sets globaly
+      }
+    }
+```
+### Enable Minimalmode
+
+Field is minimal - hides the "AI Wheel" by default
+
+**[AIAssistant(MinimalMode = true)]** => Default is false, 
+
+#### Enable MinimalMode globaly => add in appsetting:  
+
+```
+ "Epicweb": {
+    "AIAssistant": {
+      "MinimalMode": true //sets globaly
+      }
+    }
+```
 
 ## TinyMCE (XHtmlString-properties)
 
