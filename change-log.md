@@ -1,5 +1,8 @@
 # Change log
 
+## 1.7 - 2024-03-20
+- NEW FEATURE: Enable Minimal mode and disable AutoSuggest on input fields
+
 ## 1.6 - 2024-02-12
 - NEW FEATURE: Image Variation with GPT-4-Vision and Dalle-3
 - NEW FEATURE: Post process images
