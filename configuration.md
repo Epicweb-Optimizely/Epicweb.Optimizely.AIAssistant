@@ -31,6 +31,16 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
 
+**[AIAssistant(Roles = new[] { "AIEditors", "SomeRole" })** User roles can be assigned globally or on a per-property basis to manage access to AI-Assistant
+
+```
+ "Epicweb": {
+    "AIAssistant": {
+      "Roles": [ "AIEditors", "SomeRole" ] //sets globally
+      }
+    }
+```
+
 **[AIAssistant(Shortcuts = new[] {
         typeof(PromptShortcut), //prompt version 1.5
         typeof(SuggestPromptShortcut), //refine
@@ -62,7 +72,7 @@ services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 
 **[AIAssistant(ImageWidth = "")]** => Default Imagewidth added to attribute width on img-tag into XHtmlString (TinyMCE)
 
-**[AIAssistant(Shortcuts = new[] { ... })] => same as above, only specify the ones you want to use on this property
+**[AIAssistant(Shortcuts = new[] { ... })]** => same as above, only specify the ones you want to use on this property
 
 **[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - dall-e-2: 256x256, 512x512 or 1024x1024, defaults to 1024x1024
 
@@ -90,7 +100,7 @@ services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 ```
  "Epicweb": {
     "AIAssistant": {
-      "AutoSuggest": false //sets globaly
+      "AutoSuggest": false //sets globally, default true
       }
     }
 ```
@@ -105,7 +115,7 @@ Field is minimal - hides the "AI Wheel" by default
 ```
  "Epicweb": {
     "AIAssistant": {
-      "MinimalMode": true //sets globaly
+      "MinimalMode": true //sets globally, default false
       }
     }
 ```
