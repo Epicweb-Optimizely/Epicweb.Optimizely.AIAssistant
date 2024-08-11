@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Epicweb.Azure.Function.CustomAI": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7094",
+      "launchBrowser": false
+    }
+  }
+}
