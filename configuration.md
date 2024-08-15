@@ -31,6 +31,16 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
 
+**[AIAssistant(CustomJson = "{\"prop\":\"fromAttribute\"}")]** => Any custom data you want to send to your API, to be used with CustomAI Provider
+
+```
+ "Epicweb": {
+    "AIAssistant": {      
+      "CustomJson": "{\"prop\":\"fromAppsettings\"}",// Any custom data you want to send to your API
+      }
+    }
+```
+
 **[AIAssistant(Roles = new[] { "AIEditors", "SomeRole" })** User roles can be assigned globally or on a per-property basis to manage access to AI-Assistant
 
 ```
@@ -169,25 +179,45 @@ You can override these implementations if you want to implement different logic
 
 This allows for the implementation of global 'Assistant Instructions'.
 
-The default setup dictates that if the Startpage contains a field named 'AssistantInstructions', that field's content will be sent to AI ChatGPT. This approach is recommended, as it enables site editors to easily alter and optimize the instruction.
+The default setup dictates that if the Startpage contains a field named 'AssistantInstructions', that field's content will be sent to AI. This approach is recommended, as it enables site editors to easily alter and optimize the instruction.
+
+When working with translations, we have a dedicated API called "GetInstructionsForTranslations." This API allows you to provide translation instructions by language. You can also include information on how to translate, along with a list of terms or translation rules. 
 
 ```
 public interface IAssistantInstructionsResolver
 {
     string GetInstructions();
+    string GetInstructions(CultureInfo language);
+    string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null);
 }
 ```
 
 Remember to register your implementation => services.AddSingleton<IAssistantInstructionsResolver, ...>();
 
 ```
-public string GetInstructions()
+ public string GetInstructions()
+{
+    return this.GetInstructions(null);
+}
+
+public string GetInstructions(CultureInfo language)
 {
     ContentReference start = ContentReference.StartPage;
-    if (contentLoader.TryGet(start, out PageData startpage) && startpage.Property.TryGetPropertyValue<string>("AssistantInstructions", out string value)) {
+    if (contentLoader.TryGet(start, out PageData startpage) && startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
+    {
         return value;
     }
-    return null;
+    return configuration["Epicweb:AIAssistant:AssistantInstructions"];
+}
+
+public string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null)
+{
+    ContentReference start = ContentReference.StartPage;
+    if (contentLoader.TryGet(start, toLanguage, out PageData startpage) && startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
+    {
+        return value;
+    }
+    return configuration["Epicweb:AIAssistant:AssistantInstructions"];
 }
 ```
 ### IAITinyMceTemplateResolver

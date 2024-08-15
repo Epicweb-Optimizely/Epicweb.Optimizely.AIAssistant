@@ -31,7 +31,7 @@ Localhost addresses are not supported. To enable local debugging:
 
 3. Run the following command in your terminal to start ngrok:
 
-'''c:/pathto/ngrokfolder ngrok http 13115 -host-header="localhost:13115"'''
+'''c:/pathto/ngrokfolder ngrok http 7094 -host-header="localhost:7094"'''
 
 4. Replace Epicweb.ServiceUrl with the new ngrok URL provided after running the above command.
 
@@ -58,3 +58,7 @@ data.OriginalRequest.Lang // The language context of the request.
 ## support
 
 Contact support @ óptimizely.guru for demo or support
+
+## Get Started with Epicweb AI-Assistant for Optimizely
+
+Fill in the form on https://aiassistant.optimizely.blog/

@@ -1,5 +1,18 @@
 # Change log
 
+## 1.10 - 2024-08-15
+- NEW FEATURE: Custom AI - connect any AI to the service
+- NEW FEATURE: Customize AI instruction per translation language
+- NEW FEATURE: IPreSendAiRequest - Represents an interface for pre-processing AI request data before sending it to AI.
+- Size dialogs
+
+## 1.9.1 - 2024-05-05
+- NEW FEATURE: 
+- Added shortcuts: Easyread, Formatting, WCAG, TOC, LoremIpsum, generate from keywords, Headingslevels prompts
+
+## 1.8.2 - 2024-04-03
+- bugfixes ask ai prompt + image prompts + errorhandling
+
 ## 1.7 - 2024-03-20
 - NEW FEATURE: Enable Minimal mode and disable AutoSuggest on input fields
 

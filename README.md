@@ -1,6 +1,6 @@
 # The OpenAI ChatGPT AI Assistant for Optimizely Content Cloud (CMS) and Customized Commerce
 
-**The documentation is currently undergoing continuous updates** version 1.2
+**The documentation is currently undergoing continuous updates** version 1.10
 
 ## Epicweb.Optimizely.AIAssistant Plugin
 The plugin provides assistance with suggestions, spell-checking, translations, and much more for input fields in an intuitive way within the Optimizely CMS and Customizable Commerce platform
@@ -11,7 +11,7 @@ CMS 12 and Commerce 14
 - [Installation](installation.md)
 - [Configuration](configuration.md)
 - [License](license.md) (Free for evaluation, premium plan for Production use)
-- Payment plans (coming soon, read FAQ)
+- Payment plans (Read FAQ)
 - [User Manual](user-manual.md)
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
@@ -28,17 +28,19 @@ For a free evaluation without any licensing messages in the production environme
 - Translates your text into other languages
 - Image Generation
 - Generates new text
-- Spell-checking
 - Change tone of writing
 - Extracts keywords from your text
 - Run your own prompts to ChatGPT
-- Summarize texts and other propertyfields on page/site
+- Summarize texts and other propertyfields on page/site/products
 - Add your own shortcut prompts
 - Use ChatGPT as inline help
+- Spell-checking
+- Use any AI of your choice
 
 ## Choose provider:
 - Use OpenAI in USA
-- Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France)
+- Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France, US)
+- Use our CustomAI-provider. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
 
 ## Examples
 

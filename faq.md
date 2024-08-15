@@ -3,7 +3,7 @@
 **The FAQ is currently undergoing continuous updates**
 
 ## How does it work? 
-In short, the AI Assistant offers automated **suggestions** and alternative wording for your text, while also providing **translation** capabilities for texts and properties on pages and blocks.
+In short, the AI Assistant offers automated **suggestions** and alternative wording for your writing, while also providing **translation** capabilities for texts and properties on pages and blocks.
 
 Additionally, you can command the AI Assistant by initiating the text with the symbol "#"
 
@@ -26,19 +26,20 @@ You get
 - Priority Usage
    - Latest and new models will be available for you
 - Increased Usage Limits
-   - GPT-4 Models and models that can handle more text (16k and 32k)
+   - GPT-4 Models and models that can handle more text
 - Email Support
    - We answer within 24h
 - Optional Setup with different AI-Models
    - Setup your own models in Azure and finetune them
+   - Setup your own custom AI
 
 ## How do i get Premium subscription?
 Please fill in this form on this page https://aiassistant.optimizely.blog or email support@epicweb.se to get started
 
 ## What does Premium subscription cost?
 Pricing begins at 
-- $250/month for US companies 
-- 250€/month for European companies
+- $350/month for US companies 
+- 350€/month for European companies / 3900 SEK for Sweden
 
 Please note, traffic costs are not included.
 
@@ -49,13 +50,15 @@ No, OpenAI will not use data submitted by customers via our API to train or impr
 
 ## Do you offer EU data residency?
 
-Yes, we are now offering integration to Azure OpenAI Service which are offering AI APIs from differents parts of Europe (Sweden Central, France Central,  UK South) and enables localized data storage. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
+Yes, we are now offering integration to Azure OpenAI Service which are offering AI APIs from different parts of Europe (Sweden Central, France Central,  UK South) and enables localized data storage. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
 
 Data privacy and compliance are crucial in the current GDPR and data protection landscape. We enable clients to store their data exclusively within the EU, ensuring compliance and building trust. This is especially beneficial for businesses in Sweden and the UK, as it provides an additional level of confidence with localized data centers.
 
 ## Do you offer AI assistance on your own data?
 
-Will be possible, let's talk! for now you can setup your own models in Azure and finetune them.
+YES! we can offer to setup your own models in Azure and finetune them.
+
+We our Custom AI provider, it allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API. [Documented here](custom-ai.md)
 
 ## Can I use/sell the images I create with the AI-Assistant Image Generation Tool?
 
