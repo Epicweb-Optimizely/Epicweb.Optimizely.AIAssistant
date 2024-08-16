@@ -29,7 +29,7 @@ Implement your custom logic in the CustomAIFunction.cs file and publish your Azu
 
 Localhost addresses are not supported. To enable local debugging:
 
-1. Create a free developer account at ngrok.
+1. Create a free developer account at ngrok.com 
 
 2. Download and install ngrok on your local machine.
 

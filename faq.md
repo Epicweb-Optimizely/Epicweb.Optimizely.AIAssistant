@@ -27,8 +27,9 @@ You get
    - Latest and new models will be available for you
 - Increased Usage Limits
    - GPT-4 Models and models that can handle more text
-- Email Support
-   - We answer within 24h
+- Support
+   - Email support, answer within 24h
+   - New versions
 - Optional Setup with different AI-Models
    - Setup your own models in Azure and finetune them
    - Setup your own custom AI
