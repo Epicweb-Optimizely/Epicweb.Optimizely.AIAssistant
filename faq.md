@@ -46,11 +46,11 @@ Please note, traffic costs are not included.
 We offer 6 month or 12 month payment plans. Your satisfaction is our priority, and we are committed to delivering excellence every step of the way, therefor we offer a three-month money-back policy to ensure customer satisfaction.
 
 ## Will the data be used as part of the learning data for ChatGPT? 
-No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/policies/api-data-usage-policies
+No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/enterprise-privacy/
 
 ## Do you offer EU data residency?
 
-Yes, we are now offering integration to Azure OpenAI Service which are offering AI APIs from different parts of Europe (Sweden Central, France Central,  UK South) and enables localized data storage. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
+Yes, we are now offering integration to Azure OpenAI Service which are offering AI APIs from different parts of Europe (Sweden Central, France Central,  UK South) and enables localized data storage. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
 
 Data privacy and compliance are crucial in the current GDPR and data protection landscape. We enable clients to store their data exclusively within the EU, ensuring compliance and building trust. This is especially beneficial for businesses in Sweden and the UK, as it provides an additional level of confidence with localized data centers.
 
@@ -58,7 +58,7 @@ Data privacy and compliance are crucial in the current GDPR and data protection 
 
 YES! we can offer to setup your own models in Azure and finetune them.
 
-We our Custom AI provider, it allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API. [Documented here](custom-ai.md)
+Thru our Custom AI provider we allow you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API. [Documented here](custom-ai.md)
 
 ## Can I use/sell the images I create with the AI-Assistant Image Generation Tool?
 

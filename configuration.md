@@ -19,7 +19,7 @@ To ensure this functions correctly, you should annotate the model's property wit
 ### [AIAssistant]-attribute
 
 #### For text fields
-**[AIAssistant(Model = "gpt-3.5-turbo-16k")]** => The model to use => https://platform.openai.com/docs/models 
+**[AIAssistant(Model = "gpt-4o-mini")]** => The model to use => https://platform.openai.com/docs/models 
 
 For Azure, use only the models you deployed in your azure instance.
 
@@ -426,7 +426,7 @@ ServiceLocator.Current.GetAllInstances<IPromptShortcut>().FirstOrDefault(x => x.
 
 ## Azure Open AI Provider
 
-Version 1.2 now supports the utilization of Azure OpenAI Services. In order to use this service, you must establish your own service within your Azure instance. Currently, Azure Models are accessible in the following regions: Australia East, Canada East, East US, East US 2, France Central, Japan East, North Central US, Sweden Central, Switzerland North, and UK South. For the most recent information, please refer to the following resource: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-35-models
+Native out of the box support of Azure OpenAI Services. In order to use this service, you must establish your own service within your Azure instance. Currently, Azure Models are accessible in the following regions: Australia East, Canada East, East US, East US 2, France Central, Japan East, North Central US, Sweden Central, Switzerland North, and UK South. For the most recent information, please refer to the following resource: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
 
 ```
   "Epicweb": {
@@ -436,7 +436,7 @@ Version 1.2 now supports the utilization of Azure OpenAI Services. In order to u
       "ApiKey": "06de6816f*****", //azure key
       "ServiceUrl": "https://[changethis].openai.azure.com/",
       "ProviderName": "AzureOpenAI",
-      "AIModel": "gpt-35-turbo-16k",//the default model if nothing else is specified on property
+      "AIModel": "gpt-4o-mini",//the default model if nothing else is specified on property
       }
     }
 ```
@@ -444,3 +444,26 @@ Version 1.2 now supports the utilization of Azure OpenAI Services. In order to u
 ### Setup Azure OpenAI service models
 
 Read more here https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration-azure-openai.md
+
+## Pre process the AI Request (IPreSendAIRequest)
+
+IPreSendAIRequest represents an interface for pre-processing AI request data before sending it to AI
+
+```
+namespace Epicweb.Optimizely.AIAssistant
+{
+    /// <summary>
+    /// Represents an interface for pre-processing AI request data before sending it to AI.
+    /// </summary>
+    public interface IPreProcessAIRequest
+    {
+        /// <summary>
+        /// Represents an interface for pre-processing AI request data before sending it to AI.
+        /// </summary>
+        /// <param name="modelToBeSentToAI">The AI suggestion request model to be sent to AI.</param>
+        /// <param name="jsonFromFrontEnd">The request model received from the front end.</param>
+        /// <returns>The modified AI suggestion request model.</returns>
+        AiSuggestionRequest PreProcessData(AiSuggestionRequest modelToBeSentToAI, RequestModel jsonFromFrontEnd);
+    }
+}
+```

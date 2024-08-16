@@ -2,12 +2,16 @@
 
 This repository serves as a boilerplate template for integrating a Custom AI or custom implementation of the AI-Assistant within Optimizely. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
 
+## How it works
+
+The plugin in Optimizely is easily configured so it will talk to your Azure Function service where your company can implement any AI or any custom logic
+
 ## Configuration
 
 To configure the AI integration in your Optimizely setup, include the following settings in your configuration file:
 
 
-'''
+```
 "AIAssistant": {
       "AccountName": "<epicweb accountname>",// Provided by Epicweb support
       "ApiKey": "<your key>", // Your API key for the Azure function
@@ -15,7 +19,7 @@ To configure the AI integration in your Optimizely setup, include the following 
       "ProviderName": "CustomAI",
       "CustomJson": "{\"prop\":\"fromAppsettings\"}",// Any custom data you want to send to your API
       }
-'''
+```
 
 ## Installation
 
@@ -31,7 +35,7 @@ Localhost addresses are not supported. To enable local debugging:
 
 3. Run the following command in your terminal to start ngrok:
 
-'''c:/pathto/ngrokfolder ngrok http 7094 -host-header="localhost:7094"'''
+```c:/pathto/ngrokfolder ngrok http 7094 -host-header="localhost:7094"```
 
 4. Replace Epicweb.ServiceUrl with the new ngrok URL provided after running the above command.
 
@@ -57,7 +61,7 @@ data.OriginalRequest.Lang // The language context of the request.
 
 ## support
 
-Contact support @ óptimizely.guru for demo or support
+Contact support @ optimizely.guru for demo or support
 
 ## Get Started with Epicweb AI-Assistant for Optimizely
 
