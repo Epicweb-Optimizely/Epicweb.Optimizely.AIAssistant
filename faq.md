@@ -1,22 +1,20 @@
 # FAQ
 
-**The FAQ is currently undergoing continuous updates**
+## What is the AI-assistant for Optimizely?
+The AI assistant is created to facilitate and simplify the workflow for you as an editor. It is fully integrated into all fields in the platform/Optimizely, and it will help you with your writing and streamline many of your time-consuming editorial activities in a smooth and easy way.
 
 ## How does it work? 
-In short, the AI Assistant offers automated **suggestions** and alternative wording for your writing, while also providing **translation** capabilities for texts and properties on pages and blocks.
+The AI assistant can be accessed directly via the editor mode and offers automated suggestions for your text content and alternative phrasings, while also providing spelling checks and translation of texts and properties on pages and blocks. It has smart pre-installed commands for text summarization and can change the tone (persuasive, informative, etc.) of the text. It can also generate FAQs, tables, summaries, images, and image captions with just a few clicks.
 
-Additionally, you can command the AI Assistant by initiating the text with the symbol "#"
+- Can be accessed directly via the editor mode
+- Offers and suggests automated suggestions, content, and phrasings for your text
+- Generates accurate translations into 86+ languages
+- Offers spelling checks
+- Offers the ability to change and fine-tune the tone of a text (persuasive, informative, etc.)
+- Can summarize and condense texts
+- Generates FAQs, tables, images, and image captions with just a few clicks
 
-Examples: 
-
-- #summarize "a long text"
-- #summarize ::Main body::  (this will refer to the property "Main body", if you have such)
-- #summarize in a selling way ::this::  (this will refer to all content on the page/block/product)
-- #check spelling "a long text with misspelling"
-- #generate a really short text about cats
-- #Can you provide me with examples of article titles related to paint brushes?
-
-It's really powerful and intuitive
+The AI assistant is a powerful and intuitive tool that will help you in your everyday work!
 
 ## Is it free?
 No, it's free for evaluation purposes, but you may encounter limitations and receive license messages.
@@ -46,6 +44,27 @@ Please note, traffic costs are not included.
 
 We offer 6 month or 12 month payment plans. Your satisfaction is our priority, and we are committed to delivering excellence every step of the way, therefor we offer a three-month money-back policy to ensure customer satisfaction.
 
+## Which AI LLMs can i use? 
+
+With our Custom AI provider, you can connect any AI to the service [Read about the CustomAI-provider](custom-ai.md)
+
+- GPT-4, OpenAI
+- Claude, Anthropic
+- Gemini, Google DeepMind
+- Jurassic-2, AI21 Labs
+- LLaMA, Meta
+- NeMo, NVIDIA
+- Command R, Cohere
+- Tongyi Qianwen, Alibaba Cloud
+- Ernie, Baidu
+- StableLM, Stability AI
+- Grok, xAI
+- Einstein GPT, Salesforce
+- ChatGLM, Tsinghua University
+- Grok, KakaoBrain
+- Mistral, Mistral AI
+- Bring your own AI
+
 ## Will the data be used as part of the learning data for ChatGPT? 
 No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/enterprise-privacy/
 
@@ -65,3 +84,6 @@ Thru our Custom AI provider we allow you to incorporate custom logic and utilize
 
 Subject to the Content Policy and Terms of OpenAI DALL·E, you own the images you create with the AI-Assistant (DALL·E), including the right to reprint, sell, and merchandise. 
 Source:  https://help.openai.com/en/articles/6425277-can-i-sell-images-i-create-with-dall-e 
+
+## How do translations work?
+OpenAI's service supports over 86 languages, offering some of the most accurate and high-quality translations available worldwide. Additionally, you can provide specific terms or translation guidelines to tailor the translation process to your needs.

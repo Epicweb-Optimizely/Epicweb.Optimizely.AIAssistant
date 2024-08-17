@@ -26,7 +26,7 @@ For Premium Subscription: https://aiassistant.optimizely.blog
 For a free evaluation without any licensing messages in the production environment, please complete the form at https://aiassistant.optimizely.blog
 
 - Provides suggestions or alternatives for your text
-- Translates your text into other languages
+- Translates your text into other 86+ languages
 - Image Generation
 - Generates new text
 - Spell-checking
@@ -36,10 +36,12 @@ For a free evaluation without any licensing messages in the production environme
 - Summarize texts and other propertyfields on page/site
 - Add your own shortcut prompts
 - Use ChatGPT as inline help
+- Use any AI of your choice
 
 Choose provider:
 - Use OpenAI in USA
 - Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France) => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#azure-open-ai-provider
+- Use our CustomAI-provider. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
 
 ## Configuration
 

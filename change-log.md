@@ -3,7 +3,7 @@
 ## 1.10 - 2024-08-15
 - NEW FEATURE: Custom AI - connect any AI to the service
 - NEW FEATURE: Customize AI instruction per translation language
-- NEW FEATURE: IPreSendAiRequest - Represents an interface for pre-processing AI request data before sending it to AI.
+- NEW FEATURE: IPreProcessAiRequest - Represents an interface for pre-processing AI request data before sending it to AI.
 - Size dialogs
 
 ## 1.9.1 - 2024-05-05

@@ -445,9 +445,9 @@ Native out of the box support of Azure OpenAI Services. In order to use this ser
 
 Read more here https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration-azure-openai.md
 
-## Pre process the AI Request (IPreSendAIRequest)
+## Pre process the AI Request (IPreProcessAiRequest)
 
-IPreSendAIRequest represents an interface for pre-processing AI request data before sending it to AI
+IPreProcessAiRequest represents an interface for pre-processing AI request data before sending it to AI
 
 ```
 namespace Epicweb.Optimizely.AIAssistant
