@@ -32,6 +32,7 @@ For a free evaluation without any licensing messages in the production environme
 - Extracts keywords from your text
 - Run your own prompts to ChatGPT
 - Summarize texts and other property fields on page/site/products
+- Formatting HTML, WCAG AA compatible
 - Add your own shortcut prompts
 - Use ChatGPT as inline help
 - Spell-checking
