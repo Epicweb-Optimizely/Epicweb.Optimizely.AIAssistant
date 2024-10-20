@@ -130,9 +130,13 @@ Field is minimal - hides the "AI Wheel" by default
     }
 ```
 
-## TinyMCE (XHtmlString-properties)
+## TinyMCE Rich Text Editor (XHtmlString-properties)
 
 Add "ai_assistant_execute ai_assistant_choices ai_assistant_image" to Toolbar in TinyMceConfiguration
+
+You can remove the AI integration from the RTE by using services.AddAIAssistant(addToDefaultTinyMCE: false).
+
+To add AI to a custom configuration of blocks and pages, use ((TinyMceSettings)config).AddAIAssistantToTinyMCE().
 
 ## Image Generation
 
