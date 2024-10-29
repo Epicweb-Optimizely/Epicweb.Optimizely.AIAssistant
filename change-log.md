@@ -1,16 +1,36 @@
 # Change log
 
-## 1.10 - 2024-08-15
+
+## 1.12.1 - 2024-10-29
+- The UI is now localized in nl, da
+- Bugfix, issue caused in admin user interface
+
+## 1.12 - 2024-10-22
+- The UI is now localized in en, sv, dk, nb, fi, fr, de, es
+- Refactor Startup registrations
+
+## 1.11 - 2024-09-25
+- Options Pattern in startup
+- New shortcut SEO Description
+- Bugfixes when use EnableOnAllInputs
+
+## 1.10 - 2024-08-23
 - NEW FEATURE: Custom AI - connect any AI to the service
 - NEW FEATURE: Customize AI instruction per translation language
+- NEW FEATURE: Customize AI model per translation language
 - NEW FEATURE: IPreProcessAiRequest - Represents an interface for pre-processing AI request data before sending it to AI.
 - Size dialogs
+- Error message in pagetype properties of block type when in "Create state"
+- Translations not working in properties of block type 
+- Better error handling when using placeholders (::this::)
+- Known Issue: Properties and Required properties in "Create state" on pages are not translatable with the AI in this state. 
 
 ## 1.9.1 - 2024-05-05
-- NEW FEATURE: 
+- NEW FEATURE: User roles can now be assigned globally or on a per-property basis to manage access to AI-Assistant
 - Added shortcuts: Easyread, Formatting, WCAG, TOC, LoremIpsum, generate from keywords, Headingslevels prompts
 
 ## 1.8.2 - 2024-04-03
+- ENHANCED FEATURE: Ask AI window supports now history and more useful features
 - bugfixes ask ai prompt + image prompts + errorhandling
 
 ## 1.7 - 2024-03-20
