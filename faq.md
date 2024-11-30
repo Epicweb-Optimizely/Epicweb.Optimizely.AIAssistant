@@ -8,23 +8,26 @@ The AI assistant can be accessed directly via the editor mode and offers automat
 
 - Can be accessed directly via the editor mode
 - Offers and suggests automated suggestions, content, and phrasings for your text
-- Generates accurate translations into 86+ languages
+- Generates smooth translations into different languages
+- Produces exceptional realistic images or vector graphics
+- Generates fantastic realistic images or vector graphism
 - Offers spelling checks
 - Offers the ability to change and fine-tune the tone of a text (persuasive, informative, etc.)
 - Can summarize and condense texts
 - Generates FAQs, tables, images, and image captions with just a few clicks
+- Formatting tables and lists, WCAG compatible
 
 The AI assistant is a powerful and intuitive tool that will help you in your everyday work!
 
 ## Is it free?
-No, it's free for evaluation purposes, but you may encounter limitations and receive license messages.
+It is free for evaluation purposes, but you may encounter limitations and receive license messages. We offer different kinds of packages depending on your needs, contact us for more information about prices. Premium subsciption is our most valuable package.
 
 ## What is included in Premium subscription? 
 You get 
 - Priority Usage
    - Latest and new models will be available for you
 - Increased Usage Limits
-   - GPT-4 Models and models that can handle more text
+   - GPT-4o Models and models that can handle more text
 - Support
    - Email support, answer within 24h
    - New versions
@@ -37,10 +40,10 @@ Please fill in this form on this page https://aiassistant.optimizely.blog or ema
 
 ## What does Premium subscription cost?
 Pricing begins at 
-- $350/month for US companies 
-- 350€/month for European companies / 3900 SEK for Sweden
+- $400/month for US companies 
+- 350€/month for European companies / 3900 SEK/month for Sweden
 
-Please note, traffic costs are not included.
+Please note that traffic costs are not included. Additional fees may apply for additional modules and for exceeding two domains.
 
 We offer 6 month or 12 month payment plans. Your satisfaction is our priority, and we are committed to delivering excellence every step of the way, therefor we offer a three-month money-back policy to ensure customer satisfaction.
 
@@ -63,6 +66,7 @@ With our Custom AI provider, you can connect any AI to the service [Read about t
 - ChatGLM, Tsinghua University
 - Grok, KakaoBrain
 - Mistral, Mistral AI
+- writer.com
 - Bring your own AI
 
 ## Will the data be used as part of the learning data for ChatGPT? 
@@ -84,6 +88,20 @@ Thru our Custom AI provider we allow you to incorporate custom logic and utilize
 
 Subject to the Content Policy and Terms of OpenAI DALL·E, you own the images you create with the AI-Assistant (DALL·E), including the right to reprint, sell, and merchandise. 
 Source:  https://help.openai.com/en/articles/6425277-can-i-sell-images-i-create-with-dall-e 
+Same goes with Recraft AI: When you are using the paid API subscription, you own the assets you create. Recraft assigns you the copyright rights to those assets, allowing you to use them for both personal and commercial purposes. However, you are prohibited from using these assets to train AI models, systems, or similar technologies.
+Source: https://www.recraft.ai/terms
 
 ## How do translations work?
 OpenAI's service supports over 86 languages, offering some of the most accurate and high-quality translations available worldwide. Additionally, you can provide specific terms or translation guidelines to tailor the translation process to your needs.
+
+## Is the AI-Assistant Plugin EU AI ACT compatible?
+Yes, the AI-Assistant Plugin for Optimizely is designed to be compatible with the EU AI Act. Here’s a summary of why it aligns with the Act’s requirements:
+
+- Transparency: Clearly informs users that content is AI-generated, keeping all outputs in draft mode for human review.
+- Human Oversight: Allows editors to review, accept, or reject AI-generated content, ensuring human control over the final result.
+- Data Quality Responsibility: The AI-Assistant allows customers to choose their preferred models for content generation. Ensuring the use of diverse and fair datasets is handled by the implementing partner or customer.
+- Limited Risk Category: The application is used in editorial support, a lower-risk use case, not falling under high-risk or prohibited categories.
+- Compliance with GDPR: Ensures data privacy and security, aligning with broader EU data protection laws.
+- Non-manipulative Use: The tool enhances editorial efficiency without manipulative or harmful purposes.
+
+- This ensures the AI-Assistant Plugin meets the transparency, safety, and fairness standards set by the EU AI Act.

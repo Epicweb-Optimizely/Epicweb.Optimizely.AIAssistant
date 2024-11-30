@@ -1,5 +1,10 @@
 # Change log
 
+## 1.13.6 - 2024-12-01
+- NEW FEATURE: Recraft AI Image Generation, style and sizes in the ui added + new actions images, remove background
+
+## 1.13.0 - 2024-11-10
+- NEW FEATURE: Recraft AI Image Generation
 
 ## 1.12.1 - 2024-10-29
 - The UI is now localized in nl, da
@@ -24,6 +29,7 @@
 - Translations not working in properties of block type 
 - Better error handling when using placeholders (::this::)
 - Known Issue: Properties and Required properties in "Create state" on pages are not translatable with the AI in this state. 
+
 
 ## 1.9.1 - 2024-05-05
 - NEW FEATURE: User roles can now be assigned globally or on a per-property basis to manage access to AI-Assistant

@@ -1,9 +1,13 @@
 # User Manual
 
+## Video shorts and guides
+
+[Go to our video portal for guides](https://aiassistant.optimizely.blog/en/videos/)
+
 ## Input fields and text areas
 
 See video tutorials here:
-https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/README.md#provides-suggestions-or-alternatives-for-your-text
+https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/example-screens.md#provides-suggestions-or-alternatives-for-your-text
 
 ### Suggestions
 

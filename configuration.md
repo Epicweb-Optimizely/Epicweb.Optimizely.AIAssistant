@@ -84,20 +84,22 @@ services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 
 **[AIAssistant(Shortcuts = new[] { ... })]** => same as above, only specify the ones you want to use on this property
 
-**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - dall-e-2: 256x256, 512x512 or 1024x1024, defaults to 1024x1024
+**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - RecraftAI: 1024x1024, 1365x1024, 1024x1365, 1536x1024, 1024x1536, 1820x1024, 1024x1820, 1024x2048, 2048x1024, 1434x1024, 1024x1434, 1024x1280, 1280x1024, 1024x1707, 1707x1024
 
-**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
+**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural for Dalle-3. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
+For Recraft AI: https://www.recraft.ai/docs#list-of-styles create a querystring "style=digital_illustration|pixel_art", default is realistic_image  [Link to config](recraftai-image-generation.md)
+    
 
-**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or dall-e-2), default to dall-e-3 on latest version
+**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or recraft), default to dall-e-3 on latest version
 
 #### For Image fields (ContentReference or Url)
 
-**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - dall-e-2: 256x256, 512x512 or 1024x1024, defaults to 1024x1024
+**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - RecraftAI: 1024x1024, 1365x1024, 1024x1365, 1536x1024, 1024x1536, 1820x1024, 1024x1820, 1024x2048, 2048x1024, 1434x1024, 1024x1434, 1024x1280, 1280x1024, 1024x1707, 1707x1024
    
+**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural for Dalle-3. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
+For Recraft AI: https://www.recraft.ai/docs#list-of-styles create a querystring "style=digital_illustration|pixel_art", default is realistic_image  
 
-**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
-
-**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or dall-e-2), default to dall-e-3 on latest version
+**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or recraft), default to dall-e-3 on latest version
 
 ## Appsettings
 
@@ -114,13 +116,13 @@ services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
       }
     }
 ```
-### Enable Minimalmode
+### Enable Minimal Mode
 
 Field is minimal - hides the "AI Wheel" by default
 
 **[AIAssistant(MinimalMode = true)]** => Default is false, 
 
-#### Enable MinimalMode globaly => add in appsetting:  
+#### Enable MinimalMode globally => add in appsetting:  
 
 ```
  "Epicweb": {
@@ -175,7 +177,9 @@ If you need to change default behavior, these fields kan be override by AIAssist
     }
 ```
 
-## Overide default behaviors
+[Recraft Image Generation Configuration](recraftai-image-generation.md)
+
+## Override default behaviors
 
 You can override these implementations if you want to implement different logic
 

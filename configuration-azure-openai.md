@@ -7,7 +7,7 @@
 2. **Create an OpenAI Resource**:
    - In the Azure portal, look for "Create a resource". 
    - Search for "OpenAI Service" and select it.
-   - NEXT STEP is in Preview/BETA, you might need to fill in a form to get access, normaly it takes hours to get access.
+   - NEXT STEP is in Preview/BETA, you might need to fill in a form to get access, normally it takes hours to get access.
    - Click "Create". You'll be prompted to fill in details like subscription, resource group, and region. Pick options that suit your needs.
 
 3. **Configure the OpenAI Resource**:

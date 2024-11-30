@@ -42,7 +42,8 @@ Choose provider:
 - Use OpenAI in USA
 - Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France) => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#azure-open-ai-provider
 - Use our CustomAI-provider. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
-
+- Use RecraftAI ImageProvider
+- 
 ## Configuration
 
 [More configuration](configuration.md)
