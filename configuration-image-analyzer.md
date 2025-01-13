@@ -24,11 +24,17 @@ The following are examples of prompts that can be used with `AnalyzeImageAttribu
     public virtual IList<LocalizedString> AltTextList { get; set; }
    ```
 
+![image](https://github.com/user-attachments/assets/b7aeac9f-f05d-4cb8-9a36-7ff156148531)
+
+
 2. **Alt Text in one specific language**:
    ```csharp
    [AnalyzeImageAltText(languageCode: "sv")]
    public virtual string AltTextSE { get; set; }
    ```
+
+   ![image](https://github.com/user-attachments/assets/71ea9234-dbc3-4ff1-9a08-1ad8f1579ab8)
+
 
 3. **Generate Tags**:
    ```csharp
@@ -36,17 +42,25 @@ The following are examples of prompts that can be used with `AnalyzeImageAttribu
    public virtual IList<string> Tags { get; set; }
    ```
 
+   ![image](https://github.com/user-attachments/assets/1bda2d7b-cb51-4dfd-be53-2850335f53d9)
+
+
 4. **Generate Sales Description**:
    ```csharp
    [AnalyzeImage(prompt: "Describe this as a persuasive sales pitch, you are selling a product.", languageCode: "en")]
    public virtual string SalesDescription { get; set; }
    ```
 
+   ![image](https://github.com/user-attachments/assets/ff7b6a7b-d34e-49f3-9235-d4f9fd4429f8)
+
+
 5. **Identify Objects**:
 ```csharp
     [AnalyzeImage(prompt: "Return true or false if the image contains one or more cars. Return true or false only.")]
     public virtual bool IsCarInImage { get; set; }
 ```
+![image](https://github.com/user-attachments/assets/c25e79da-d87c-4304-81e4-8753c1e274cc)
+
 
 6. **Count People**:
 ```csharp
@@ -54,11 +68,18 @@ The following are examples of prompts that can be used with `AnalyzeImageAttribu
     public virtual int PeopleCountTest { get; set; }
 ```
 
+![image](https://github.com/user-attachments/assets/16462e18-3891-41ab-9fa5-82967ce4b835)
+
+
 7. **Extract Text from Images OCR (Optical Character Recognition)**:
 ```csharp
     [AnalyzeImage(prompt: "Return the Text that appear in the image. Return in semi colon separated (;) text.")]
     public virtual string TextInImage { get; set; }
 ```
+
+![image](https://github.com/user-attachments/assets/6556ce22-a79d-4eee-a59b-ce6a44acf7c4)
+![image](https://github.com/user-attachments/assets/4bcafa11-9cea-42fc-bad0-1c0a5d30c292)
+
 
 ---
 
