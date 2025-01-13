@@ -28,6 +28,7 @@ For a free evaluation without any licensing messages in the production environme
 - Provides suggestions or alternatives for your text
 - Translates your text into other 86+ languages
 - Image Generation
+- Advanced Image Analyzer
 - Generates new text
 - Spell-checking
 - Change tone of writing
@@ -44,9 +45,11 @@ Choose provider:
 - Use our CustomAI-provider. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
 - Use RecraftAI ImageProvider
 - 
-## Configuration
+## Configurations
 
 [More configuration](configuration.md)
+[Configuration translations](configuration-translations.md)
+[Configuration Image Analyzer](configuration-image-analyzer.md)
 
 ## Dependencies
 

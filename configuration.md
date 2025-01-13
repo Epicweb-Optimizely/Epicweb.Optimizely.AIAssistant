@@ -33,7 +33,7 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(CustomJson = "{\"prop\":\"fromAttribute\"}")]** => Any custom data you want to send to your API, to be used with CustomAI Provider
 
-```
+```json
  "Epicweb": {
     "AIAssistant": {      
       "CustomJson": "{\"prop\":\"fromAppsettings\"}",// Any custom data you want to send to your API
@@ -43,7 +43,7 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(Roles = new[] { "AIEditors", "SomeRole" })** User roles can be assigned globally or on a per-property basis to manage access to AI-Assistant
 
-```
+```json
  "Epicweb": {
     "AIAssistant": {
       "Roles": [ "AIEditors", "SomeRole" ] //sets globally
@@ -71,7 +71,7 @@ SeoTitlePromptShortcut (for creation of SEO titles based on page content)
 SEOKeywordsPromptShortcut (for creation of keywords based on page content)
 
 you need to add them to services => 
-```
+```csharp
 services.AddSingleton<IPromptShortcut, SEOKeywordsPromptShortcut>();
 services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 ```
@@ -109,7 +109,7 @@ For Recraft AI: https://www.recraft.ai/docs#list-of-styles create a querystring 
 
 #### Disable Auto Suggest globaly => add in appsetting:  
 
-```
+```json
  "Epicweb": {
     "AIAssistant": {
       "AutoSuggest": false //sets globally, default true
@@ -124,7 +124,7 @@ Field is minimal - hides the "AI Wheel" by default
 
 #### Enable MinimalMode globally => add in appsetting:  
 
-```
+```json
  "Epicweb": {
     "AIAssistant": {
       "MinimalMode": true //sets globally, default false
@@ -157,7 +157,7 @@ By implementing your own IMediaPropertyResolver, you can modify media data throu
 You need your own API key for the Image Generation to work, you can obtain a key by registering and create an key here => https://platform.openai.com/account/api-keys 
 
 add the key to your appsettings: 
-```
+```json
  "Epicweb": {
     "AIAssistant": {
       "ApiKey": "sk-NpPD....jrwm"
@@ -168,7 +168,7 @@ add the key to your appsettings:
 ### Image Properties
 
 If you need to change default behavior, these fields kan be override by AIAssistantAttribute on each property 
-```
+```json
  "Epicweb": {
     "AIAssistant": {
         "ImageModel": "dall-e-3", // or dall-e-2
@@ -191,7 +191,7 @@ The default setup dictates that if the Startpage contains a field named 'Assista
 
 When working with translations, we have a dedicated API called "GetInstructionsForTranslations." This API allows you to provide translation instructions by language. You can also include information on how to translate, along with a list of terms or translation rules. 
 
-```
+```csharp
 public interface IAssistantInstructionsResolver
 {
     string GetInstructions();
@@ -202,7 +202,7 @@ public interface IAssistantInstructionsResolver
 
 Remember to register your implementation => services.AddSingleton<IAssistantInstructionsResolver, ...>();
 
-```
+```csharp
  public string GetInstructions()
 {
     return this.GetInstructions(null);
@@ -232,7 +232,7 @@ public string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo
 
 Override the IAITinyMceTemplateResolver to implement your own image-tag implementation in the rich text editor
 
-```
+```csharp
 public interface IAITinyMceTemplateResolver
 {
     /// <summary>
@@ -254,7 +254,7 @@ Remember to register your service =>  services.AddSingleton<IAITinyMceTemplateRe
 
 Create your custom placeholders. Within a text field, you can use patterns like ::this:: or ::pageid:5:main body:: and the text will automatically be substituted with the relevant content. The 'IPlaceholderResolver' interface allows you to define your own logic for these placeholders.
 
-```
+```csharp
     public interface IPlaceholderResolver
     {
         /// <summary>
@@ -282,7 +282,7 @@ Create your custom placeholders. Within a text field, you can use patterns like 
 
 Here is an example for Optimizely Commerce, if you want to use the pattern ::code:P-15254:: to point to the product with productcode "P-15254"
 
-```
+```csharp
 using Epicweb.Optimizely.AIAssistant;
 using Epicweb.Optimizely.AIAssistant.Services;
 using System.Globalization;
@@ -366,7 +366,7 @@ namespace Foundation.Infrastructure
 
 As a developer you can add Shortcut prompts, this is perfect if your organization reuse prompts on many places. The default shortcuts can be disabled. And you can disable shortcuts per property. 
 
-```
+```csharp
 namespace Epicweb.Optimizely.AIAssistant
 {
    public interface IPromptShortcut
@@ -419,7 +419,7 @@ remember to register your shortcut =>  services.AddSingleton<IPromptShortcut, My
 
 #### Disable shortcuts globaly => add in appsetting:  
 
-```
+```json
  "Epicweb": {
     "AIAssistant": {
       "DisableShortcuts": false
@@ -436,7 +436,7 @@ ServiceLocator.Current.GetAllInstances<IPromptShortcut>().FirstOrDefault(x => x.
 
 Native out of the box support of Azure OpenAI Services. In order to use this service, you must establish your own service within your Azure instance. Currently, Azure Models are accessible in the following regions: Australia East, Canada East, East US, East US 2, France Central, Japan East, North Central US, Sweden Central, Switzerland North, and UK South. For the most recent information, please refer to the following resource: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
 
-```
+```json
   "Epicweb": {
     "AIAssistant": {
       "ApiUrl": "", //azure service url provided by Epicweb upon registration of add-on
@@ -457,7 +457,7 @@ Read more here https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssist
 
 IPreProcessAiRequest represents an interface for pre-processing AI request data before sending it to AI
 
-```
+```csharp
 namespace Epicweb.Optimizely.AIAssistant
 {
     /// <summary>

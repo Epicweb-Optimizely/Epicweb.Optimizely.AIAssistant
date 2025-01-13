@@ -13,7 +13,7 @@ This allows for the implementation of global 'Assistant Instructions' but also d
 
 When working with translations, we have a dedicated API called "GetInstructionsForTranslations." This API allows you to provide translation instructions by language. You can also include information on how to translate, along with a list of terms or translation rules. 
 
-```
+```csharp
 public interface IAssistantInstructionsResolver
 {
     string GetInstructions();
@@ -24,7 +24,7 @@ public interface IAssistantInstructionsResolver
 
 Remember to register your implementation => services.AddSingleton<IAssistantInstructionsResolver, ...>();
 
-```
+```csharp
  public string GetInstructions()
 {
     return this.GetInstructions(null);
