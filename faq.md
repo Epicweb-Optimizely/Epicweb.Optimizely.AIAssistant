@@ -10,7 +10,7 @@ The AI assistant can be accessed directly via the editor mode and offers automat
 - Offers and suggests automated suggestions, content, and phrasings for your text
 - Generates smooth translations into different languages
 - Produces exceptional realistic images or vector graphics
-- Generates fantastic realistic images or vector graphism
+- Image Analyzer functionality for accurate Alt Texts and meta extraction
 - Offers spelling checks
 - Offers the ability to change and fine-tune the tone of a text (persuasive, informative, etc.)
 - Can summarize and condense texts
@@ -92,7 +92,7 @@ Same goes with Recraft AI: When you are using the paid API subscription, you own
 Source: https://www.recraft.ai/terms
 
 ## How do translations work?
-OpenAI's service supports over 86 languages, offering some of the most accurate and high-quality translations available worldwide. Additionally, you can provide specific terms or translation guidelines to tailor the translation process to your needs.
+OpenAI's service supports over 92 languages, offering some of the most accurate and high-quality translations available worldwide. Additionally, you can provide specific terms or translation guidelines to tailor the translation process to your needs.
 
 ## Is the AI-Assistant Plugin EU AI ACT compatible?
 Yes, the AI-Assistant Plugin for Optimizely is designed to be compatible with the EU AI Act. Here’s a summary of why it aligns with the Act’s requirements:

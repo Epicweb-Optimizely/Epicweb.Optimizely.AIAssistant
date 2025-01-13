@@ -27,6 +27,7 @@ For a free evaluation without any licensing messages in the production environme
 - Provides suggestions or alternatives for your text
 - Translates your text into other languages
 - Image Generation
+- Smart Image Analyzer
 - Generates new text
 - Change tone of writing
 - Extracts keywords from your text

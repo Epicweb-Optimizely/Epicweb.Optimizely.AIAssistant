@@ -1,5 +1,9 @@
 # Change log
 
+## 1.14.0 - 2025-01-14
+- NEW FEATURE: Smart Image Analyzer, advanced AI capabilities to analyze images and automatically populate media object properties. When images are uploaded into Optimizely CMS.
+- NEW FEATURE: DBLocalizationProvider AI Assistance
+
 ## 1.13.6 - 2024-12-01
 - NEW FEATURE: Recraft AI Image Generation, style and sizes in the ui added + new actions images, remove background
 
