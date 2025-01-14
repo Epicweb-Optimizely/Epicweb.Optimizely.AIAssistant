@@ -23,4 +23,4 @@ services.AddAIAssistantDbLocalizationProvider();
 
 ### Dependencies
 
-The package is dependent on the Epicweb.Optimizely.AIAssistant and Epicweb.Optimizely.AIAssistant.LanguageManager package.
+The package is dependent on the `Epicweb.Optimizely.AIAssistant` and `Epicweb.Optimizely.AIAssistant.LanguageManager` package.
