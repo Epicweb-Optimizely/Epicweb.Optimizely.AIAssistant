@@ -5,6 +5,9 @@ The LocalizationProvider is a powerful tool designed to enhance the localization
 
 You can find the project [here](https://github.com/valdisiljuconoks/LocalizationProvider/blob/master/README.md).
 
+[localizationprovider-ai-assistant.webm](https://github.com/user-attachments/assets/f476a4d5-a2ce-4cc9-a91c-1bfe44e8787c)
+
+
 ## Connecting to AI-Assistant
 With the integration of AI-Assistant, editors can now leverage cloud-based translation services to boost productivity and streamline the content translation process. This connection enables real-time translation capabilities, enhancing the overall localization process.
 
