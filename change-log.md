@@ -1,5 +1,12 @@
 # Change log
 
+## 1.14.2 - 2025-02-04
+- NEW FEATURE: DisabledSites - disable functionality on specific sites in solution
+- Bugfix, download image RTE
+
+## 1.14.1 - 2025-01-20
+- Bugfix, Ask AI not opening the dialog
+
 ## 1.14.0 - 2025-01-14
 - NEW FEATURE: Smart Image Analyzer, advanced AI capabilities to analyze images and automatically populate media object properties. When images are uploaded into Optimizely CMS.
 - NEW FEATURE: DBLocalizationProvider AI Assistance
