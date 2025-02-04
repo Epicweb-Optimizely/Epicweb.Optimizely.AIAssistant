@@ -132,6 +132,16 @@ Field is minimal - hides the "AI Wheel" by default
     }
 ```
 
+#### Disable AI functionaliy on Site level => add in appsetting:  
+
+```json
+ "Epicweb": {
+    "AIAssistant": {
+      "DisabledSites": [ "025c64b0-c66d-4d75-8606-92c2866cb555", "MySiteName" ] //set name or siteid
+      }
+    }
+```
+
 ## TinyMCE Rich Text Editor (XHtmlString-properties)
 
 Add "ai_assistant_execute ai_assistant_choices ai_assistant_image" to Toolbar in TinyMceConfiguration
