@@ -1,5 +1,11 @@
 # Change log
 
+## 1.15.0 - 2025-03-06
+- NEW FEATURE: New image features, replace background, remove background, generate variations.
+- Implement loader in the UI image download
+- Bugfix, Ask AI some times returns text instead of html.
+- Bugfix, duplicate download of image in tinymce
+
 ## 1.14.2 - 2025-02-04
 - NEW FEATURE: DisabledSites - disable functionality on specific sites in solution
 - Bugfix, download image RTE
