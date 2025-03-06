@@ -209,10 +209,20 @@ Find all styles here: https://www.recraft.ai/docs#list-of-styles
           ]
         }
       ],
-      "ImageActions": [
+      "ImageActions":       "ImageActions": [
         {
           "id": "removeBackground", //case sensitive
           "name": "Remove Background"
+        },
+        {
+          "id": "replaceBackground", //case sensitive
+          "name": "Replace Background",
+          "prompt": true
+        },
+        {
+          "id": "imageToImage", //case sensitive
+          "name": "Generate variation",
+          "prompt": true
         }
       ]
 ```
