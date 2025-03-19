@@ -51,6 +51,12 @@ public string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo
 }
 ```
 
+### The Translation API
+
+We offer a translation API for customization, such as in scheduled tasks and similar use cases. 
+
+Epicweb.Optimizely.AIAssistant.Services.TranslationService, which includes TranslateText(string input, CultureInfo? fromLanguage, CultureInfo toLanguage, string source = null)
+
 ## Examples
 
 ### **Scenario 1:** English page exists with text in the property "page description", change to Swedish context of the page, spinn the wheel and it translates the field.
