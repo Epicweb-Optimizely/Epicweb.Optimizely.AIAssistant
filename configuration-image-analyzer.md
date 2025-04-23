@@ -23,7 +23,7 @@ This ensures that the image analysis process is triggered when creating or impor
      }
 }
 ```
-This is required to make the Analyzer to work.
+Defaults to gpt-4o-mini if OpenAI provider is used
 
 ## Example Prompts
 The following are examples of prompts that can be used with `AnalyzeImageAttribute`:
