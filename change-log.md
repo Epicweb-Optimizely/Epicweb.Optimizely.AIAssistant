@@ -1,5 +1,8 @@
 # Change log
 
+## 1.16.0 - 2025-04-25
+- NEW FEATURE: Use AI to refine and generate a detailed prompt
+  
 ## 1.15.0 - 2025-03-06
 - NEW FEATURE: New image features, replace background, remove background, generate variations.
 - Implement loader in the UI image download
