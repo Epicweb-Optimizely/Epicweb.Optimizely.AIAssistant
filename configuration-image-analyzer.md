@@ -14,6 +14,16 @@ This ensures that the image analysis process is triggered when creating or impor
 
 ---
 
+### Add vision model to appsettings
+
+```json
+"Epicweb": {
+    "AIAssistant": {
+       "AIVisionModel": "gpt-4o"
+     }
+}
+```
+This is required to make the Analyzer to work.
 
 ## Example Prompts
 The following are examples of prompts that can be used with `AnalyzeImageAttribute`:
