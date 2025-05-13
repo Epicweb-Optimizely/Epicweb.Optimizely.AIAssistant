@@ -39,13 +39,20 @@ You get
 Please fill in this form on this page https://aiassistant.optimizely.blog or email support@epicweb.se to get started
 
 ## What does Premium subscription cost?
-Pricing begins at 
-- $400/month for US companies 
-- 350€/month for European companies / 3900 SEK/month for Sweden
+Pricing begins at:
 
-Please note that traffic costs are not included. Additional fees may apply for additional modules and for exceeding two domains.
+- $400/month for US companies
+- 350€/month for European companies
+- 3,900 SEK/month for companies in Sweden
 
-We offer 6 month or 12 month payment plans. Your satisfaction is our priority, and we are committed to delivering excellence every step of the way, therefor we offer a three-month money-back policy to ensure customer satisfaction.
+Please note:
+Traffic costs are not included in the base price.
+
+Additional charges apply for more than two domains and for optional modules such as the Image Module (generation and analysis) and Language Manager (auto translate).
+
+We offer flexible 6-month or 12-month payment plans.
+
+To ensure your satisfaction, we also provide a three-month money-back guarantee — we're committed to excellence, every step of the way.
 
 ## Which AI LLMs can i use? 
 
