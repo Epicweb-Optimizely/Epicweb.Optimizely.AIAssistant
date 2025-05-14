@@ -41,7 +41,7 @@ For a free evaluation without any licensing messages in the production environme
 
 The AI assistant is a powerful and intuitive tool that will help you in your everyday work!
 
-## Build in providers:
+## Built-in providers:
 
 - Use OpenAI in USA
 - Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France, US)
