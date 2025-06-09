@@ -1,6 +1,6 @@
 # The AI Assistant for Optimizely Content Cloud (CMS) PaaS and Commerce Connect PaaS
 
-**The documentation is currently undergoing continuous updates** version 1.13
+**The documentation is currently undergoing continuous updates** version 1.17
 
 ## Epicweb.Optimizely.AIAssistant Plugin
 The plugin offers intuitive support within the Optimizely CMS and Customizable Commerce platform, providing suggestions, translations, SEO summarization, formatting help, and much more for input fields within the Optimizely CMS and Customizable Commerce platform
@@ -44,9 +44,11 @@ The AI assistant is a powerful and intuitive tool that will help you in your eve
 ## Built-in providers:
 
 - Use OpenAI in USA
+- Use Google Gemini AI
 - Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France, US)
 - Use our CustomAI-provider. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
 - Use RecraftAI ImageProvider
+- Use Google Imagen
 
 ## Examples
 
