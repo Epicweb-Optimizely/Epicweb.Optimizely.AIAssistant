@@ -28,8 +28,11 @@ For a free evaluation without any licensing messages in the production environme
 - Translates your text into other languages
 - Image Generation
 - Smart Image Analyzer
+- Alt-Text generations
+- SEO title generations
+- SEO description generations
 - Generates new text
-- Change tone of writing
+- Change or maintain consistency in tone of writing
 - Extracts keywords from your text
 - Run your own prompts to ChatGPT
 - Summarize texts and other property fields on page/site/products
