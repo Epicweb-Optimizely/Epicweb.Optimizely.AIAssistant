@@ -1,5 +1,8 @@
 # Change log
 
+## 1.17.0 - 2025-06-09
+- NEW FEATURE: Google Gemini AI Provider, use Google Gemini AI as a provider for AI Assistant + Google "Imagen"
+- 
 ## 1.16.0 - 2025-04-25
 - NEW FEATURE: Use AI to refine and generate a detailed prompt
   
