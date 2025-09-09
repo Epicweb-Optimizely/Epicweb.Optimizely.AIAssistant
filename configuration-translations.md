@@ -7,6 +7,15 @@
  - translate one field at time
  - translate all fields on a page/block type with the [LanguageManager plugin](Translations-with-LanguageManager.md)
 
+## Installation
+
+- Install latest version => https://nuget.optimizely.com/packages/EPiServer.Labs.LanguageManager/ 
+- Install latest version => https://nuget.optimizely.com/packages/epicweb.optimizely.aiassistant.languagemanager/ 
+
+- Add to startup.cs => services.AddLanguageManagerAIAssistant();
+
+Start site and add the AI-Assistant Translation Provider in Admin Settings => Language Manager => Choose AI-Assistant (no need to add Subscription Key nor Region)
+
  ## Implement IAssistantInstructionsResolver
 
 This allows for the implementation of global 'Assistant Instructions' but also different instruction between languages if needed. 
