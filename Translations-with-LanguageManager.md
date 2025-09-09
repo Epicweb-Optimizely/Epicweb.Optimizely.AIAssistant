@@ -2,9 +2,15 @@
 
 Blog posts: https://optimizely.blog/?tag=Translations
 
-AI-Assistant Version 1.3.0 is compatible with LanguageManager 5.2
+AI-Assistant Version 1.3.0 is compatible with EPiServer.Labs.LanguageManager  5.2
 
-Add the AI-Assistant Translation Provider in Admin Settings => Language Manager => Choose AI-Assistant (no need to add Subscription Key nor Region)
+
+- Install latest version => https://nuget.optimizely.com/packages/EPiServer.Labs.LanguageManager/ 
+- Install latest version => https://nuget.optimizely.com/packages/epicweb.optimizely.aiassistant.languagemanager/ 
+
+- Add to startup.cs => services.AddLanguageManagerAIAssistant();
+
+Start site and add the AI-Assistant Translation Provider in Admin Settings => Language Manager => Choose AI-Assistant (no need to add Subscription Key nor Region)
 
 ![image](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/3f2910ce-7f90-4e29-aef7-27d9a58a7b0a)
 
