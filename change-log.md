@@ -1,8 +1,17 @@
 # Change log
 
+## 1.17.3 - 2025-09-09
+- NEW FEATURE: Gemini Nano Banana (gemini-2.5-flash-image-preview)
+- Bugfix, bug in translation functionality when working with websites missing wildcard (*) in configuration
+- Bugfix, missing button label in Ask AI dialog
+
+## 1.17.2 - 2025-09-07
+- Bugfix, naming of images is automatic with AI.
+- Bugfix, when translations error, return errormessage + original input.
+  
 ## 1.17.0 - 2025-06-09
 - NEW FEATURE: Google Gemini AI Provider, use Google Gemini AI as a provider for AI Assistant + Google "Imagen"
-- 
+  
 ## 1.16.0 - 2025-04-25
 - NEW FEATURE: Use AI to refine and generate a detailed prompt
   
