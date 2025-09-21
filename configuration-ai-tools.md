@@ -77,3 +77,9 @@ Now register the tools in startup:
 
 Now you can use prompts like "Create a sales pitch of Product P-5555 and link to the product" or "Create a table of the differences between products BS8877 and L8877"
 
+## Demo video
+
+
+https://github.com/user-attachments/assets/726e2cb3-11fe-4ef7-8bf9-fafa22a9a1c1
+
+
