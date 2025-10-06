@@ -11,6 +11,7 @@ Download the built in tools, download nuget package **Epicweb.Optimizely.AIAssis
 Register the tools =>  
 ```csharp
   services
+     .AddAIAssistant()
      // Register MCP tool types
      .RegisterMcpToolType(typeof(BuiltinTools))
 
@@ -33,7 +34,7 @@ The assistant comes with several default tools that let AI retrieve and work wit
 Example tool, fetch product data from Optimizely Commerce
 
 ```csharp
-using ModelContextProtocol.Server;
+using ModelContextProtocol.Server; // or using Epicweb.Optimizely.AIAssistant.Attributes;
 using System.ComponentModel;
 
 [McpServerToolType]
@@ -69,6 +70,7 @@ Now register the tools in startup:
 
 ```csharp
   services
+     .AddAIAssistant()    
      // Register MCP tool types
      .RegisterMcpToolType(typeof(ProductInfoTools))
 ```
