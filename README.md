@@ -1,6 +1,6 @@
 # The AI Assistant for Optimizely Content Cloud (CMS) PaaS and Commerce Connect PaaS
 
-**The documentation is currently undergoing continuous updates** version 1.17
+**The documentation is currently undergoing continuous updates** version 2.0
 
 ## Epicweb.Optimizely.AIAssistant Plugin
 The plugin offers intuitive support within the Optimizely CMS and Customizable Commerce platform, providing suggestions, translations, SEO summarization, formatting help, and much more for input fields within the Optimizely CMS and Customizable Commerce platform
@@ -26,21 +26,25 @@ For a free evaluation without any licensing messages in the production environme
 ## Feature list
 - Provides suggestions or alternatives for your text
 - Translates your text into other languages
-- Image Generation
-- Smart Image Analyzer
-- Alt-Text generations
+- Image generation
+- Image transformation
+- Image analyzing
+- Image Alttext automation
 - SEO title generations
 - SEO description generations
 - Generates new text
+- Generates FAQ questions and answers (AEO)
+- Tools for AI – Connect your C# Function Calling or MCP
+- RAG (Retrieval-Augmented Generation) – Connect your own knowledge base
+- Spell-checking
 - Change or maintain consistency in tone of writing
 - Extracts keywords from your text
-- Run your own prompts to ChatGPT
-- Summarize texts and other property fields on page/site/products
+- Run your own prompts to ChatGPT/Gemini
+- Summarize texts and other property fields on page/site (SEO, GEO)
 - Formatting HTML, WCAG AA compatible
 - Add your own shortcut prompts
-- Use ChatGPT as inline help
-- Spell-checking
-- Use any AI of your choice
+- Use ChatGPT/Gemini as inline help
+- Use any AI of your choice (Bring your own AI)
 
 The AI assistant is a powerful and intuitive tool that will help you in your everyday work!
 
@@ -51,14 +55,25 @@ The AI assistant is a powerful and intuitive tool that will help you in your eve
 - Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France, US)
 - Use our CustomAI-provider. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
 - Use RecraftAI ImageProvider
-- Use Google Imagen
-
-## Examples
-
-[Short screens of the AI-Assistant](example-screens.md)
+- Gemini Imagen or Nano-Banana ImageProvider
 
 ## Video shorts and guides
 
 [Go to our video portal for guides](https://aiassistant.optimizely.blog/en/videos/)
 
+## Dependencies
 
+Episerver.CMS > 12.18
+Episerver.Commerce > 14
+
+## Discussions and feedback
+
+This can be discussed in Github discussions (https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
+
+## Package maintainer
+
+https://github.com/lucgosso
+
+## TERMS OF USE
+
+[License](license.md)
