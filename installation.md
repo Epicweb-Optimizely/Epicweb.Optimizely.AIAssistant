@@ -6,7 +6,7 @@ Install it thru nuget package management:  https://nuget.optimizely.com/package/
 
 For demo and evaluation, the only required configuration is to include the **AI**HINT attribute for the property.
 
-1. Add to startup.cs: services.AddAIAssistant();
+1. Add to startup.cs: ```services.AddAIAssistant(); ```
 
 2. Decorate your string property with [UIHint(AIHint.Image)], [UIHint(AIHint.Textarea)] or [UIHint(AIHint.Input)] for single line strings
 
@@ -20,36 +20,35 @@ For demo and evaluation, the only required configuration is to include the **AI*
 
 7. For global instructions to AI Assistant => implement IAssistantInstructionsResolver => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#iassistantinstructionsresolver
 
+8. For Analyzing Images use [AnalyzeImageAltText], [AnalyzeImage] on imagedata models properties and add ```app.AddImageAnalyzer();``` in startup.
 
-For Premium Subscription: https://aiassistant.optimizely.blog
+9. Install the built in tools, download package => https://nuget.optimizely.com/package/?id=Epicweb.Optimizely.AIAssistant.Tools 
+
+Register the tools =>  
+```csharp
+  services
+     .AddAIAssistant()
+     // Register MCP tool types
+     .RegisterMcpToolType(typeof(BuiltinTools))
+
+     using Epicweb.Optimizely.AIAssistant.Tools;
+```
+
 
 For a free evaluation without any licensing messages in the production environment, please complete the form at https://aiassistant.optimizely.blog
 
-- Provides suggestions or alternatives for your text
-- Translates your text into other 86+ languages
-- Image Generation
-- Advanced Image Analyzer
-- Generates new text
-- Spell-checking
-- Change tone of writing
-- Extracts keywords from your text
-- Run your own prompts to ChatGPT
-- Summarize texts and other propertyfields on page/site
-- Add your own shortcut prompts
-- Use ChatGPT as inline help
-- Use any AI of your choice
 
-Choose provider:
-- Use OpenAI in USA
-- Use Azure OpenAI Services in data centers in Europe (Sweden, UK, France) => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#azure-open-ai-provider
-- Use our CustomAI-provider. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
-- Use RecraftAI ImageProvider
-- 
-## Configurations
 
-[More configuration](configuration.md)
+## Further Configurations
+
+[More configuration](configuration.md) Install your own tools or MCP server
+
+[Configuration Tools](configuration-ai-tools.md)
+
 [Configuration translations](configuration-translations.md)
+
 [Configuration Image Analyzer](configuration-image-analyzer.md)
+
 
 ## Dependencies
 
