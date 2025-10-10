@@ -1,5 +1,12 @@
 # Change log
 
+## 2.0.0 - 2025-10-10
+- NEW FEATURE: Tools for AI - use external tools with AI with Function calling or MCP
+- NEW FEATURE: Add tools to your shortcuts
+
+## 1.17.4 - 2025-10-09
+- Bugfix, dependency issue
+  
 ## 1.17.3 - 2025-09-09
 - NEW FEATURE: Gemini Nano Banana (gemini-2.5-flash-image-preview)
 - Bugfix, bug in translation functionality when working with websites missing wildcard (*) in configuration
