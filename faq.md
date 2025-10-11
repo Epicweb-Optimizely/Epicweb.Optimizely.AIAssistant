@@ -29,7 +29,7 @@ You get
 - Priority Usage
    - Latest and new models will be available for you
 - Increased Usage Limits
-   - GPT-4o Models and models that can handle more text
+   - Latest and greatest models and models that can handle more text
 - Support
    - Email support, answer within 24h
    - New versions
