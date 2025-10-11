@@ -34,6 +34,7 @@ The assistant comes with several default tools that let AI retrieve and work wit
 Example tool, fetch product data from Optimizely Commerce
 
 ```csharp
+using Epicweb.Optimizely.AIAssistant.Models;
 using ModelContextProtocol.Server; // or using Epicweb.Optimizely.AIAssistant.Attributes;
 using System.ComponentModel;
 
@@ -43,7 +44,8 @@ public static class ProductInfoTools
     [McpServerTool(Name = "GetProductDescription"),
  Description("Get detailed product information based on product number")]
     public static async Task<ProductInfo> GetProductDescriptionAsync(
-    [Description("The product number to get information for, e.g. 'P12345', 'B78901'")] string productNumber)
+        [Description("The product number to get information for, e.g. 'P12345', 'B78901'")] string productNumber,
+        RequestModel context = null)//the context parameter is optional, it can be used to get more information about the current request, like current page, language or property
     {
         // implement your logic to fetch product details here
 
