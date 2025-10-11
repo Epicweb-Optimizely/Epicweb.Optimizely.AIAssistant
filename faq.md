@@ -16,6 +16,8 @@ The AI assistant can be accessed directly via the editor mode and offers automat
 - Can summarize and condense texts
 - Generates FAQs, tables, images, and image captions with just a few clicks
 - Formatting tables and lists, WCAG compatible
+- Integrate C# tools with AI Assistant for custom use.
+- Use your data for AI-generated responses (RAG).
 
 The AI assistant is a powerful and intuitive tool that will help you in your everyday work!
 
@@ -42,13 +44,11 @@ Please fill in this form on this page https://aiassistant.optimizely.blog or ema
 Pricing begins at:
 
 - $400/month for US companies
-- 350€/month for European companies
+- 400€/month for European companies
 - 3,900 SEK/month for companies in Sweden
+Please note: Traffic costs are not included in the base price. You pay your own AI-tokens from you AI vendor of choice. 
 
-Please note:
-Traffic costs are not included in the base price.
-
-Additional charges apply for more than two domains and for optional modules such as the Image Module (generation and analysis) and Language Manager (auto translate).
+The price list is modular. Additional costs apply per domain and for optional modules such as the Image Module (generation), altText modules (image analysis), and the Language Manager (automated translation).
 
 We offer flexible 6-month or 12-month payment plans.
 
@@ -58,7 +58,7 @@ To ensure your satisfaction, we also provide a three-month money-back guarantee 
 
 With our Custom AI provider, you can connect any AI to the service [Read about the CustomAI-provider](custom-ai.md)
 
-- GPT-4, OpenAI
+- GPT-4 and 5, OpenAI
 - Claude, Anthropic
 - Gemini, Google DeepMind
 - Jurassic-2, AI21 Labs
@@ -76,8 +76,10 @@ With our Custom AI provider, you can connect any AI to the service [Read about t
 - writer.com
 - Bring your own AI
 
-## Will the data be used as part of the learning data for ChatGPT? 
-No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/enterprise-privacy/
+## Will the data be used as part of the learning data for AI? 
+No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/policies/api-data-usage-policies
+
+Google does not use your prompts or outputs to improve Google products. Source: https://ai.google.dev/gemini-api/terms 
 
 ## Do you offer EU data residency?
 
@@ -91,15 +93,22 @@ YES! we can offer to setup your own models in Azure and finetune them.
 
 Thru our Custom AI provider we allow you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API. [Documented here](custom-ai.md)
 
+Through custom tools, we offer the retrieval of individual data and real-time data from external systems, referred to as RAG. [Documented here](configuration-ai-tools.md)
+
 ## Can I use/sell the images I create with the AI-Assistant Image Generation Tool?
 
 Subject to the Content Policy and Terms of OpenAI DALL·E, you own the images you create with the AI-Assistant (DALL·E), including the right to reprint, sell, and merchandise. 
 Source:  https://help.openai.com/en/articles/6425277-can-i-sell-images-i-create-with-dall-e 
+
 Same goes with Recraft AI: When you are using the paid API subscription, you own the assets you create. Recraft assigns you the copyright rights to those assets, allowing you to use them for both personal and commercial purposes. However, you are prohibited from using these assets to train AI models, systems, or similar technologies.
 Source: https://www.recraft.ai/terms
 
+Under Google’s Gemini API Additional Terms of Service, Google does not claim ownership over the content (including images) you generate using the service.  Source: https://ai.google.dev/gemini-api/terms 
+
 ## How do translations work?
 OpenAI's service supports over 92 languages, offering some of the most accurate and high-quality translations available worldwide. Additionally, you can provide specific terms or translation guidelines to tailor the translation process to your needs.
+
+Google’s Translation LLM (powered by Gemini) on Vertex AI lists 49 supported source/target languages as of 7 Oct 2025. See the “[Supported languages](https://cloud.google.com/vertex-ai/generative-ai/docs/translate/translate-text#supported-languages)” table on Google’s documentation.
 
 ## Is the AI-Assistant Plugin EU AI ACT compatible?
 Yes, the AI-Assistant Plugin for Optimizely is designed to be compatible with the EU AI Act. Here’s a summary of why it aligns with the Act’s requirements:
