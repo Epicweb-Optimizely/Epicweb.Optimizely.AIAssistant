@@ -1,6 +1,10 @@
 # Change log
 
-## 2.0.0 - 2025-10-10
+## 2.0.2 - 2026-01-18
+- New FEATURE: Recommended models for Azure and OpenAI after retirement of GPT-4o => GPT-5.2, GPT-image-1.5
+- Bugfix, issue saving image with to long names. Alt-text generation looping, impact high.
+
+## 2.0.0 - 2025-10-08
 - NEW FEATURE: Tools for AI - use external tools with AI with Function calling or MCP
 - NEW FEATURE: Add tools to your shortcuts
 
