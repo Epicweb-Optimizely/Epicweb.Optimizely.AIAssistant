@@ -1,7 +1,8 @@
 # Change log
 
-## 2.0.2 - 2026-01-18
+## 2.0.3 - 2026-01-20
 - New FEATURE: Recommended models for Azure and OpenAI after retirement of GPT-4o => GPT-5.2, GPT-image-1.5
+- Bugfix, issue with image generation now showing images
 - Bugfix, issue saving image with to long names. Alt-text generation looping, impact high.
 
 ## 2.0.0 - 2025-10-08
