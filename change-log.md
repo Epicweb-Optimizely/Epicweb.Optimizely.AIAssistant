@@ -1,5 +1,26 @@
 # Change log
 
+## 3.0.0 - 2026-02-12
+- **NEW MAJOR FEATURE: AI Chat Window** - Standalone conversational AI assistant integrated into Optimizely CMS
+  - **Chat Interface** - Floating, resizable chat window accessible from CMS toolbar
+  - **Context Management** - Drag-and-drop content attachment with context overlay UI
+  - **Session History** - Persistent conversation history with message management
+  - **Tool Packs** - Modular tool loading system (Work Content, Update, Publish, Create, Image)
+  - **Lazy Loading** - Efficient context and tool loading for optimal performance
+  - **@ Mentions** - Autocomplete tool discovery in chat and property editors
+  - **Chat Settings** - User preferences for chat behavior and display
+  - **Feedback System** - Built-in feedback and thumbs up/down for chat responses
+  - **Multi-language Support** - Full localization support for chat UI
+  - **Instruction System** - Priority-based instruction hierarchy for chat behavior customization
+- **NEW FEATURE: Chat Instructions** - Customizable AI behavior through markdown instruction files
+- **NEW FEATURE: Context Overlay Manager** - Visual interface for managing attached content and context
+- **NEW FEATURE: Tool Pack System** - Group related tools with instructions for better AI understanding
+- **NEW FEATURE: Chat Suggestions** - Quick action suggestions based on conversation context
+- **ENHANCED: Tool System** - Expanded tool capabilities specifically for chat scenarios
+- **BREAKING CHANGE: Removed Dalle-3 support** - Use Recraft AI, Gemini, gpt-image-1.5 instead
+- Improved tool discovery with @ mention functionality in property editors
+- New chat storage manager for session persistence
+
 ## 2.0.3 - 2026-01-20
 - New FEATURE: Recommended models for Azure and OpenAI after retirement of GPT-4o => GPT-5.2, GPT-image-1.5
 - Bugfix, issue with image generation now showing images
@@ -74,7 +95,6 @@
 - Better error handling when using placeholders (::this::)
 - Known Issue: Properties and Required properties in "Create state" on pages are not translatable with the AI in this state. 
 
-
 ## 1.9.1 - 2024-05-05
 - NEW FEATURE: User roles can now be assigned globally or on a per-property basis to manage access to AI-Assistant
 - Added shortcuts: Easyread, Formatting, WCAG, TOC, LoremIpsum, generate from keywords, Headingslevels prompts
@@ -90,14 +110,14 @@
 - NEW FEATURE: Image Variation with GPT-4-Vision and Dalle-3
 - NEW FEATURE: Post process images
 - Support for custom Edit UI path
-- End of support for Dalle-2
+- **End of support for Dalle-2**
 
 ## 1.5 - 2024-01-24
 - NEW FEATURE: Ask AI new prompt window
 - Epicweb.Optimizely.AIAssistant.LanguageManager is released version 1.1 => bugfix when translating "Questions" 
 
 ## 1.4 - 2023-11-19
-- NEW FEATURE: Introducing Dalle-3
+- NEW FEATURE: Introducing Dalle-3 (removed in version 3.0.0 - use Recraft AI or gpt-image-1.5 or later)
 - NEW FEATURE: Add more shortcuts out of the box (SEO Title Prompt)
 
 ## 1.3 - 2023-10-23
