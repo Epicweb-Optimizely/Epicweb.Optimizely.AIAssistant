@@ -14,7 +14,7 @@ CMS 12 and Commerce 14
 - Payment plans ([Read FAQ](faq.md))
 - [User Manual](user-manual.md)
 - **[AI Chat - Getting Started](chat-instructions.md)** ⭐ NEW
-- **[AI Tools - Function Calling and MCP](Tools.md)** ⭐ NEW
+- **[AI Tools - Function Calling and MCP](tools.md)** ⭐ NEW
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
 - [Example Customizable Commerce](Example-Commerce-work-with-SEO-and-translations-on-a-product.md)
