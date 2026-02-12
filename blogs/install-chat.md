@@ -10,6 +10,9 @@ AI Chat is a revolutionary feature introduced in version 3.0 of Epicweb.Optimize
 
 Think of it as having an expert content strategist, SEO specialist, and technical writer all rolled into one—available 24/7, right in your CMS toolbar.
 
+<img width="2836" height="1160" alt="image" src="https://github.com/user-attachments/assets/484869d3-adcf-49b7-b6eb-48bb6a6d6d6d" />
+
+
 ### The Power of Conversational Content Management
 
 Instead of this traditional workflow:
