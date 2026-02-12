@@ -81,7 +81,7 @@ Before installing AI Chat, ensure you have:
 ✅ **Epicweb.Optimizely.AIAssistant 3.0+** installed  
 ✅ **OpenAI API key** or compatible AI provider (Azure OpenAI, Google Gemini)  
 ✅ **Developer access** to your solution's source code  
-✅ **.NET 5.0+** (or compatible with your CMS version)
+✅ **.NET 6.0+** (or compatible with your CMS version)
 
 ---
 
@@ -199,8 +199,8 @@ Add AI Chat configuration to your `appsettings.json`:
 {
   "Epicweb": {
     "AIAssistant": {
-      "ApiKey": "sk-proj-your-openai-api-key-here",
-      "Provider": "AzureOpenAI",
+      "ApiKey": "sk-proj-your-openai-api-key-here", //optional on localhost
+      "Provider": "OpenAI", //optional on localhost
       "Model": "gpt-5.2",
       "EnableChat": true,
       "ChatRoles": [ //optional
@@ -225,7 +225,7 @@ Add AI Chat configuration to your `appsettings.json`:
 | `Model` | string | AI model to use (see recommendations below) | `gpt-5.2` |
 | `EnableChat` | bool | Enables the AI Chat window in CMS toolbar | `false` |
 | `ChatRoles` | string[] | User roles that can access AI Chat (**optional**, if not specified all authenticated users can access) | All users |
-| `MaxToolIterations` | int | Prevents infinite tool calling loops | `8` |
+| `MaxToolIterations` | int | **optional** Prevents infinite tool calling loops | `8` |
 
 #### Getting Your API Key
 
@@ -851,7 +851,7 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 ### Continue Your Journey:
 
 1. **Explore and Build Tools**  
-   Discover all available tools in the [AI Tools Reference](../Tools.md)
+   Discover all available tools in the [AI Tools Reference](../tools.md)
 
 2. **Customize Instructions**  
    Create brand-specific and template-specific AI behavior [Instructions Guide](../chat-instructions.md)
