@@ -13,9 +13,11 @@ CMS 12 and Commerce 14
 - [License](license.md) (Free for evaluation, premium plan for Production use)
 - Payment plans ([Read FAQ](faq.md))
 - [User Manual](user-manual.md)
+- **[AI Chat - Getting Started](chat-instructions.md)** ⭐ NEW
+- **[AI Tools - Function Calling and MCP](tools.md)** ⭐ NEW
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
-- [Example Customizable Commerce](Example-Commerce-work-with-SEO-and-translations-on-a-product.md)
+- [Example Commerce Connect](example-Commerce-work-with-SEO-and-translations-on-a-product.md)
 
 ### GET STARTED
 
@@ -36,6 +38,7 @@ For a free evaluation without any licensing messages in the production environme
 - Generates FAQ questions and answers (AEO)
 - Tools for AI – Connect your C# Function Calling or MCP
 - RAG (Retrieval-Augmented Generation) – Connect your own knowledge base
+- **AI Chat Window** - Conversational AI assistant for content editors ⭐ NEW
 - Spell-checking
 - Change or maintain consistency in tone of writing
 - Extracts keywords from your text
