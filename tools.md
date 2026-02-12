@@ -34,8 +34,8 @@ public void ConfigureServices(IServiceCollection services)
            .RegisterMcpToolType(typeof(BuiltinChatTools))
            .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
            .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))
-           .RegisterMcpToolType(typeof(BuiltinChatImageTools))
-           .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));
+           .RegisterMcpToolType(typeof(BuiltinChatImageTools)) //only together with image analysation module (licensed)
+           .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions, only together with image generation module (licensed)
 }
 ```
 
