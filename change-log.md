@@ -21,6 +21,10 @@
 - Improved tool discovery with @ mention functionality in property editors
 - New chat storage manager for session persistence
 
+
+## 2.0.4 - 2026-01-25
+- New FEATURE: The Image Analyzing Service can now run on additional media types that inherit from MediaData, for example QBank media types.
+
 ## 2.0.3 - 2026-01-20
 - New FEATURE: Recommended models for Azure and OpenAI after retirement of GPT-4o => GPT-5.2, GPT-image-1.5
 - Bugfix, issue with image generation now showing images

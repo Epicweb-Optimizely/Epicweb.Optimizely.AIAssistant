@@ -19,11 +19,11 @@ This ensures that the image analysis process is triggered when creating or impor
 ```json
 "Epicweb": {
     "AIAssistant": {
-       "AIVisionModel": "gpt-4o"
+       "AIVisionModel": "gpt-5.1"
      }
 }
 ```
-Defaults to gpt-4o-mini if OpenAI provider is used
+Defaults to gpt-5-mini if OpenAI provider is used
 
 ## Example Prompts
 The following are examples of prompts that can be used with `AnalyzeImageAttribute`:

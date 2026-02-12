@@ -31,12 +31,22 @@ using Epicweb.Optimizely.AIAssistant.Tools;
 services
    .AddAIAssistant()
    // Register MCP tool types for AI Assistant
+   //.AddEmbeddedInstructionStore()//only if added your own instructions, otherwise not needed read more "chat-instructions.md"
    .RegisterMcpToolType(typeof(BuiltinTools))
    .RegisterMcpToolType(typeof(BuiltinChatTools))
    .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
    .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))
    .RegisterMcpToolType(typeof(BuiltinChatImageTools))
    .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions
+
+
+   // ... other registrations
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+        endpoints.MapContent();
+        endpoints.MapAIAssistantHub(); // Required when Chat is enabled
+    });
 ```
 
 **Note:** Built-in tools are essential for AI Chat functionality and enable features like content reading, updates, publishing, and image operations.
@@ -59,6 +69,36 @@ services
 - `EnableChat` - (bool) Enables the AI Chat window in CMS toolbar. Default: `false`
 - `ChatRoles` - (string[]) User roles that have access to AI Chat. Default: `["AIEditors", "WebEditors", "WebAdmins", "CmsAdmins", "CmsEditors"]`
 - `MaxToolIterations` - (int) Maximum number of tool call iterations to prevent infinite loops. Default: `8`
+
+**IMPORTANT:** When `EnableChat` is `true`, you must also register the endpoints.MapAIAssistantHub hub in your `Startup.cs`:
+**IMPORTANT:** With the chat it is important to use the right model, do not use GPT-4 legacy models nor Gemini flash 1.5
+
+```csharp
+using Epicweb.Optimizely.AIAssistant.Hub;
+
+public void ConfigureServices(IServiceCollection services)
+{    
+    services
+        .AddAIAssistant()
+        .RegisterMcpToolType(typeof(BuiltinChatTools))
+        // ... other registrations
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // ... other middleware
+    
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+        endpoints.MapContent();
+        endpoints.MapAIAssistantHub(); // Required when Chat is enabled
+    });
+}
+```
+
+**Note:** The SignalR hub (`MapAIAssistantHub()`) is required for AI Chat to function properly. It enables real-time communication between the chat interface and the backend AI service.
+
 
 For a free evaluation without any licensing messages in the production environment, please complete the form at https://aiassistant.optimizely.blog
 
