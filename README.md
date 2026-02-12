@@ -17,7 +17,7 @@ CMS 12 and Commerce 14
 - **[AI Tools - Function Calling and MCP](tools.md)** ⭐ NEW
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
-- [Example Customizable Commerce](Example-Commerce-work-with-SEO-and-translations-on-a-product.md)
+- [Example Commerce Connect](example-Commerce-work-with-SEO-and-translations-on-a-product.md)
 
 ### GET STARTED
 
