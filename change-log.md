@@ -1,5 +1,10 @@
 # Change log
 
+## 4.0.0 - 2026-04-20
+
+- Release for CMS 13 and .NET 10, but also compatible with CMS 12 and .NET 8
+- Chat tools for Visitor Groups and Display Options in content area items
+
 ## 3.0.0 - 2026-02-12
 - **NEW MAJOR FEATURE: AI Chat Window** - Standalone conversational AI assistant integrated into Optimizely CMS
   - **Chat Interface** - Floating, resizable chat window accessible from CMS toolbar
