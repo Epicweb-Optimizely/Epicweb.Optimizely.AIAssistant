@@ -33,11 +33,13 @@ services
    // Register MCP tool types for AI Assistant
    //.AddEmbeddedInstructionStore()//only if added your own instructions, otherwise not needed read more "chat-instructions.md"
    .RegisterMcpToolType(typeof(BuiltinTools))
-   .RegisterMcpToolType(typeof(BuiltinChatTools))
+   .RegisterMcpToolType(typeof(BuiltinChatTools)) 
    .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
-   .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))
-   .RegisterMcpToolType(typeof(BuiltinChatImageTools))
-   .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions
+   .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))   
+   .RegisterMcpToolType(typeof(VisitorGroupTools))  // Visitor group discovery for AI context
+   .RegisterMcpToolType(typeof(DisplayOptionTools))// Use this to understand what display options are available for ContentArea items.
+   .RegisterMcpToolType(typeof(BuiltinChatImageTools)) //only together with image analysation module (licensed)
+   .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions, only together with image generation module (licensed)
 
 
    // ... other registrations
@@ -171,7 +173,12 @@ See [Chat Instructions Guide](chat-instructions.md) for more details.
 ## Dependencies
 
 Episerver.CMS > 12.18
+
 Episerver.Commerce > 14
+
+Episerver.CMS > 13
+
+Episerver.Commerce > 15
 
 ## Discussions and feedback
 
