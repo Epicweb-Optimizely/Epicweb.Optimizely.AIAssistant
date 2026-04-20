@@ -30,12 +30,14 @@ public void ConfigureServices(IServiceCollection services)
 {
     services.AddAIAssistant()
            // Register built-in MCP tool types
-           .RegisterMcpToolType(typeof(BuiltinTools))
-           .RegisterMcpToolType(typeof(BuiltinChatTools))
-           .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
-           .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))
-           .RegisterMcpToolType(typeof(BuiltinChatImageTools)) //only together with image analysation module (licensed)
-           .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions, only together with image generation module (licensed)
+   .RegisterMcpToolType(typeof(BuiltinTools))
+   .RegisterMcpToolType(typeof(BuiltinChatTools)) 
+   .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
+   .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))   
+   .RegisterMcpToolType(typeof(VisitorGroupTools)) // Visitor group discovery for AI context
+   .RegisterMcpToolType(typeof(DisplayOptionTools)) // Use this to understand what display options are available for ContentArea items.
+   .RegisterMcpToolType(typeof(BuiltinChatImageTools)) //only together with image analysation module (licensed)
+   .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions, only together with image generation module (licensed)
 }
 ```
 
