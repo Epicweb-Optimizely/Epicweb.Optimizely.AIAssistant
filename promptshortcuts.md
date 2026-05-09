@@ -1,10 +1,12 @@
-# `IPromptShortcut` implementer guide
+# Shortcut implementer guide
 
 This guide is for developers integrating or extending `Epicweb.Optimizely.AIAssistant` in Optimizely.
 
 ## What a shortcut is
 
 A shortcut is a reusable prompt action shown in the editor UI.
+
+![image](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/bc57c229-802d-45bb-a59a-f07613070a6f)
 
 - It is implemented as a class that implements `IPromptShortcut`.
 - It builds prompt text in `GeneratePrompt(...)`.
