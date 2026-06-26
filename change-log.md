@@ -1,9 +1,23 @@
 # Change log
 
+## 4.1.0 - 2026-06-25
+
+- Added a new administration experience for managing AI assistants and instructions
+- Added persistent assistant and instruction stores for chat configuration
+- Added embedded instruction store support and instruction resolution for chat and property editor scenarios
+- Improved CMS 13 compatibility for Language Manager gadget settings deserialization
+
+## 4.0.1 - 2026-05-10
+
+- Add category capabilities
+- Add statistics sources
+- Add Image Generation and transformation with gpt-image-2 for Azure and OpenAI
+- Bugfixes to the chat when sending code and Token manager
+
 ## 4.0.0 - 2026-04-20
 
-- Release for CMS 13 and .NET 10, but also compatible with CMS 12 and .NET 8
-- Chat tools for Visitor Groups and Display Options in content area items
+- Refactor and new features for CMS 13 and .NET 10, but also compatible with CMS 12 and .NET 8
+- Tools for Visitor Groups and Display Options in content area items
 
 ## 3.0.0 - 2026-02-12
 - **NEW MAJOR FEATURE: AI Chat Window** - Standalone conversational AI assistant integrated into Optimizely CMS
