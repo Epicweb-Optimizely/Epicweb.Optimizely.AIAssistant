@@ -1,11 +1,11 @@
 # The AI Assistant for Optimizely Content Cloud (CMS) PaaS and Commerce Connect PaaS
 
-**The documentation is currently undergoing continuous updates** version 2.0
-
 ## Epicweb.Optimizely.AIAssistant Plugin
-The plugin offers intuitive support within the Optimizely CMS and Customizable Commerce platform, providing suggestions, translations, SEO summarization, formatting help, and much more for input fields within the Optimizely CMS and Customizable Commerce platform
+The plugin offers intuitive support within the Optimizely CMS and Customizable Commerce platform, providing suggestions, translations, SEO summarization, formatting help, AI chat and much more for input fields within the Optimizely CMS and Commerce Connect platform
 
-CMS 12 and Commerce 14
+CMS 12 and Commerce 14 
+
+CMS 13 and Commerce 15
 
 ## Links 
 - [Installation](installation.md)
@@ -39,6 +39,8 @@ For a free evaluation without any licensing messages in the production environme
 - Tools for AI – Connect your C# Function Calling or MCP
 - RAG (Retrieval-Augmented Generation) – Connect your own knowledge base
 - **AI Chat Window** - Conversational AI assistant for content editors ⭐ NEW
+- **Custom instructions** - Possibility to add your own shortcut instructions from the UI ⭐ NEW
+- **Custom Assistants** - Possibility to add your own AI experts from the UI ⭐ NEW
 - Spell-checking
 - Change or maintain consistency in tone of writing
 - Extracts keywords from your text
@@ -66,14 +68,19 @@ The AI assistant is a powerful and intuitive tool that will help you in your eve
 
 ## Dependencies
 
+.net8 =>
 Episerver.CMS > 12.18
 Episerver.Commerce > 14
+
+.net10  =>
+Episerver.CMS > 13.1
+Episerver.Commerce > 15
 
 ## Discussions and feedback
 
 This can be discussed in Github discussions (https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
 
-## Package maintainer
+## Documentation maintainer
 
 https://github.com/lucgosso
 
