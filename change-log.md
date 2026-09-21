@@ -1,5 +1,17 @@
 # Change log
 
+## 4.2.4 - 2026-09-17
+- Bugfix, path to plugin wrong in some configurations
+
+## 4.2.3 - 2026-08-24
+- Bugfix, message rendering issue in chat for tables
+
+## 4.2.2 - 2026-08-24
+
+- Added new statistics to monitor usage patterns and token consumption.
+- Changed APIs in administration pages
+- Better instructions when translating
+
 ## 4.1.0 - 2026-06-25
 
 - Added a new administration experience for managing AI assistants and instructions
