@@ -499,7 +499,7 @@ AI: [Displays content] "Here's the first page: ..."
 - **Explore Tools** - Learn about [AI Tools and Function Calling](Tools.md)
 - **Customize Instructions** - Create project-specific guidelines
 - **Configure Providers** - Set up Azure, Gemini, or custom AI
-- **Learn Shortcuts** - Speed up common tasks with shortcuts
+- **Learn Shortcuts** - [Speed up common tasks with shortcuts](./shortcuts.md)
 - **Watch Videos** - [Video tutorials](https://aiassistant.optimizely.blog/en/videos/)
 
 ## Additional Resources

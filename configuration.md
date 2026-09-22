@@ -31,6 +31,8 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
 
+See [Shortcuts Guide](./shortcuts.md) for detailed information on available shortcuts, configuration, and creating custom shortcuts.
+
 **[AIAssistant(CustomJson = "{\"prop\":\"fromAttribute\"}")]** => Any custom data you want to send to your API, to be used with CustomAI Provider
 
 ```json
@@ -62,7 +64,7 @@ For Azure, use only the models you deployed in your azure instance.
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.ChangeTonePromptShortcut),
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.HumorPromptShortcut),//you need to add all subprompts for "Change tone" if you want to use them
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.SeriousPromptShortcut),
-        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.CheckSpellingPromptShortcut) })]** => Only specify the ones you want to use on this property
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.CheckSpellingPromptShortcut) })]** => Only specify the ones you want to use on this property. See [Shortcuts Guide](./shortcuts.md) for available options and configuration examples.
 
 **Additional shortcut of value: **
 
@@ -82,7 +84,7 @@ services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 
 **[AIAssistant(ImageWidth = "")]** => Default Imagewidth added to attribute width on img-tag into XHtmlString (TinyMCE)
 
-**[AIAssistant(Shortcuts = new[] { ... })]** => same as above, only specify the ones you want to use on this property
+**[AIAssistant(Shortcuts = new[] { ... })]** => Same as above for text fields. See [Shortcuts Guide](./shortcuts.md) for RTE-specific shortcuts and all configuration options.
 
 **[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - RecraftAI: 1024x1024, 1365x1024, 1024x1365, 1536x1024, 1024x1536, 1820x1024, 1024x1820, 1024x2048, 2048x1024, 1434x1024, 1024x1434, 1024x1280, 1280x1024, 1024x1707, 1707x1024
 
