@@ -31,7 +31,7 @@ For Azure, use only the models you deployed in your azure instance.
 
 **[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
 
-See [Shortcuts Guide](./shortcuts.md) for detailed information on available shortcuts, configuration, and creating custom shortcuts.
+See [Shortcuts Guide](./promptshortcuts.md) for detailed information on available shortcuts, configuration, and creating custom shortcuts.
 
 **[AIAssistant(CustomJson = "{\"prop\":\"fromAttribute\"}")]** => Any custom data you want to send to your API, to be used with CustomAI Provider
 

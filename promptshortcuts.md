@@ -1,117 +1,434 @@
-# Shortcut implementer guide
+# Shortcuts - Developer & User Guide
 
-This guide is for developers integrating or extending `Epicweb.Optimizely.AIAssistant` in Optimizely.
+This comprehensive guide covers shortcuts for both editors (users) and developers integrating `Epicweb.Optimizely.AIAssistant`.
 
-## What a shortcut is
+---
 
-A shortcut is a reusable prompt action shown in the editor UI.
+## Part 1: What Are Shortcuts? (For Everyone)
+
+### Overview
+
+Shortcuts are reusable AI prompt actions that speed up common content editing tasks. They are one-click buttons or menu options in the Optimizely editor UI that trigger predefined AI operations like translating text, changing tone, generating SEO descriptions, and more.
+
+**Key characteristics:**
+
+- **Reusable** — A single shortcut can be attached to multiple properties and content types
+- **Configurable** — Enable/disable shortcuts globally, per content type, or per property
+- **Extensible** — Create custom shortcuts for your organization's common workflows
+- **Non-intrusive** — Users can opt-in by clicking; no automatic changes unless configured
+- **Prompt-driven** — Each shortcut builds a structured prompt for consistent AI behavior
+
+### Visual Examples
+
+Shortcuts appear as buttons and dropdown menus in text editors:
+
+- **Quick access buttons** in input fields (textarea, rich text)
+- **Grouped menus** for related shortcuts (e.g., "Change Tone" groups tone variants)
+- **Hierarchical organization** with parent shortcuts that contain child shortcuts
 
 ![image](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/bc57c229-802d-45bb-a59a-f07613070a6f)
 
-- It is implemented as a class that implements `IPromptShortcut`.
-- It builds prompt text in `GeneratePrompt(...)`.
-- It is reused across multiple fields and content types.
+### How Shortcuts Work Behind the Scenes
 
-Each shortcut controls:
+Each shortcut:
 
-- metadata (`Name`, `SortOrder`, `ParentName`)
-- visibility (`Enabled`, `EnabledInRichTextEditor`)
-- invalid-input feedback (`EmptyMessage`)
-- optional tool behavior (`Tools`, `UseTools`)
+1. Is implemented as a C# class inheriting `IPromptShortcut`
+2. Generates prompt text via `GeneratePrompt(...)`
+3. Controls visibility via metadata (`Name`, `Enabled`, `SortOrder`, `ParentName`)
+4. May include optional tool integration (`UseTools`, `Tools`)
+5. Optionally implements `IJavascriptPromptShortcut` for frontend-specific behavior (e.g., setting fields, executing actions)
 
-Some shortcuts also implement `IJavascriptPromptShortcut` to influence frontend action (`aiprompt`, `setfield`, `execute_ai`).
+---
 
-## How shortcuts connect to fields
+## Part 2: Using Shortcuts (For Editors)
 
-Shortcuts are attached through AI-enabled property editors and `[AIAssistant(...)]`.
+### How to Use Shortcuts
 
-Typical field setup:
+#### Basic Usage
 
-- use `UIHint` (`AIHint.Input`, `AIHint.Textarea`, or RTE/XhtmlString usage)
-- configure the property with `[AIAssistant]`
+1. **Locate shortcuts** in your text field or rich text editor
+   - For input/textarea: look for buttons or a dropdown menu
+   - For RTE: check the toolbar for shortcut buttons/menu
 
-Per-property shortcut behavior:
+2. **Select text** (optional for some shortcuts)
+   - Some shortcuts work on highlighted text
+   - Others work on the entire field content
+
+3. **Click the shortcut** button or menu option
+   - The AI processes your request
+   - The result is inserted or suggested for approval
+
+4. **Review and accept**
+   - Compare the AI's output with your original
+   - Click "Use this suggestion" to accept
+   - Or undo (Ctrl+Z) if you prefer the original
+
+#### Using Hashtag Prompts
+
+Shortcuts can also be invoked via **hashtag syntax** in the Ask AI dialog:
+
+```
+#[SHORTCUT_NAME]: <text>
+```
+
+Examples:
+
+- `#[SPELLCHECK]: "your text here"` — Spell-check your text
+- `#[SHORTEN]: "long text here"` — Condense text
+- `#[SEOTITLE]: ::this::` — Generate SEO title (uses current field content)
+
+#### Disabling Auto-Suggest
+
+To prevent automatic suggestions from appearing as you type:
+
+```json
+{
+  "Epicweb": {
+	"AIAssistant": {
+	  "AutoSuggest": false
+	}
+  }
+}
+```
+
+---
+
+## Part 3: Built-in Shortcuts Reference
+
+The core `Epicweb.Optimizely.AIAssistant` package includes the following shortcuts out of the box.
+
+### Main Orchestrator Shortcuts
+
+These are root-level shortcuts that serve as entry points or grouping containers:
+
+| Shortcut Class | Name in UI | Purpose | Scope |
+|---|---|---|---|
+| `PromptShortcut` | Ask AI Assistant | Opens the AI prompt dialog for custom instructions | All AI-enabled fields |
+| `GroupPromptShortcut` | More | Grouping node for additional shortcuts | All AI-enabled fields |
+
+### Tone & Voice Shortcuts
+
+**Parent shortcut:** `ChangeTonePromptShortcut` ("Change Tone" menu)
+
+Adjusts the tone/voice of text. All use pattern `#[TONE]: <text>`
+
+| Shortcut Class | Tone | Use Case |
+|---|---|---|
+| `ConfidentPromptShortcut` | Confident | Assertive, strong messaging |
+| `EmpatheticPromptShortcut` | Empathetic | Understanding, compassionate messaging |
+| `FormalPromptShortcut` | Formal | Official, professional documents |
+| `HumorPromptShortcut` | Humor | Light, entertaining tone |
+| `InFormalPromptShortcut` | Informal | Casual, conversational tone |
+| `OptimisticPromptShortcut` | Optimistic | Positive, forward-looking messaging |
+| `PassionatePromptShortcut` | Passionate | Enthusiastic, heartfelt tone |
+| `ProvocativePromptShortcut` | Provocative | Attention-grabbing, bold messaging |
+| `SalesPromptShortcut` | Sales | Persuasive, marketing-focused tone |
+| `SeriousPromptShortcut` | Serious | Stern, grave, formal tone |
+| `SimplisticPromptShortcut` | Simplistic | Simple, clear, easy-to-understand language |
+| `SkepticalPromptShortcut` | Skeptical | Questioning, doubtful tone |
+
+### Rewrite & Enhancement Shortcuts
+
+Modify and improve existing text:
+
+| Shortcut Class | Prompt Pattern | Purpose | Scope |
+|---|---|---|---|
+| `CheckSpellingPromptShortcut` | `#[SPELLCHECK]: <text>` | Spell-check and grammar enhancement | Input, textarea, RTE |
+| `ElaboratePromptShortcut` | `#[ELABORATE]: <text>` | Expand text with more detail | Input, textarea, RTE |
+| `FeedbackPromptShortcut` | `#[FEEDBACK]: <text>` | Request AI feedback on content | Input, textarea, RTE |
+| `ShortenPromptShortcut` | `#[SHORTEN]: <text>` | Condense text while preserving meaning | Input, textarea, RTE |
+| `SuggestPromptShortcut` | `#[SUGGEST]: "<text>"` or `#[TRANSLATE]` | Suggest improvements; fallback to translate if empty | Input, textarea, RTE |
+
+### Summarization & Generation Shortcuts
+
+Generate new content or summaries:
+
+| Shortcut Class | Pattern/Behavior | Purpose | Scope |
+|---|---|---|---|
+| `SummarizeShortPromptShortcut` | `#[SUMMARIZE20]: ...` with `::this::` fallback | Create brief 20-word summaries | Input, textarea, RTE |
+| `SalesSumPromptShortcut` | `#[SALES]: ...` with `::this::` fallback | Generate sales pitch summary | Input, textarea, RTE |
+| `GenerateLoremPromptShortcut` | Lorem ipsum generation | Generate 25-word placeholder text | Input, textarea, RTE |
+| `GenerateLorem2PromptShortcut` | Lorem ipsum generation | Generate 60-word placeholder text | Input, textarea, RTE |
+| `KeywordsGenerateArticlePromptShortcut` | Article generation from keywords | Create full articles from keyword input | RTE only |
+
+### SEO & Meta Shortcuts
+
+Optimize for search engines:
+
+| Shortcut Class | Prompt Pattern | Purpose | Scope |
+|---|---|---|---|
+| `SeoTitlePromptShortcut` | `#[SEOTITLE]: ...` with `::this::` fallback | Generate SEO-optimized page titles | Input, textarea |
+| `SeoDescriptionPromptShortcut` | `#[SEODESC]: ...` with `::this::` fallback | Generate SEO meta descriptions | Input, textarea |
+| `SeoKeywordsPromptShortcut` | `#[KEYWORDS]: ...` with `::this::` fallback | Generate relevant keywords based on content | Input, textarea |
+
+### Translation Shortcut
+
+| Shortcut Class | Prompt Pattern | Purpose | Scope |
+|---|---|---|---|
+| `TranslatePromptShortcut` | `#[TRANSLATE]: "<text>"` or `#[TRANSLATE]` when empty | Translate text to target language | Input, textarea, RTE |
+
+### Rich Text Editor (RTE) Formatting & Accessibility
+
+**Parent shortcut:** `FormattingPromptShortcut` ("Formatting" menu)
+
+These shortcuts are RTE-only and modify HTML structure and semantics:
+
+| Shortcut Class | Purpose | Scope |
+|---|---|---|
+| `WCAGCompatPromptShortcut` | Enhance WCAG Accessibility | Improve HTML for accessibility compliance (RTE only) |
+| `HeadingLevelsPromptShortcut` | Fix Heading Levels | Normalize heading hierarchy (`<h1>`, `<h2>`, etc.) (RTE only) |
+| `ToCPromptShortcut` | Create Table of Contents | Generate TOC with anchors and navigation links (RTE only) |
+| `FaqPromptShortcut` | Generate FAQ | Create semantic FAQ section from content (RTE only) |
+
+---
+
+## Part 4: For Developers - Implementation Guide
+
+### How Shortcuts Connect to Fields
+
+Shortcuts are attached through AI-enabled property editors and `[AIAssistant(...)]` attribute.
+
+**Typical field setup:**
+
+- Use `UIHint` (`AIHint.Input`, `AIHint.Textarea`, or RTE/XhtmlString usage)
+- Configure the property with `[AIAssistant]` attribute
+
+**Per-property shortcut behavior:**
 
 - `[AIAssistant(ShortcutsDisabled = true)]` → hide all shortcuts on that field
 - `[AIAssistant(Shortcuts = new[] { typeof(SeoKeywordsPromptShortcut) })]` → allow-list selected shortcuts only
-- no `Shortcuts` specified → show registered shortcuts where `Enabled` is `true`
+- No `Shortcuts` specified → show all registered shortcuts where `Enabled` is `true`
 
-## Adding custom shortcuts
+### Creating Custom Shortcuts
 
-1. Create a class implementing `IPromptShortcut`.
-2. Implement `GeneratePrompt(...)` with your organization’s reusable prompt format.
-3. Register the class in DI as `IPromptShortcut`.
-4. Optionally expose it only on specific fields using `AIAssistantAttribute.Shortcuts`.
+#### Basic Structure
 
-## Disabling default shortcuts
+```csharp
+using Epicweb.Optimizely.AIAssistant.Shortcuts;
 
-You can disable defaults at different levels:
+public class MyCustomShortcut : IPromptShortcut
+{
+	public string Name => "My Custom Action";
+	public int SortOrder => 100; // Higher = lower priority
+	public string? ParentName => null; // null = root level
+	public bool Enabled => true;
+	public bool EnabledInRichTextEditor => true;
+	public string? EmptyMessage => "Please enter text first";
+	public string? Tools => null;
+	public bool UseTools => false;
 
-- global: remove the `services.AddSingleton<IPromptShortcut, ...>()` registration
-- class level: set `Enabled` / `EnabledInRichTextEditor` defaults to `false`
-- property level: `ShortcutsDisabled = true`
-- property allow-list: explicit `Shortcuts = ...`
+	public string GeneratePrompt(string userInput, string? selectedText, Dictionary<string, object>? contextData)
+	{
+		// Build your prompt here
+		return $"My instruction: {userInput}";
+	}
+}
+```
 
-## Built-in shortcuts in the core package (`Epicweb.Optimizely.AIAssistant`)
+#### Registering Custom Shortcuts
 
-### Grouping / parent shortcuts
+In `Startup.cs`:
 
-- `PromptShortcut` (`Ask AI Assistant`) — opens AI prompt dialog and forwards text
-- `ChangeTonePromptShortcut` (`Change Tone`) — parent for tone shortcuts
-- `FormattingPromptShortcut` (`Formatting`) — parent for formatting/accessibility shortcuts
-- `GroupPromptShortcut` (`More`) — additional grouping node
+```csharp
+services.AddAIAssistant();
+services.AddSingleton<IPromptShortcut, MyCustomShortcut>();
+```
 
-### Rewrite and enhancement shortcuts
+#### Grouping Custom Shortcuts
 
-- `CheckSpellingPromptShortcut` — `#[SPELLCHECK]: <text>`
-- `ElaboratePromptShortcut` — `#[ELABORATE]: <text>`
-- `FeedbackPromptShortcut` — `#[FEEDBACK]: <text>`
-- `ShortenPromptShortcut` — `#[SHORTEN]: <text>`
-- `SuggestPromptShortcut` — `#[SUGGEST]: "<text>"` (fallback `#[TRANSLATE]` in non-RTE empty-input case)
+Create a parent shortcut to organize related ones:
 
-### Tone shortcuts (children of `ChangeTonePromptShortcut`)
+```csharp
+public class MyGroupShortcut : IPromptShortcut
+{
+	public string Name => "My Group";
+	public int SortOrder => 50;
+	public string? ParentName => null;
+	public bool Enabled => true;
+	public bool EnabledInRichTextEditor => true;
+	public string? EmptyMessage => null;
+	public string? Tools => null;
+	public bool UseTools => false;
 
-- `ConfidentPromptShortcut` — `#[CONFIDENT]: <text>`
-- `EmpatheticPromptShortcut` — `#[EMPATHETIC]: <text>`
-- `FormalPromptShortcut` — `#[FORMAL]: <text>`
-- `HumorPromptShortcut` — `#[HUMOR]: <text>`
-- `InFormalPromptShortcut` — `#[INFORMAL]: <text>`
-- `OptimisticPromptShortcut` — `#[OPTIMISTIC]: <text>`
-- `PassionatePromptShortcut` — `#[PASSIONATE]: <text>`
-- `ProvocativePromptShortcut` — `#[PROVOCATIVE]: <text>`
-- `SalesPromptShortcut` — `#[SALES]: <text>`
-- `SeriousPromptShortcut` — `#[SERIOUS]: <text>`
-- `SimplisticPromptShortcut` — `#[SIMPLISTIC]: <text>`
-- `SkepticalPromptShortcut` — `#[SKEPTICAL]: <text>`
+	public string GeneratePrompt(string userInput, string? selectedText, Dictionary<string, object>? contextData) => "";
+}
 
-### Summarize / generate shortcuts
+public class MyChildShortcut : IPromptShortcut
+{
+	public string Name => "Child Action";
+	public int SortOrder => 10;
+	public string? ParentName => nameof(MyGroupShortcut); // Reference parent
+	public bool Enabled => true;
+	public bool EnabledInRichTextEditor => true;
+	public string? EmptyMessage => null;
+	public string? Tools => null;
+	public bool UseTools => false;
 
-- `SummarizeShortPromptShortcut` (`Summarize short`) — `#[SUMMARIZE20]: ...` (`::this::` fallback)
-- `SalesSumPromptShortcut` (`Summarize Sales Pitch`) — `#[SALES]: ...` (`::this::` fallback)
-- `GenerateLoremPromptShortcut` — lorem ipsum (25 words)
-- `GenerateLorem2PromptShortcut` — lorem ipsum (60 words)
-- `KeywordsGenerateArticlePromptShortcut` — article generation from keyword input
+	public string GeneratePrompt(string userInput, string? selectedText, Dictionary<string, object>? contextData)
+	{
+		return $"Child action prompt: {userInput}";
+	}
+}
+```
 
-### SEO shortcuts
+#### Using Tools with Shortcuts
 
-- `SeoTitlePromptShortcut` — `#[SEOTITLE]: ...` (`::this::` fallback)
-- `SeoDescriptionPromptShortcut` — `#[SEODESC]: ...` (`::this::` fallback)
-- `SeoKeywordsPromptShortcut` — `#[KEYWORDS]: ...` (`::this::` fallback)
+Shortcuts can invoke AI tools for dynamic content:
 
-### Translation shortcut
+```csharp
+public class MyToolShortcut : IPromptShortcut
+{
+	public string Name => "AI Tool Action";
+	public int SortOrder => 30;
+	public string? ParentName => null;
+	public bool Enabled => true;
+	public bool EnabledInRichTextEditor => true;
+	public string? EmptyMessage => null;
+	public string? Tools => "GetContentById,GetThisContent"; // Comma-separated
+	public bool UseTools => true;
 
-- `TranslatePromptShortcut` — `#[TRANSLATE]: "<text>"` (or `#[TRANSLATE]` when empty)
+	public string GeneratePrompt(string userInput, string? selectedText, Dictionary<string, object>? contextData)
+	{
+		return $"Use the available tools to {userInput}";
+	}
+}
+```
 
-### RTE formatting/accessibility shortcuts (children of `FormattingPromptShortcut`)
+### IPromptShortcut Interface Properties
 
-These are internal and are for examples use
+| Property | Type | Purpose |
+|---|---|---|
+| `Name` | string | Display name in the UI |
+| `SortOrder` | int | Ordering within parent (higher = lower priority) |
+| `ParentName` | string? | Name of parent shortcut (null = root) |
+| `Enabled` | bool | Show/hide shortcut by default |
+| `EnabledInRichTextEditor` | bool | Show/hide in RTE context |
+| `EmptyMessage` | string? | Message shown if input is empty |
+| `Tools` | string? | Comma-separated list of AI tools to use |
+| `UseTools` | bool | Enable tool invocation |
+| `GeneratePrompt()` | method | Build the final prompt sent to AI |
 
-- `WCAGCompatPromptShortcut` (`Enhance WCAG Accessibility`) — RTE-only WCAG-focused HTML rewrite
-- `HeadingLevelsPromptShortcut` (`Fix heading levels`) — RTE-only heading normalization
-- `ToCPromptShortcut` (`Create Table of Content`) — RTE-only TOC generation with anchors/nav
-- `FaqPromptShortcut` (`Generate FAQ`) — RTE-only semantic FAQ section generation
+### Disabling Default Shortcuts
 
-## Notes
+You can disable shortcuts at different levels:
 
-- This document intentionally lists core package shortcuts only.
-- Core shortcuts rely on tagged prompt patterns (`#[...]`) and shared assistant pipeline behavior.
+- **Global:** Remove the `services.AddSingleton<IPromptShortcut, ...>()` registration
+- **Class level:** Set `Enabled` / `EnabledInRichTextEditor` defaults to `false`
+- **Property level:** `ShortcutsDisabled = true`
+- **Property allow-list:** Explicit `Shortcuts = new[] { ... }`
+
+### Optional: IJavascriptPromptShortcut
+
+For advanced scenarios where you need frontend-specific behavior:
+
+```csharp
+public class MyAdvancedShortcut : IPromptShortcut, IJavascriptPromptShortcut
+{
+	// ... IPromptShortcut implementation ...
+
+	public string GetJavascriptBehavior() 
+	{
+		return "setfield"; // or "aiprompt", "execute_ai"
+	}
+}
+```
+
+---
+
+## Part 5: Common Scenarios
+
+### Scenario 1: SEO Title Field — Limited Shortcuts
+
+```csharp
+[Display(Name = "SEO Title")]
+[UIHint(AIHint.Input)]
+[AIAssistant(Shortcuts = new[] {
+	typeof(SeoTitlePromptShortcut),
+	typeof(ShortenPromptShortcut)
+})]
+public virtual string SeoTitle { get; set; }
+```
+
+**Result:** Only "SEO Title" and "Shorten" shortcuts appear on this field.
+
+### Scenario 2: Rich Description — Full Shortcuts + Custom
+
+```csharp
+[Display(Name = "Rich Description")]
+[UIHint("XhtmlString")]
+[AIAssistant()] // All default shortcuts
+public virtual XhtmlString Description { get; set; }
+
+// In Startup.cs
+services.AddAIAssistant();
+services.AddSingleton<IPromptShortcut, GenerateBulletPointsShortcut>();
+```
+
+**Result:** All default shortcuts plus your custom "Generate Bullet Points" action.
+
+### Scenario 3: Internal Notes — No Shortcuts
+
+```csharp
+[Display(Name = "Internal Notes")]
+[UIHint(AIHint.Textarea)]
+[AIAssistant(ShortcutsDisabled = true)]
+public virtual string InternalNotes { get; set; }
+```
+
+**Result:** No shortcuts available on this field.
+
+---
+
+## Part 6: Troubleshooting
+
+### Shortcuts Don't Appear
+
+1. **Check `[AIAssistant]` configuration**
+   - Ensure `ShortcutsDisabled` is not `true`
+   - If using an allowlist, verify the shortcut type is included
+
+2. **Check global registration**
+   - Confirm shortcuts are registered in `Startup.cs` via `services.AddAIAssistant()`
+   - Verify shortcut's `Enabled` property is `true`
+
+3. **Check field UIHint**
+   - Only `AIHint.Input`, `AIHint.Textarea`, and RTE fields support shortcuts
+   - Rich text editors (XhtmlString) have a subset of shortcuts
+
+### Shortcut Produces Wrong Output
+
+1. Check the shortcut's `GeneratePrompt()` implementation
+2. Verify the AI model has appropriate instructions via `[AIAssistant(AssistantInstructions = "...")]`
+3. Test with a different AI provider or model
+4. Review the built-in prompt patterns (e.g., `#[SPELLCHECK]:`) for reference
+
+### Custom Shortcut Not Registered
+
+1. Ensure the class implements `IPromptShortcut`
+2. Verify registration in `Startup.cs`: `services.AddSingleton<IPromptShortcut, YourShortcut>()`
+3. Check that `Enabled` property is `true`
+4. Clear browser cache and restart the application
+
+### Hashtag Prompts Not Working
+
+- Use exact shortcut pattern (e.g., `#[SPELLCHECK]:`, not `#[spellcheck]:`)
+- Invoke from Ask AI dialog, not from regular field suggestions
+- Verify the shortcut is enabled globally
+
+---
+
+## Part 7: Notes
+
+- Built-in shortcuts rely on tagged prompt patterns (`#[...]`) and shared assistant pipeline behavior
+- This guide covers core package shortcuts only
+- For advanced chat-specific shortcuts and instructions, see [Chat Instructions](./chat-instructions.md)
+- For configuration details, see [Configuration Guide](./configuration.md)
+
+---
+
+## Related Documentation
+
+- [Configuration Guide](./configuration.md) — Detailed attribute and appsettings options
+- [User Manual](./user-manual.md) — How editors use AI features
+- [Chat Instructions](./chat-instructions.md) — Building custom instructions with shortcuts
+- [Example Screens](./example-screens.md) — Visual examples of shortcuts in the editor

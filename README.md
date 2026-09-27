@@ -16,7 +16,7 @@ CMS 13 and Commerce 15
 - **[AI Chat - Getting Started](chat-instructions.md)** ⭐ NEW
 - **[AI Tools - Function Calling and MCP](tools.md)** ⭐ NEW
 - **[Agent API - External Integration](agent-api.md)** ⭐ NEW
-- **[Shortcuts Guide](shortcuts.md)** - Speed up common tasks with reusable prompts
+- **[Shortcuts Guide](promptshortcuts.md)** - Speed up common tasks with reusable prompts
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
 - [Example Commerce Connect](example-Commerce-work-with-SEO-and-translations-on-a-product.md)
@@ -52,7 +52,7 @@ For a free evaluation without any licensing messages in the production environme
 - Run your own prompts to ChatGPT/Gemini
 - Summarize texts and other property fields on page/site (SEO, GEO)
 - Formatting HTML, WCAG AA compatible
-- **[Add your own shortcut prompts](shortcuts.md)** - Create reusable AI actions on field level
+- **[Add your own shortcut prompts](promptshortcuts.md)** - Create reusable AI actions on field level
 - Use ChatGPT/Gemini as inline help
 - Use any AI of your choice (Bring your own AI)
 
