@@ -80,6 +80,25 @@ services.AddAIAssistantAgentAPI();
 
 Both methods are equivalent and enable the Agent API with default built-in API key authentication.
 
+**With custom options**:
+```csharp
+// Custom authentication scheme
+services.AddEpicwebAgentApi(options =>
+{
+    options.UseBuiltInApiKeyAuthentication = true;
+    options.AuthenticationScheme = "CustomScheme";
+});
+
+// Custom API path
+services.AddEpicwebAgentApi(agentApiPath: "/api/agents");
+
+// Both
+services.AddEpicwebAgentApi(
+    options => { options.UseBuiltInApiKeyAuthentication = true; },
+    agentApiPath: "/api/agents"
+);
+```
+
 ### 3. Configure Route (Optional)
 
 By default, MVC routing exposes the controller under `/api/epicweb/agent/chat`.
