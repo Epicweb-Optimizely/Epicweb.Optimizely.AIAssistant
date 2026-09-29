@@ -99,7 +99,7 @@ With Shortcuts, you can programmatically commonly used prompts for quick and eas
 - Summarize Sales Pitch: will condence the page content into a sales pitch
 - Spell-check: Will suggest the text in textarea without any spelling errors
 
-You can add your most commonly used prompts for quick and easy access
+You can add your most commonly used prompts for quick and easy access. See [Shortcuts Guide](./shortcuts.md) for a complete list of built-in shortcuts, usage examples, and how to create custom shortcuts.
 
 | ![Epicweb Optimizely AIAssistant-shorcuts](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/bce3581f-0039-45b5-8fc1-b9ec8705d5a0) |
 |-|
