@@ -1,5 +1,34 @@
 # Change log
 
+
+## 5.4.2 - 2026-10-18 CMS 13
+- Compatibility with GPT-6 versions
+- new tools for create blocks and pages
+- register with .RegisterMcpToolType(typeof(BuiltinCreateChatTools)) // Content type discovery and creation tools for pages and blocks
+- new tools for translation thru chat
+- better handling for culture
+- autoscroll behavior for chat
+- fix bug savning "for this folder"
+- Chat tools for quick instructions and assistant management
+
+## 5.4.0 - 2026-09-25 CMS 13
+
+- CMS 13 specific package for Optimizely Content Cloud 13.x and .NET 10
+
+## 4.4.2 - 2026-10-18 CMS 12
+- Compatibility with GPT-6 versions
+- new tools for create blocks and pages
+- register with .RegisterMcpToolType(typeof(BuiltinCreateChatTools)) // Content type discovery and creation tools for pages and blocks
+- new tools for translation thru chat
+- better handling for culture
+- autoscroll behavior for chat
+- fix bug savning "for this folder"
+- Chat tools for quick instructions and assistant management
+
+## 4.4.0 - 2026-09-25
+
+- CMS 12 specific package for Optimizely Content Cloud 12.x compat with .net 8 and 10
+
 ## 4.2.4 - 2026-09-17
 - Bugfix, path to plugin wrong in some configurations
 
