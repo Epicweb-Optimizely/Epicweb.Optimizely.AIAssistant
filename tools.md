@@ -29,15 +29,17 @@ using Epicweb.Optimizely.AIAssistant.Tools;
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddAIAssistant()
-           // Register built-in MCP tool types
-   .RegisterMcpToolType(typeof(BuiltinTools))
-   .RegisterMcpToolType(typeof(BuiltinChatTools)) 
-   .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
-   .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))   
-   .RegisterMcpToolType(typeof(VisitorGroupTools)) // Visitor group discovery for AI context
-   .RegisterMcpToolType(typeof(DisplayOptionTools)) // Use this to understand what display options are available for ContentArea items.
-   .RegisterMcpToolType(typeof(BuiltinChatImageTools)) //only together with image analysation module (licensed)
-   .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions, only together with image generation module (licensed)
+    // Register built-in MCP tool types
+    .RegisterMcpToolType(typeof(BuiltinTools))               // Content lookup and querying
+    .RegisterMcpToolType(typeof(BuiltinChatTools))           // Content reading and management
+    .RegisterMcpToolType(typeof(BuiltinPublishChatTools))    // Publishing and versioning
+    .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))     // Content property updates
+    .RegisterMcpToolType(typeof(BuiltinCreateChatTools))     // Content discovery and creation
+    .RegisterMcpToolType(typeof(CategoryTools))              // Category discovery and management
+    .RegisterMcpToolType(typeof(DisplayOptionTools))         // Display option discovery
+    .RegisterMcpToolType(typeof(VisitorGroupTools))          // Visitor group and personalization
+    .RegisterMcpToolType(typeof(BuiltinChatImageTools))      // Image analysis (requires license)
+    .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));// Image generation (requires license)
 }
 ```
 
@@ -148,72 +150,162 @@ using Epicweb.Optimizely.AIAssistant.Tools;
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddAIAssistant()
-           .RegisterMcpToolType(typeof(BuiltinTools))
-           .RegisterMcpToolType(typeof(BuiltinChatTools))
-           .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
-           .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))
-           .RegisterMcpToolType(typeof(BuiltinChatImageTools))
-           .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));
+    // Register built-in MCP tool types
+    .RegisterMcpToolType(typeof(BuiltinTools))               // Content lookup and querying
+    .RegisterMcpToolType(typeof(BuiltinChatTools))           // Content reading and management
+    .RegisterMcpToolType(typeof(BuiltinPublishChatTools))    // Publishing and versioning
+    .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))     // Content property updates
+    .RegisterMcpToolType(typeof(BuiltinCreateChatTools))     // Content discovery and creation
+    .RegisterMcpToolType(typeof(CategoryTools))              // Category discovery and management
+    .RegisterMcpToolType(typeof(DisplayOptionTools))         // Display option discovery
+    .RegisterMcpToolType(typeof(VisitorGroupTools))          // Visitor group and personalization
+    .RegisterMcpToolType(typeof(BuiltinChatImageTools))      // Image analysis (requires license)
+    .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));// Image generation (requires license)
 }
 ```
 
 ### Built-in Tool Reference
 
-#### BuiltinTools (Helper Tools)
+#### BuiltinTools (Content Lookup and Querying)
+
+Core tools for retrieving content and structure from Optimizely CMS:
 
 | Tool | Description | Example |
 |------|-------------|---------|
-| `FormatDate` | Format dates in various formats | "Format today as 'Jan 15, 2024'" |
-| `GetCurrentDate` | Get current date/time | "What's today's date?" |
-| `StringManipulation` | String operations (uppercase, lowercase, trim) | "Convert to uppercase" |
-| `CalculateLength` | Get text or content length | "How long is this text?" |
-
-#### BuiltinChatTools (Content Reading)
-
-Core tools that allow the AI to retrieve and work with content directly from Optimizely CMS:
-
-| Tool | Description | Example |
-|------|-------------|---------|
-| `GetContentById` | Get content by ID or reference | "Get content 123" |
-| `GetContentProperty` | Get specific property value (e.g. MainBody, Preamble, SEO title) | "Get MainBody from page 123" |
-| `GetThisContent` | Get current page/block content (all properties) | "Show me this page's properties" |
-| `GetChildContent` | Get children of a page (useful for "list all child titles") | "List all child pages" |
+| `GetContentById` | Get content by ID or reference, with optional specific property | "Get content 123" or "Get MainBody from page 123" |
+| `GetThisContent` | Get current page/block content (all properties) for context-aware operations | "Show me this page's properties" |
+| `GetChildContent` | Get children of a page (useful for listing child titles and summarization) | "List all child pages" |
 | `GetContentByName` | Search content by name or partial match across all page types | "Find page named 'Products'" |
-| `SearchContent` | Full-text content search | "Search for 'sustainability'" |
-| `GetPageStructure` | Get page tree structure | "Show site structure" |
+| `FindByUrl` | Find content by URL path (e.g., '/about', '/products/category') | "Get content from /about page" |
+| `GetLatestPublishedContent` | Get the latest published version of content | "Get latest published version of page 123" |
 
-👉 **In short:** These tools allow the AI to look up content and structure from the CMS, so it can summarize, generate SEO metadata, build lists, or answer context-aware editorial queries.
+👉 **In short:** These tools allow the AI to look up content and structure from the CMS, enabling summarization, SEO metadata generation, content lists, and context-aware editorial queries.
 
-#### BuiltinPublishChatTools (Publishing)
+#### BuiltinChatTools (Content Reading, Site Info & Management)
+
+Extended tools for content retrieval, site information, and AI instruction management:
 
 | Tool | Description | Example |
 |------|-------------|---------|
-| `PublishContent` | Publish content | "Publish this page" |
-| `UnpublishContent` | Unpublish content | "Unpublish the News page" |
-| `SchedulePublish` | Schedule publishing | "Schedule for tomorrow 10am" |
-| `GetPublishStatus` | Check publish status | "Is this page published?" |
+| `GetSiteLanguages` | Get all enabled languages configured for the CMS site | "What languages are available?" |
+| `GetStartPage` | Get the site's start/home page content | "What's on the home page?" |
+| `OpenContentVersion` | Open a specific content version for review or modification | "Show version history of page 123" |
+| `GetIContentVersions` | Get version history for content (all versions) | "List all versions of this page" |
+| `GetContentProperties` | Get detailed property information for content with metadata and constraints | "What properties does this content have?" |
+| `ListAvailableToolPacks` | Lists available tool packs that can be loaded for specific tasks | "What tool packs are available?" |
+| `LoadToolPack` | Load a specific tool pack to extend available tools in chat | "Load the ProductTools pack" |
+| `GetTranslationInstructions` | Get translation guidelines and rules | "Show translation instructions for this page type" |
+| `GetAIInstructions` | Lists available AI instruction files by category (Chat, ContentType, Field, Translation, General) | "What instructions are available for this page type?" |
+| `GetAIInstruction` | Returns full AI instruction text by ID for AI behavior guidance in specific contexts | "Show me the instruction for creating product pages" |
+| `CreateAssistant` | Create a new AI Assistant configuration with custom instructions | "Create an assistant for product descriptions" |
+| `GetAssistants` | List all configured AI Assistants | "Show available assistants" |
+| `UpdateAssistant` | Update an existing AI Assistant configuration | "Update the product assistant" |
+| `CreateQuickInstruction` | Create quick instructions for specific users or tasks | "Create quick instructions for SEO optimization" |
+| `UpdateQuickInstruction` | Update existing quick instructions | "Update the SEO instructions" |
+| `GetQuickInstructionsForUsers` | Retrieve quick instructions available for current user | "Show my quick instructions" |
+
+👉 **In short:** These tools provide AI with site information, version history, language settings, and access to customizable AI instructions for context-aware content operations.
+
+#### BuiltinPublishChatTools (Publishing and Versioning)
+
+Tools for managing publication status and creating language versions:
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `PublishOrUnpublishContent` | Publish or unpublish content | "Publish this page" or "Unpublish the News page" |
+| `CheckScheduledPublish` | Check if content is scheduled for publishing | "When is this page scheduled to publish?" |
+| `CreateLanguageVersion` | Create a new language version of content (before translation) | "Create Swedish version of this page" |
+
+👉 **In short:** These tools manage publication workflows and enable multi-language content versioning.
 
 #### BuiltinUpdateChatTools (Content Updates)
 
-| Tool | Description | Example |
-|------|-------------|---------|
-| `UpdateContentProperty` | Update a property value | "Set heading to 'Welcome'" |
-| `UpdateMultipleProperties` | Update several properties | "Update heading and preamble" |
-| `CreateDraft` | Create a new version | "Create a draft version" |
-
-#### BuiltinChatImageTools (Image Operations)
+Tools for updating content properties in bulk:
 
 | Tool | Description | Example |
 |------|-------------|---------|
-| `AnalyzeImage` | Analyze image content | "Describe this image" |
-| `GenerateAltText` | Generate alt text | "Create alt text for images" |
-| `GetImageMetadata` | Get image properties | "Show image dimensions" |
+| `UpdateMultiplePropertiesOnPageOrBlock` | Update multiple properties in a single save operation (prevents multiple versions) | "Update heading to 'Welcome' and preamble to 'Hello'" |
+
+👉 **In short:** Efficiently update multiple content properties at once without creating intermediate versions.
+
+#### BuiltinCreateChatTools (Content Discovery and Creation)
+
+Tools for discovering content types, asset structures, and creating new pages and blocks:
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `GetAvailablePageTypes` | Lists CMS page types that can be created under a parent page, with optional name filter | "What page types can I create under this page?" |
+| `GetAvailableBlockTypes` | Lists block types available for a location (shared library or page-specific assets) | "What blocks can I create in the global library?" |
+| `GetAssetFolderInfo` | Returns information about where blocks can be stored (global library or local page/block assets) | "Where can I store blocks for this page?" |
+| `GetContentTypeSchema` | Returns property schema for a content type (names, types, constraints, defaults) | "What properties does this page type have?" |
+| `CreatePage` | Creates a new page of a specific type under a parent, saves as unpublished draft with optional properties | "Create a new product page with heading 'New Product'" |
+| `CreateBlock` | Creates a new block in an asset folder or page-specific location, saves as draft with optional properties | "Create a feature block in the global library" |
+
+👉 **In short:** These tools enable AI to discover content structure, understand what can be created, and automatically create new pages and blocks with pre-filled properties.
+
+#### BuiltinChatImageTools (Image Analysis)
+
+Tools for analyzing image content and metadata:
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `AskImageQuestions` | Ask questions about image content using AI analysis | "What's in this image?" or "Describe the main subject" |
+| `GetImageProperties` | Get image properties (dimensions, format, metadata) | "Show image dimensions and file size" |
+
+👉 **In short:** Analyze and retrieve information about image files using AI and metadata.
 
 #### BuiltinChatCreateImageTools (Image Generation)
 
+Tools for generating images with AI:
+
 | Tool | Description | Example |
 |------|-------------|---------|
-| `ImageCreationInstructions` | Image Creation instruction | "Create image of ..." |
+| `ImageCreationInstructions` | Generate images based on text descriptions using AI image generation | "Create an image of a modern office workspace" |
+
+👉 **In short:** Generate images from text prompts using AI image generation.
+
+#### CategoryTools (Content Organization)
+
+Tools for managing and discovering content categories:
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `GetAllCategories` | Get all categories configured in CMS with hierarchy and descriptions | "What categories are available?" |
+| `GetCategory` | Get detailed information about a specific category by name, ID, or GUID | "Show details for the 'News' category" |
+| `SearchCategories` | Search for categories by name or pattern matching | "Find categories containing 'Product'" |
+| `GetCategoryHierarchy` | Get the complete category tree structure | "Show the category hierarchy" |
+| `GetContentCategories` | Get categories assigned to specific content | "What categories is this page in?" |
+| `GetCategoriesByParent` | Get child categories under a parent category | "What categories are under 'News'?" |
+| `SetContentCategories` | Set/replace categories for content | "Categorize this page as 'News' and 'Featured'" |
+| `AddContentCategories` | Add categories to content (without removing existing ones) | "Add 'Urgent' category to this page" |
+| `RemoveContentCategories` | Remove specific categories from content | "Remove 'Draft' category from this page" |
+
+👉 **In short:** Discover and manage content categorization for organization, filtering, and content discovery.
+
+#### DisplayOptionTools (UI and Presentation)
+
+Tools for discovering available display options:
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `GetAvailableDisplayOptions` | Get all display options registered in CMS (e.g., 'wide', 'narrow', '2-columns') | "What display options are available for content areas?" |
+
+👉 **In short:** Find available display options for ContentArea items to control how content is rendered.
+
+#### VisitorGroupTools (Personalization)
+
+Tools for managing visitor groups and personalization:
+
+| Tool | Description | Example |
+|------|-------------|---------|
+| `GetAllVisitorGroups` | Get all visitor groups configured for personalization | "What visitor groups exist?" |
+| `GetVisitorGroup` | Get detailed information about a specific visitor group by name or GUID | "Show details for the 'Mobile Users' group" |
+| `SearchVisitorGroups` | Search visitor groups by name or criteria | "Find visitor groups for VIP customers" |
+| `GetVisitorGroupRoles` | Get roles and criteria associated with a visitor group | "What criteria define the 'Premium Members' group?" |
+
+👉 **In short:** Discover and manage visitor groups for content personalization and targeted content delivery.
+
+
 
 ## Tool Scopes
 

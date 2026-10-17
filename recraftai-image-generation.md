@@ -1,4 +1,4 @@
-# Image generation with Recraft AI
+# Image generation with Recraft AI (depcrecated)
 
 This integration brings the next generation of image generation capabilities directly into your content management system, revolutionizing the way you create and manage visual assets.
 

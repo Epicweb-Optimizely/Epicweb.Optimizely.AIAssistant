@@ -16,6 +16,7 @@ CMS 13 and Commerce 15
 - **[AI Chat - Getting Started](chat-instructions.md)** ⭐ NEW
 - **[AI Tools - Function Calling and MCP](tools.md)** ⭐ NEW
 - **[Agent API - External Integration](agent-api.md)** ⭐ NEW
+- **[Administration Features](admin-features.md)** ⭐ NEW - Instructions, Assistants & Statistics
 - **[Shortcuts Guide](promptshortcuts.md)** - Speed up common tasks with reusable prompts
 - [FAQ](faq.md)
 - [Feedback and Issues](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/discussions)
