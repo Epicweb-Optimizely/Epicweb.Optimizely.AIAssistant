@@ -46,10 +46,10 @@ The solution offers:
 
 Install the latest versions:
 
-`
+```
 Install-Package EPiServer.Labs.LanguageManager
 Install-Package Epicweb.Optimizely.AIAssistant.LanguageManager
-`
+```
 
 Or via Package Manager:
 - https://nuget.optimizely.com/packages/EPiServer.Labs.LanguageManager/ 
@@ -59,11 +59,11 @@ Or via Package Manager:
 
 Add to Program.cs or Startup.cs:
 
-`csharp
+```csharp
 services.AddLanguageManager();
 services.AddLanguageManagerAIAssistant();
 services.AddLanguageManagerOverrides(Configuration);  // Optional: for advanced configuration
-`
+```
 
 ### Step 3: Configure AI Provider (Editor UI)
 
@@ -86,24 +86,24 @@ All translation instructions are defined through the IAssistantInstructionsResol
 
 #### Implement IAssistantInstructionsResolver
 
-`csharp
+```csharp
 public interface IAssistantInstructionsResolver
 {
     string GetInstructions();
     string GetInstructions(CultureInfo language);
     string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null);
 }
-`
+```
 
 Register your implementation:
 
-`csharp
+```csharp
 services.AddSingleton<IAssistantInstructionsResolver, YourCustomResolver>();
-`
+```
 
 #### Example Implementation
 
-`csharp
+```csharp
 public class CustomInstructionsResolver : IAssistantInstructionsResolver
 {
     private readonly IContentLoader _contentLoader;
@@ -142,69 +142,108 @@ public class CustomInstructionsResolver : IAssistantInstructionsResolver
         return _configuration["Epicweb:AIAssistant:AssistantTranslationInstructions"];
     }
 }
-`
+```
 
 ### Advanced Configuration: LanguageManager Overrides
 
-The LanguageManager Overrides system allows fine-grained control over which content and properties are translated. This is configured through appsettings.json.
+The LanguageManager Overrides system allows fine-grained control over which content and properties are translated. This is configured through appsettings.json.
 
 #### Configuration Structure
 
-Add the LanguageManagerOverrides section to your appsettings.json:
+Add the LanguageManagerOverrides section to your appsettings.json:
 
-`json
-{
+```json
+
   "LanguageManagerOverrides": {
+    // When true: base configured type excludes derived types too. When false: only exact type match.
     "ApplyToDerivedContentTypes": true,
+    // Content types that should NOT be translated - values are copied/preserved from source instead
     "ExcludedContentTypes": [
+      // EPiServer Forms blocks are excluded from translation, block reference is preserved
       "EPiServer.Forms.Implementation.Elements.FormContainerBlock",
-      "MyProject.Models.Blocks.TechnicalBlock"
+      // Alloy TextBlock is excluded from translation, block reference is preserved
+      "AlloySandbox.Models.Blocks.TextBlock"
     ],
+    // Properties that should not be translated
     "ExcludedProperties": {
+      // Global: Property names excluded on all content types (supports Provider.PropertyName format)
       "Global": [
-        "PageURLSegment",
+        // "PageURLSegment", // Uncomment to globally prevent URL segment changes
+        // CatalogContent.SeoUri is excluded on all content types
         "CatalogContent.SeoUri",
-        "TechnicalIdentifier",
-        "TrackingCode"
+        // Technical identifier field is never translated
+        "TechnicalIdentifier"
       ],
+      // Per-type property exclusions: Properties excluded only on specific content types
       "ByContentType": {
+        // ArticlePage type-specific excluded properties (if this content type exists in your project)
         "MyProject.Models.Pages.ArticlePage": [
+          // ExternalUrl property is excluded from translation for ArticlePages
           "ExternalUrl",
+          // CustomMetadata property is excluded from translation for ArticlePages
           "CustomMetadata"
         ],
+        "AlloySandbox.Models.Blocks.TestBlock": [
+          // Copyright property should not be copied from source for TestBlocks, it is excluded from translation
+          "Copyright"
+        ],
+        // TeaserBlock type-specific excluded properties (if this content type exists in your project)
         "MyProject.Models.Blocks.TeaserBlock": [
+          // TrackingCode property is excluded from translation for TeaserBlocks
           "TrackingCode"
         ]
       }
     },
+    // Properties that should always be copied from source (never translated)
     "PreserveSourceProperties": {
-      "Global": ["PageName"],
+      // Global
+      "Global": [ "PageName" ],
+      // Per-type preserve-source properties: Matching properties are copied from source during translation
       "ByContentType": {
-        "EPiServer.Core.BlockData": [
-          "Name"
+        "AlloySandbox.Models.Blocks.TestBlock": [
+          // Copyright property is preserved from source without translation
+          "Copyright"
         ],
-        "EPiServer.Core.PageData": [
-          "PageName"
-        ]
+        // "EPiServer.Core.PageData": [ "PageName" ], // Uncomment to preserve page names from source
+        // BlockData base type: Name property is preserved/copied from source without translation
+        // Note: With ApplyToDerivedContentTypes=true, this applies to all derived BlockData types
+        "EPiServer.Core.BlockData": [ "Name" ]
+        // TestBlock type-specific: Copyright property is preserved from source
+        //"AlloySandbox.Models.Blocks.TestBlock": [
+        //  // Copyright property is preserved from source without translation
+        //  "Copyright"
+        //]
       }
     },
+    // Translation behavior controls
     "Translation": {
+      // When true: skip translation if target branch already contains meaningful values (default behavior)
       "SkipExistingTranslations": true,
+      // When true: forces update of existing translations and overrides skip behavior
       "ForceRetranslation": false
     },
+    // URL segment behavior per language
     "UrlSegments": {
-      "DefaultMode": "FromName",
+      // Fallback mode for languages not explicitly mapped (Default, PreserveSource, or FromName)
+      // Default: translate URL segment with BuildAsciiSlug()
+      // PreserveSource: copy source PageURLSegment without modification
+      // FromName: generate ASCII-safe slug from translated page title (PageName)
+      "DefaultMode": "Default",
+      // Per-language URL segment mode override
       "Languages": {
+        // Chinese (simplified): preserve URL segment from source (Page/Block Name still translates unless configured separately)
         "zh": "PreserveSource",
-        "zh-CN": "PreserveSource",
-        "zh-TW": "PreserveSource",
-        "ja": "FromName",
-        "sv": "Default"
+        // French: preserve URL segment from source (Page/Block Name still translates unless configured separately)
+        // Important: To also preserve Name/PageName, configure it separately in PreserveSourceProperties
+        "fr": "PreserveSource",
+        // Swedish: generates URL segment from translated Title (uncomment if Title field exists and is translated)
+        // "sv": "FromName",
+        // Japanese: use default mode (translate URL segment with BuildAsciiSlug)
+        "ja": "Default"
       }
     }
   }
-}
-`
+```
 
 #### Configuration Options Reference
 
@@ -235,7 +274,7 @@ The URL segment (page slug) can be handled differently per language:
 
 **Scenario 1: Exclude form blocks and technical properties globally**
 
-`json
+```json
 {
   "LanguageManagerOverrides": {
     "ExcludedContentTypes": [
@@ -250,11 +289,11 @@ The URL segment (page slug) can be handled differently per language:
     }
   }
 }
-`
+```
 
 **Scenario 2: Preserve block names and handle Chinese URLs**
 
-`json
+```json
 {
   "LanguageManagerOverrides": {
     "PreserveSourceProperties": {
@@ -263,26 +302,32 @@ The URL segment (page slug) can be handled differently per language:
       }
     },
     "UrlSegments": {
+      // Fallback mode for languages not explicitly mapped (Default, PreserveSource, or FromName)
+      // Default: translate URL segment with BuildAsciiSlug()
+      // PreserveSource: copy source PageURLSegment without modification
+      // FromName: generate ASCII-safe slug from translated page title (PageName)
+      "DefaultMode": "Default",
       "Languages": {
         "zh": "PreserveSource",
         "zh-CN": "PreserveSource",
-        "zh-TW": "PreserveSource"
+        "zh-TW": "PreserveSource",
+        "sv": "FromName"
       }
     }
   }
 }
-`
+```
 
 **Scenario 3: Exclude specific properties per content type**
 
-`json
+```json
 {
   "LanguageManagerOverrides": {
     "ExcludedProperties": {
       "ByContentType": {
         "MyProject.Models.Pages.ArticlePage": [
-          "ExternalUrl",
-          "PublishedDate"
+          "MyProperty",
+          "OtherProperty"
         ],
         "MyProject.Models.Pages.ProductPage": [
           "SKU",
@@ -292,11 +337,11 @@ The URL segment (page slug) can be handled differently per language:
     }
   }
 }
-`
+```
 
 **Scenario 4: Force retranslation of all branches**
 
-`json
+```json
 {
   "LanguageManagerOverrides": {
     "Translation": {
@@ -305,7 +350,7 @@ The URL segment (page slug) can be handled differently per language:
     }
   }
 }
-`
+```
 
 ---
 
@@ -313,7 +358,7 @@ The URL segment (page slug) can be handled differently per language:
 
 For programmatic translation (e.g., in scheduled tasks or custom workflows), use the TranslationService:
 
-`csharp
+```csharp
 public class TranslationService
 {
     public Task<string> TranslateText(
@@ -325,11 +370,11 @@ public class TranslationService
         // Translates text from source language to target language
     }
 }
-`
+```
 
 Inject and use it in your custom code:
 
-`csharp
+```csharp
 [Inject]
 public TranslationService TranslationService { get; set; }
 
@@ -342,7 +387,7 @@ public async Task TranslateMyContent()
         "My content page"        // source context
     );
 }
-`
+```
 
 ---
 
@@ -390,5 +435,8 @@ Translate entire pages and their blocks with a single action:
 5. All content and nested blocks are translated according to your configuration
 
 [Video: Language Manager Bulk Translation](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/aea7c323-47f7-45c1-93a9-9185e5074e0f)
+
+
+
 
 
