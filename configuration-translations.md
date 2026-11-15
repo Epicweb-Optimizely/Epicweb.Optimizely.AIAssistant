@@ -209,10 +209,10 @@ Add the LanguageManagerOverrides section to your appsettings.json:
         // Note: With ApplyToDerivedContentTypes=true, this applies to all derived BlockData types
         "EPiServer.Core.BlockData": [ "Name" ]
         // TestBlock type-specific: Copyright property is preserved from source
-        //"AlloySandbox.Models.Blocks.TestBlock": [
-        //  // Copyright property is preserved from source without translation
-        //  "Copyright"
-        //]
+        "AlloySandbox.Models.Blocks.TestBlock": [
+          // Copyright property is preserved from source without translation
+          "Copyright"
+        ]
       }
     },
     // Translation behavior controls
@@ -237,9 +237,7 @@ Add the LanguageManagerOverrides section to your appsettings.json:
         // Important: To also preserve Name/PageName, configure it separately in PreserveSourceProperties
         "fr": "PreserveSource",
         // Swedish: generates URL segment from translated Title (uncomment if Title field exists and is translated)
-        // "sv": "FromName",
-        // Japanese: use default mode (translate URL segment with BuildAsciiSlug)
-        "ja": "Default"
+        "sv": "FromName"
       }
     }
   }
