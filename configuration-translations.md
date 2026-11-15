@@ -1,94 +1,394 @@
- # Working with translations
+﻿# Working with translations
 
- The translations capabilities with the AI Assistant are highly configurable
+The translations capabilities with the AI Assistant are highly configurable and support both manual field-by-field translations and automated bulk translations using the LanguageManager integration.
 
- ## Features
+## Overview
 
- - translate one field at time
- - translate all fields on a page/block type with the [LanguageManager plugin](Translations-with-LanguageManager.md)
+### For Content Editors
+
+The AI Assistant provides two translation workflows:
+
+1. **Manual Translation** - Translate individual properties one at a time within the content editor using inline AI assistance
+2. **Bulk Translation** - Translate entire pages or blocks using the LanguageManager plugin, which can translate multiple properties simultaneously across content hierarchies
+
+### For Developers
+
+The solution offers:
+
+- Flexible configuration of translation behavior
+- Integration with LanguageManager for automated translation workflows
+- Configurable exclusion and preservation rules for specific content types and properties
+- Per-language URL segment handling strategies
+- Custom instruction support via IAssistantInstructionsResolver
+
+---
+
+## Features
+
+### Manual Field Translation
+- Translate one field at a time using the AI Property Wrapper
+- Inline AI suggestions with support for multiple languages
+- Real-time translation within the content editor
+
+### Bulk Translation with LanguageManager
+- Translate entire pages or block hierarchies at once
+- Configurable content type and property exclusions
+- Automatic URL segment generation strategies per language
+- Skip existing translations by default with optional force-retranslation
+- Recursive nested content translation support
+- Preserve specific properties from being translated (e.g., identifiers, technical fields, block names)
+
+---
 
 ## Installation
 
-- Install latest version => https://nuget.optimizely.com/packages/EPiServer.Labs.LanguageManager/ 
-- Install latest version => https://nuget.optimizely.com/packages/epicweb.optimizely.aiassistant.languagemanager/ 
+### Step 1: Install NuGet Packages
 
-- Add to startup.cs => services.AddLanguageManagerAIAssistant();
+Install the latest versions:
 
-Start site and add the AI-Assistant Translation Provider in Admin Settings => Language Manager => Choose AI-Assistant (no need to add Subscription Key nor Region)
+`
+Install-Package EPiServer.Labs.LanguageManager
+Install-Package Epicweb.Optimizely.AIAssistant.LanguageManager
+`
 
- ## Implement IAssistantInstructionsResolver
+Or via Package Manager:
+- https://nuget.optimizely.com/packages/EPiServer.Labs.LanguageManager/ 
+- https://nuget.optimizely.com/packages/epicweb.optimizely.aiassistant.languagemanager/ 
 
-This allows for the implementation of global 'Assistant Instructions' but also different instruction between languages if needed. 
+### Step 2: Configure Startup
 
-When working with translations, we have a dedicated API called "GetInstructionsForTranslations." This API allows you to provide translation instructions by language. You can also include information on how to translate, along with a list of terms or translation rules. 
+Add to Program.cs or Startup.cs:
 
-```csharp
+`csharp
+services.AddLanguageManager();
+services.AddLanguageManagerAIAssistant();
+services.AddLanguageManagerOverrides(Configuration);  // Optional: for advanced configuration
+`
+
+### Step 3: Configure AI Provider (Editor UI)
+
+1. Log in to Optimizely CMS Admin
+2. Go to **Settings** → **Language Manager**
+3. Select **AI-Assistant** as the translation provider
+4. No API key or region configuration needed (uses your existing AI Assistant settings)
+
+---
+
+## Configuration & Customization
+
+### Basic Instructions
+
+All translation instructions are defined through the IAssistantInstructionsResolver interface, which allows you to:
+
+- Set global translation instructions
+- Override instructions per language
+- Provide language-specific terminology and translation rules
+
+#### Implement IAssistantInstructionsResolver
+
+`csharp
 public interface IAssistantInstructionsResolver
 {
     string GetInstructions();
     string GetInstructions(CultureInfo language);
     string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null);
 }
-```
+`
 
-Remember to register your implementation => services.AddSingleton<IAssistantInstructionsResolver, ...>();
+Register your implementation:
 
-```csharp
- public string GetInstructions()
+`csharp
+services.AddSingleton<IAssistantInstructionsResolver, YourCustomResolver>();
+`
+
+#### Example Implementation
+
+`csharp
+public class CustomInstructionsResolver : IAssistantInstructionsResolver
 {
-    return this.GetInstructions(null);
-}
+    private readonly IContentLoader _contentLoader;
+    private readonly IConfiguration _configuration;
 
-public string GetInstructions(CultureInfo language)
-{
-    ContentReference start = ContentReference.StartPage;
-    if (contentLoader.TryGet(start, out PageData startpage) && startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
+    public CustomInstructionsResolver(IContentLoader contentLoader, IConfiguration configuration)
     {
-        return value;
+        _contentLoader = contentLoader;
+        _configuration = configuration;
     }
-    return configuration["Epicweb:AIAssistant:AssistantInstructions"];
-}
 
-public string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null)
-{
-    ContentReference start = ContentReference.StartPage;
-    if (contentLoader.TryGet(start, toLanguage, out PageData startpage) && startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
+    public string GetInstructions()
     {
-        return value;
+        return GetInstructions(null);
     }
-    return configuration["Epicweb:AIAssistant:AssistantTranslationInstructions"];
+
+    public string GetInstructions(CultureInfo language)
+    {
+        ContentReference start = ContentReference.StartPage;
+        if (_contentLoader.TryGet(start, out PageData startpage) && 
+            startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
+        {
+            return value;
+        }
+        return _configuration["Epicweb:AIAssistant:AssistantInstructions"];
+    }
+
+    public string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null)
+    {
+        ContentReference start = ContentReference.StartPage;
+        if (_contentLoader.TryGet(start, toLanguage, out PageData startpage) && 
+            startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
+        {
+            return value;
+        }
+        return _configuration["Epicweb:AIAssistant:AssistantTranslationInstructions"];
+    }
 }
-```
+`
 
-### The Translation API
+### Advanced Configuration: LanguageManager Overrides
 
-We offer a translation API for customization, such as in scheduled tasks and similar use cases. 
+The LanguageManager Overrides system allows fine-grained control over which content and properties are translated. This is configured through appsettings.json.
 
-Epicweb.Optimizely.AIAssistant.Services.TranslationService, which includes TranslateText(string input, CultureInfo? fromLanguage, CultureInfo toLanguage, string source = null)
+#### Configuration Structure
 
-## Examples
+Add the LanguageManagerOverrides section to your appsettings.json:
 
-### **Scenario 1:** English page exists with text in the property "page description", change to Swedish context of the page, spinn the wheel and it translates the field.
+`json
+{
+  "LanguageManagerOverrides": {
+    "ApplyToDerivedContentTypes": true,
+    "ExcludedContentTypes": [
+      "EPiServer.Forms.Implementation.Elements.FormContainerBlock",
+      "MyProject.Models.Blocks.TechnicalBlock"
+    ],
+    "ExcludedProperties": {
+      "Global": [
+        "PageURLSegment",
+        "CatalogContent.SeoUri",
+        "TechnicalIdentifier",
+        "TrackingCode"
+      ],
+      "ByContentType": {
+        "MyProject.Models.Pages.ArticlePage": [
+          "ExternalUrl",
+          "CustomMetadata"
+        ],
+        "MyProject.Models.Blocks.TeaserBlock": [
+          "TrackingCode"
+        ]
+      }
+    },
+    "PreserveSourceProperties": {
+      "Global": ["PageName"],
+      "ByContentType": {
+        "EPiServer.Core.BlockData": [
+          "Name"
+        ],
+        "EPiServer.Core.PageData": [
+          "PageName"
+        ]
+      }
+    },
+    "Translation": {
+      "SkipExistingTranslations": true,
+      "ForceRetranslation": false
+    },
+    "UrlSegments": {
+      "DefaultMode": "FromName",
+      "Languages": {
+        "zh": "PreserveSource",
+        "zh-CN": "PreserveSource",
+        "zh-TW": "PreserveSource",
+        "ja": "FromName",
+        "sv": "Default"
+      }
+    }
+  }
+}
+`
 
-| ![Epicweb Optimizely AIAssistant_Scenario_Translations1](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5973da64-f645-43f0-93eb-6769bb1170fb) |
-|-|
+#### Configuration Options Reference
 
-<br /><br />
+| Setting | Type | Description |
+|---------|------|-------------|
+| **ApplyToDerivedContentTypes** | boolean | When true, exclusion rules for base types apply to all derived types (e.g., rules for BlockData apply to all blocks). Default: true |
+| **ExcludedContentTypes** | string[] | Content type names (full CLR names) that should never be translated. AI translation is skipped; values are copied from source. |
+| **ExcludedProperties.Global** | string[] | Properties excluded from translation on ALL content types. Supports provider-qualified format (Provider.PropertyName) and plain property names. |
+| **ExcludedProperties.ByContentType** | object | Per-content-type property exclusions. Maps content type names to arrays of property names. |
+| **PreserveSourceProperties.Global** | string[] | Properties that should always be copied directly from source language without translation, on all content types. |
+| **PreserveSourceProperties.ByContentType** | object | Per-content-type properties that preserve source values. Maps content type names to arrays of property names. |
+| **Translation.SkipExistingTranslations** | boolean | When true, skips translation if the target language branch already contains meaningful values. Default: true |
+| **Translation.ForceRetranslation** | boolean | When true, forces re-translation of existing branches. Overrides skip behavior. Default: false |
+| **UrlSegments.DefaultMode** | string | Default URL segment generation strategy for languages not explicitly configured. Options: Default, PreserveSource, FromName. Default: Default |
+| **UrlSegments.Languages** | object | Per-language URL segment strategies. Maps language codes to strategy names. |
 
-### **Scenario 2:** Go to Swedish context of the page, paste in the English text, spinn the wheel and it translates the field to Swedish automatically.
+#### URL Segment Strategies
 
-| ![Epicweb Optimizely AIAssistant_Scenario_Translations2](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/110e46a3-0538-462e-adde-ea0e47ca0d98) |
-|-|
+The URL segment (page slug) can be handled differently per language:
 
-<br /><br />
+- **Default**: Translates the URL segment along with other content using AI, then applies ASCII-safe slug formatting
+- **PreserveSource**: Copies the source language URL segment without modification (useful for languages like Chinese or Japanese where translated slugs may not be meaningful)
+- **FromName**: Generates URL segment from the translated page/block Name/PageName, ensuring title-based, language-appropriate slugs
 
-### **Scenario 3:** Translate text to any language
+> **Important**: Preserving the URL segment does NOT automatically preserve the page/block Name. If you want both to remain unchanged, configure the Name separately in PreserveSourceProperties.
 
-| ![Epicweb Optimizely AIAssistant_Scenario_Translations3](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/96da3776-8fde-4e4e-b81a-cb076d6ea8ae) |
-|-|
+#### Common Configuration Scenarios
 
-<br /><br />
+**Scenario 1: Exclude form blocks and technical properties globally**
 
-### **Scenario 4:** Language Manager
+`json
+{
+  "LanguageManagerOverrides": {
+    "ExcludedContentTypes": [
+      "EPiServer.Forms.Implementation.Elements.FormContainerBlock"
+    ],
+    "ExcludedProperties": {
+      "Global": [
+        "TechnicalIdentifier",
+        "TrackingCode",
+        "CustomMetadata"
+      ]
+    }
+  }
+}
+`
 
-https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/aea7c323-47f7-45c1-93a9-9185e5074e0f
+**Scenario 2: Preserve block names and handle Chinese URLs**
+
+`json
+{
+  "LanguageManagerOverrides": {
+    "PreserveSourceProperties": {
+      "ByContentType": {
+        "EPiServer.Core.BlockData": [ "Name" ]
+      }
+    },
+    "UrlSegments": {
+      "Languages": {
+        "zh": "PreserveSource",
+        "zh-CN": "PreserveSource",
+        "zh-TW": "PreserveSource"
+      }
+    }
+  }
+}
+`
+
+**Scenario 3: Exclude specific properties per content type**
+
+`json
+{
+  "LanguageManagerOverrides": {
+    "ExcludedProperties": {
+      "ByContentType": {
+        "MyProject.Models.Pages.ArticlePage": [
+          "ExternalUrl",
+          "PublishedDate"
+        ],
+        "MyProject.Models.Pages.ProductPage": [
+          "SKU",
+          "Price"
+        ]
+      }
+    }
+  }
+}
+`
+
+**Scenario 4: Force retranslation of all branches**
+
+`json
+{
+  "LanguageManagerOverrides": {
+    "Translation": {
+      "SkipExistingTranslations": false,
+      "ForceRetranslation": true
+    }
+  }
+}
+`
+
+---
+
+## Using the Translation API
+
+For programmatic translation (e.g., in scheduled tasks or custom workflows), use the TranslationService:
+
+`csharp
+public class TranslationService
+{
+    public Task<string> TranslateText(
+        string input, 
+        CultureInfo? fromLanguage, 
+        CultureInfo toLanguage, 
+        string source = null)
+    {
+        // Translates text from source language to target language
+    }
+}
+`
+
+Inject and use it in your custom code:
+
+`csharp
+[Inject]
+public TranslationService TranslationService { get; set; }
+
+public async Task TranslateMyContent()
+{
+    string translated = await TranslationService.TranslateText(
+        "Hej världen",           // input text
+        new CultureInfo("sv"),   // from Swedish
+        new CultureInfo("en"),   // to English
+        "My content page"        // source context
+    );
+}
+`
+
+---
+
+## Translation Examples
+
+### Scenario 1: Manual Translation - Using the Wheel Icon
+
+English page exists with text in the "page description" property. To translate to Swedish:
+
+1. Navigate to the page's Swedish language context
+2. Click the AI wheel icon on the "page description" property
+3. The AI translates and fills the field automatically
+
+![Scenario 1](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5973da64-f645-43f0-93eb-6769bb1170fb)
+
+### Scenario 2: Manual Translation - Pasting English Text
+
+When working in Swedish context with English source text:
+
+1. Paste or have English text in the property (on Swedish page)
+2. Click the AI wheel icon
+3. The AI detects the source language and translates to Swedish
+
+![Scenario 2](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/110e46a3-0538-462e-adde-ea0e47ca0d98)
+
+### Scenario 3: Translate to Any Language
+
+Translate content to multiple languages regardless of current page context:
+
+1. Select text in a property
+2. Click the AI wheel icon
+3. Choose target language from the dialog
+4. AI translates to the specified language
+
+![Scenario 3](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/96da3776-8fde-4e4e-b81a-cb076d6ea8ae)
+
+### Scenario 4: Bulk Translation with LanguageManager
+
+Translate entire pages and their blocks with a single action:
+
+1. Navigate to Language Manager module
+2. Select source language and target language
+3. Select content to translate
+4. Choose "Translate and Copy" action
+5. All content and nested blocks are translated according to your configuration
+
+[Video: Language Manager Bulk Translation](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/aea7c323-47f7-45c1-93a9-9185e5074e0f)
+
+
