@@ -277,6 +277,20 @@ You are assisting editors at [Your Company Name].
 - Ask before making changes
 ```
 
+### SEO Manager metadata prompts
+
+SEO Manager uses the `SeoManager/Metadata` instruction key. To override the default prompt, add `Instructions/SeoManager/Metadata.md` to your application as an embedded resource and register the application assembly with `AddEmbeddedInstructionStore`. The application store defaults to priority 20, which takes precedence over the built-in store at priority 10.
+
+For a language-specific prompt, use the two-letter code of the page language. For example, use `Instructions/SeoManager/Metadata.sv.md` for Swedish pages. Set `WithCulture="false"` to keep the resource in the main assembly.
+
+```xml
+<EmbeddedResource Include="Instructions\SeoManager\Metadata.sv.md" WithCulture="false" />
+```
+
+If the wildcard in the project file already includes this resource, use `Update` in place of `Include` and put the update after the wildcard entry.
+
+SEO Manager uses the same prompt for **Analyse and suggest** and for **Generate** and **Regenerate** on individual fields. The request includes the requested SEO fields, their current values, validation findings, and context from the current page. SEO Manager enforces the response format and validates the suggested field values.
+
 ## Message History
 
 ### Viewing History
