@@ -4,11 +4,48 @@ SEO Manager is part of Epicweb AI Assistant. It lets editors scan a site or a se
 
 ## Enable SEO Manager
 
-In an application that already uses Epicweb AI Assistant, set `Epicweb:AIAssistant:EnableSeoManager` to `true` in `appsettings.json`. Users in `AIEditors` or `WebAdmins` can then open **SEO Manager** from the **AI Assistant** menu. To grant access to additional roles such as `WebEditors`, configure `Epicweb:AIAssistant:AIAssistantSEOManager`. See [Granting SEO Manager access](admin-features.md#granting-seo-manager-access) for an example.
+SEO Manager works with AI Chat turned off. If this is the site's first AI Assistant feature, install the `Epicweb.Optimizely.AIAssistant` NuGet package for your CMS version and register it in startup. If the site already calls `AddAIAssistant()`, reuse that registration. It includes SignalR and the background scan service. See the [package installation guide](installation.md).
+
+```csharp
+using Epicweb.Optimizely.AIAssistant;
+
+// In ConfigureServices
+services.AddAIAssistant();
+```
+
+Merge the following setting into `appsettings.json`. You can leave `EnableChat` at its default of `false`.
+
+```json
+{
+  "Epicweb": {
+    "AIAssistant": {
+      "EnableSeoManager": true
+    }
+  }
+}
+```
+
+Before running a scan, [map the site's SEO properties](#map-your-existing-seo-properties). Scanning checks those fields locally. To use **Analyse and suggest** or **Generate**, also configure the site's AI provider and credentials.
+
+### Configure live scan updates
+
+SEO Manager and AI Chat share the same SignalR hub. If the site already calls `MapAIAssistantHub(...)` for chat, that mapping also serves SEO Manager. On a site without a hub mapping, add this line to the existing `app.UseEndpoints(endpoints => { ... })` block for live updates.
+
+```csharp
+endpoints.MapAIAssistantHub();
+```
+
+The default path is `/epicweb-progresshub`. For a custom path, use `endpoints.MapAIAssistantHub("/edit/epicweb-hub");` in place of the call above. Passing the path to the method configures both the server route and the URL sent to the browser. Setting `SignalRHubPath` in `appsettings.json` alone leaves the server route at its default.
+
+The browser fetches scan status and results over HTTP every two seconds. A hub notification triggers an earlier refresh. Scans therefore still work when the hub is unavailable. To use WebSockets, enable WebSocket support on the host and allow connection upgrades through any reverse proxy on the hub path. The SEO Manager view loads the SignalR client from `cdnjs.cloudflare.com`, so the editor's browser and the site's content security policy must allow that script for live updates.
+
+On a load-balanced CMS, route the editor's scan requests to the same application instance using session affinity. Each instance keeps its own scan jobs and results in memory. Review and ignore marks are also local to the instance and are cleared when it restarts.
 
 ## Content permissions
 
 Access to SEO Manager lets users open the feature. Optimizely checks the user's CMS permissions on each page.
+
+Users in `AIEditors` or `WebAdmins` can open **SEO Manager** from the **AI Assistant** menu. Grant additional roles access through `Epicweb:AIAssistant:AIAssistantSEOManager`. The shared hub accepts `AIEditors`, `WebEditors`, `WebAdmins`, `CmsAdmins`, and `CmsEditors`. A user with only a custom SEO role receives scan updates through HTTP polling. See [Granting SEO Manager access](admin-features.md#granting-seo-manager-access).
 
 | Action | Required CMS permissions |
 | --- | --- |
