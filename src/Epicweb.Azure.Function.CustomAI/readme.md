@@ -1,68 +1,49 @@
-﻿# Azure Function for Implementing a Custom AI to the Epicweb AI-Assistant for Optimizely
+﻿# Azure Function for a custom AI provider
 
-This repository serves as a boilerplate template for integrating a Custom AI or custom implementation of the AI-Assistant within Optimizely. It allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API.
+This sample shows the CustomAI request and response contracts using an Azure Functions v4 .NET 8 isolated worker. Implement your own model call or application logic in [CustomAIFunction.cs](CustomAIFunction.cs).
 
 ## How it works
 
-The plugin in Optimizely is easily configured so it will talk to your Azure Function service where your company can implement any AI or any custom logic
+The AI Assistant plugin sends the `CustomAI` provider and `ServiceUrl` to the Epicweb AI service. The sample receives a JSON POST at `/api/CustomAI` and returns a response based on the requested action.
 
 ## Configuration
 
-To configure the AI integration in your Optimizely setup, include the following settings in your configuration file:
+Add these settings to the Optimizely application. Set the actual credential through your application's secret configuration.
 
-
-```
-"AIAssistant": {
-      "AccountName": "<epicweb accountname>",// Provided by Epicweb support
-      "ApiKey": "<your key>", // Your API key for the Azure function
-      "ServiceUrl": "https://<your azure instance>.azurewebsites.net/api/CustomAI", 
+```json
+{
+  "Epicweb": {
+    "AIAssistant": {
+      "AccountName": "<epicweb-account-name>",
+      "ApiKey": "<custom-provider-credential>",
+      "ServiceUrl": "https://<function-app>.azurewebsites.net/api/CustomAI",
       "ProviderName": "CustomAI",
-      "CustomJson": "{\"prop\":\"fromAppsettings\"}",// Any custom data you want to send to your API
-      }
+      "CustomJson": "{\"prop\":\"fromAppsettings\"}"
+    }
+  }
+}
 ```
+
+`CustomJson` is optional. The CMS plugin sends it as a string, which your function can parse if it contains JSON.
 
 ## Installation
 
-Implement your custom logic in the CustomAIFunction.cs file and publish your Azure function according to the Azure documentation https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function.
+Implement the `default`, `vision`, or `imagegeneration` actions that your integration needs before deploying the function. The sample uses an anonymous HTTP trigger and only checks whether the Authorization header has a value. Implement credential validation for your endpoint before publishing it.
 
 ## Local debugging
 
-Localhost addresses are not supported. To enable local debugging:
-
-1. Create a free developer account at ngrok.com 
-
-2. Download and install ngrok on your local machine.
-
-3. Run the following command in your terminal to start ngrok:
-
-```c:/pathto/ngrokfolder ngrok http 7094 -host-header="localhost:7094"```
-
-4. Replace Epicweb.ServiceUrl with the new ngrok URL provided after running the above command.
+The launch profile uses port `7094`. To test the function itself, run it locally and send a POST to `http://localhost:7094/api/CustomAI`. To test the Optimizely integration, set `Epicweb:AIAssistant:ServiceUrl` to a full HTTPS endpoint including `/api/CustomAI` that the configured AI service can reach.
 
 ## Data Fields
 
-Here are the key data fields that you can access and manipulate within your custom AI function:
+[AIRequest.cs](AIRequest.cs) defines the incoming JSON contract. The `prompt`, `instructions`, and `systemPrompt` fields carry prepared input for the model. `originalRequest` can include the CMS input (`text`), language (`lang`), HTML flag (`isHtml`), `customJson`, and `correlationId` for tracing.
 
-data.Prompt //The processed prompt.
-data.Instructions //Instructions provided to the AI.
-data.SystemPrompt //Additional instructions, rules, or terms for the AI.
-data.Action //The requested action, which can be "default", "vision", or "imagegeneration".
-data.Base64Image //A supplied image in Base64 format.
+| Action | Input | Sample response |
+|--------|-------|-----------------|
+| `default` | Text and prompt data | [AIResult](AIResult.cs) with text and token usage |
+| `vision` | Prompt and `base64Image` | [AIResult](AIResult.cs) with analysis text |
+| `imagegeneration` | The image prompt | Array of [ImageResult](ImageResult.cs) objects with a URL or base64 image |
 
-data.OriginalRequest //The original request from the plugin before processing by Epicweb.
-data.OriginalRequest.Text //The original text/prompt from the plugin.
-data.OriginalRequest.Prompt //Processed prompt from the plugin.
-data.OriginalRequest.Shortcut //Name of the shortcut, if any
-data.OriginalRequest.CustomJson //A string that needs to be serialized.
-data.OriginalRequest.IsAuto //Indicates if the request is from an automatic process in Optimizely (e.g., LanguageManager).
-data.OriginalRequest.IsHtml //if true use HTML in response, probably used in Rich Text Editor
-data.OriginalRequest.CorrelationId //Used for support or troubleshooting along with the timestamp.
-data.OriginalRequest.Lang // The language context of the request.
+## Support
 
-## support
-
-Contact support @ optimizely.guru for demo or support
-
-## Get Started with Epicweb AI-Assistant for Optimizely
-
-Fill in the form on https://aiassistant.optimizely.blog/
+Contact support@optimizely.guru or visit the [Epicweb AI Assistant website](https://aiassistant.optimizely.blog/).

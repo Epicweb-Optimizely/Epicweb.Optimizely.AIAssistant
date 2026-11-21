@@ -1,7 +1,7 @@
 # FAQ
 
 ## What is the AI-assistant for Optimizely?
-The AI assistant is created to facilitate and simplify the workflow for you as an editor. It is fully integrated into all fields in the platform/Optimizely, and it will help you with your writing and streamline many of your time-consuming editorial activities in a smooth and easy way.
+The AI assistant is created to facilitate and simplify the workflow for you as an editor. It integrates with enabled Optimizely property editors and offers optional tools such as AI Chat and SEO Manager.
 
 ## How does it work? 
 The AI assistant can be accessed directly via the editor mode and offers automated suggestions for your text content and alternative phrasings, while also providing spelling checks and translation of texts and properties on pages and blocks. It has smart pre-installed commands for text summarization and can change the tone (persuasive, informative, etc.) of the text. It can also generate FAQs, tables, summaries, images, and image captions with just a few clicks.
@@ -9,13 +9,13 @@ The AI assistant can be accessed directly via the editor mode and offers automat
 - Can be accessed directly via the editor mode
 - Offers and suggests automated suggestions, content, and phrasings for your text
 - Generates smooth translations into different languages
-- Produces exceptional realistic images or vector graphics
+- Generates images in formats supported by the configured image provider
 - Image Analyzer functionality for accurate Alt Texts and meta extraction
 - Offers spelling checks
 - Offers the ability to change and fine-tune the tone of a text (persuasive, informative, etc.)
 - Can summarize and condense texts
 - Generates FAQs, tables, images, and image captions with just a few clicks
-- Formatting tables and lists, WCAG compatible
+- Helps format tables and lists and suggest accessibility improvements
 - Integrate C# tools with AI Assistant for custom use.
 - Use your data for AI-generated responses (RAG).
 
@@ -50,42 +50,21 @@ Please note: Traffic costs are not included in the base price. You pay your own 
 
 The price list is modular. Additional costs apply per domain and for optional modules such as the Image Module (generation), altText modules (image analysis), and the Language Manager (automated translation).
 
-We offer flexible 6-month or 12-month payment plans.
+We offer 6-month or 12-month payment plans. See [Epicweb's published pricing](https://aiassistant.optimizely.blog/).
 
 To ensure your satisfaction, we also provide a three-month money-back guarantee — we're committed to excellence, every step of the way.
 
-## Which AI LLMs can i use? 
+## Which AI LLMs can i use?
 
-With our Custom AI provider, you can connect any AI to the service [Read about the CustomAI-provider](custom-ai.md)
+Choose a model from a configured provider such as OpenAI, Azure OpenAI, or Google Gemini. To use another model or service, implement the REST contract described in the [Custom AI guide](custom-ai.md).
 
-- GPT-4 and 5, OpenAI
-- Claude, Anthropic
-- Gemini, Google DeepMind
-- Jurassic-2, AI21 Labs
-- LLaMA, Meta
-- NeMo, NVIDIA
-- Command R, Cohere
-- Tongyi Qianwen, Alibaba Cloud
-- Ernie, Baidu
-- StableLM, Stability AI
-- Grok, xAI
-- Einstein GPT, Salesforce
-- ChatGLM, Tsinghua University
-- Grok, KakaoBrain
-- Mistral, Mistral AI
-- writer.com
-- Bring your own AI
+## Will the data be used as part of the learning data for AI?
 
-## Will the data be used as part of the learning data for AI? 
-No, OpenAI will not use data submitted by customers via our API to train or improve our models. Source: https://openai.com/policies/api-data-usage-policies
-
-Google does not use your prompts or outputs to improve Google products. Source: https://ai.google.dev/gemini-api/terms 
+Data use depends on the configured provider and account. OpenAI does not train on API business data by default. Google's Gemini API terms distinguish between paid and unpaid services and specify which terms apply to accounts in the EEA, Switzerland, and the United Kingdom. [OpenAI enterprise privacy](https://openai.com/enterprise-privacy/) · [Gemini API terms](https://aistudio.google.com/docs/terms)
 
 ## Do you offer EU data residency?
 
-Yes, we are now offering integration to Azure OpenAI Service which are offering AI APIs from different parts of Europe (Sweden Central, France Central,  UK South) and enables localized data storage. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
-
-Data privacy and compliance are crucial in the current GDPR and data protection landscape. We enable clients to store their data exclusively within the EU, ensuring compliance and building trust. This is especially beneficial for businesses in Sweden and the UK, as it provides an additional level of confidence with localized data centers.
+The plugin can send requests to the Azure OpenAI deployment you configure. Azure's processing location depends on the deployment type. EU Data Zone deployments process inference data within that zone, while Global deployments may process requests outside it. Check the deployment and data-handling terms for each service in your setup. [Azure OpenAI data privacy](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy)
 
 ## Do you offer AI assistance on your own data?
 
@@ -93,34 +72,21 @@ YES! we can offer to setup your own models in Azure and finetune them.
 
 Thru our Custom AI provider we allow you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API. [Documented here](custom-ai.md)
 
-Through custom tools, we offer the retrieval of individual data and real-time data from external systems, referred to as RAG. [Documented here](configuration-ai-tools.md)
+Through custom tools, we offer the retrieval of individual data and real-time data from external systems, referred to as RAG. [Documented here](tools.md)
 
 ## Can I use/sell the images I create with the AI-Assistant Image Generation Tool?
 
-Subject to the Content Policy and Terms of OpenAI DALL·E, you own the images you create with the AI-Assistant (DALL·E), including the right to reprint, sell, and merchandise. 
-Source:  https://help.openai.com/en/articles/6425277-can-i-sell-images-i-create-with-dall-e 
-
-Same goes with Recraft AI: When you are using the paid API subscription, you own the assets you create. Recraft assigns you the copyright rights to those assets, allowing you to use them for both personal and commercial purposes. However, you are prohibited from using these assets to train AI models, systems, or similar technologies.
-Source: https://www.recraft.ai/terms
-
-Under Google’s Gemini API Additional Terms of Service, Google does not claim ownership over the content (including images) you generate using the service.  Source: https://ai.google.dev/gemini-api/terms 
+Commercial use depends on the terms for the configured image provider and any third-party rights that apply. See the [OpenAI Services Agreement](https://openai.com/policies/services-agreement/), the [Recraft Developer Terms](https://www.recraft.ai/legal/developer-terms), or the [Gemini API terms](https://aistudio.google.com/docs/terms#use-generated).
 
 ## How do translations work?
-OpenAI's service supports over 92 languages, offering some of the most accurate and high-quality translations available worldwide. Additionally, you can provide specific terms or translation guidelines to tailor the translation process to your needs.
 
-Google’s Translation LLM (powered by Gemini) on Vertex AI lists 49 supported source/target languages as of 7 Oct 2025. See the “[Supported languages](https://cloud.google.com/vertex-ai/generative-ai/docs/translate/translate-text#supported-languages)” table on Google’s documentation.
+The plugin sends the text, source and target languages, and any configured translation instructions to your configured AI provider. The available languages depend on the model. See [Translation configuration](configuration-translations.md).
 
-## Is the AI-Assistant Plugin EU AI ACT compatible?
-Yes, the AI-Assistant Plugin for Optimizely is designed to be compatible with the EU AI Act. Here’s a summary of why it aligns with the Act’s requirements:
+## How does the plugin support editorial review under the EU AI Act?
 
-- Transparency: Clearly informs users that content is AI-generated, keeping all outputs in draft mode for human review.
-- Human Oversight: Allows editors to review, accept, or reject AI-generated content, ensuring human control over the final result.
-- Data Quality Responsibility: The AI-Assistant allows customers to choose their preferred models for content generation. Ensuring the use of diverse and fair datasets is handled by the implementing partner or customer.
-- Limited Risk Category: The application is used in editorial support, a lower-risk use case, not falling under high-risk or prohibited categories.
-- Compliance with GDPR: Ensures data privacy and security, aligning with broader EU data protection laws.
-- Non-manipulative Use: The tool enhances editorial efficiency without manipulative or harmful purposes.
+Editors can review AI suggestions before applying them. SEO Manager offers **Save draft** and a separate **Publish** action for eligible language versions. Chat and Agent API can invoke publishing tools when those tools are registered and the CMS user has permission to publish.
 
-- This ensures the AI-Assistant Plugin meets the transparency, safety, and fairness standards set by the EU AI Act.
+Applicable AI Act requirements depend on the deployment and how it is used. See the [European Commission's guidance on AI transparency obligations](https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations).
 
 ---
 
@@ -128,9 +94,9 @@ Yes, the AI-Assistant Plugin for Optimizely is designed to be compatible with th
 
 ### What is the Agent API?
 
-The Agent API is a standardized REST endpoint (`/api/epicweb/agent/chat`) that allows external assistant engines, automation platforms, and workflows to interact directly with the Optimizely AI Assistant. It enables seamless AI-powered integration from third-party systems while leveraging all built-in AI capabilities, tools, and content management features.
+The Agent API is a standardized REST endpoint (`/api/epicweb/agent/chat`) that allows external assistant engines, automation platforms, and workflows to interact directly with the Optimizely AI Assistant. It uses the host's configured AI provider and tools registered for chat.
 
-**Prerequisites:** You must have the base **Epicweb.Optimizely.AIAssistant** package installed with the **Chat** module enabled. The Agent API extends the existing AI Assistant chat functionality to programmatic access.
+**Prerequisites:** Install and register the base `Epicweb.Optimizely.AIAssistant` plugin and the separate `Epicweb.Optimizely.AIAssistant.AgentAPI` package. The API calls the same chat service used by the editor UI.
 
 [Read full Agent API documentation](agent-api.md)
 
@@ -139,7 +105,7 @@ The Agent API is a standardized REST endpoint (`/api/epicweb/agent/chat`) that a
 - **Editor UI**: Interactive chat for CMS editors within the Optimizely admin interface
 - **Agent API**: Programmatic REST endpoint for external systems, bots, and automation platforms to invoke AI assistance without user interaction
 
-Both use the same underlying AI service and respect the same content permissions.
+Both use the same underlying AI service. The API runs content operations as the mapped CMS user.
 
 ### Can I use Agent API for automation and batch processing?
 
@@ -150,7 +116,7 @@ Yes. Common use cases include:
 - Scheduled jobs that need AI-assisted content creation
 - Multi-agent systems coordinating CMS updates
 
-Suggested changes are saved as **unpublished drafts**, so an editor must review and approve before publishing—no automatic publishing occurs.
+Drafting and publishing are separate tool operations. When publishing tools are available and the mapped CMS user has Publish permission, a request can publish or schedule content.
 
 ### Who has access to the Agent API?
 
@@ -186,63 +152,35 @@ X-Api-Key: your-long-secret-key
 
 You can also implement **JWT bearer tokens** or custom authentication by swapping the authentication scheme.
 
-### Can Agent API invoke tools (MCP)?
+### Can Agent API invoke registered tools?
 
-Yes. Set `"useTools": true` in your request payload to enable the agent to invoke available MCP tools (e.g., search content, create pages, update properties). This respects the same function-calling permissions as the editor UI.
-
-Set `"useTools": false` for read-only sessions where the AI cannot perform actions.
+Yes. Set `"useTools": true` to let the assistant invoke registered chat tools such as content search, page creation, or property updates. Set `"useTools": false` to omit tools in an ordinary chat request. Assign the mapped CMS user only the permissions the integration needs.
 
 ### Is Agent API suitable for high-volume requests?
 
-The Agent API is designed for moderate to high throughput. For optimal performance:
-- Batch requests when possible
-- Implement exponential backoff for retries
-- Monitor token usage and set appropriate rate limits
-- Use read-only mode (`useTools: false`) for non-critical queries
-- Enable session caching for conversation continuity
+Throughput depends on the CMS host, the configured AI service, and the work tools perform. Monitor token usage and account for provider rate limits. For requests that only need AI-generated text, omit tools with `useTools: false`.
 
 For very high-volume scenarios (thousands of requests/day), contact us to discuss enterprise options.
 
 ### Does Agent API support session persistence?
 
-Yes. Each request can include a `sessionId` to maintain conversation history across multiple calls. By default, sessions are cached in memory and expire after 24 hours.
+Yes. Each request can include a `sessionId` to maintain conversation history across multiple calls. The default in-memory cache expires three hours after the last saved response for that session.
 
 For persistent session storage (e.g., database), implement the `IChatSessionCacheService` interface and register it in dependency injection.
 
 ### Can I use Agent API with custom AI models?
 
-Yes. The Agent API uses your configured AI provider:
-- OpenAI (default)
-- Azure OpenAI
-- Google Gemini
-- Custom AI provider with your own models
-
-Configure your AI provider in `appsettings.json` and all Agent API requests automatically use it.
+Yes. The Agent API uses the host's AI provider configuration. See [Configuration](configuration.md) for provider and model settings.
 
 ### What happens if the Agent API service is unavailable?
 
-The endpoint returns a `501 Service Not Implemented` error if the underlying `AIAssistantService` is not registered. Ensure:
-1. `services.AddAIAssistant()` is called before `services.AddEpicwebAgentApi()`
-2. Your AI provider credentials are valid
-3. Your CMS host application is running
+The chat endpoint returns `501 Not Implemented` with `service_not_registered` when the host has not registered `AIAssistantService`. Register the base plugin with `AddAIAssistant()` and the API extension with `AddAIAssistantAgentAPI()` or `AddEpicwebAgentApi(...)`.
 
 ### Can I use Agent API with content that has publishing restrictions?
 
-Yes. Agent API respects all Optimizely content restrictions:
-- Access control lists (ACLs)
-- Publishing schedules
-- Workflow states
-- User role permissions
+The API maps requests to a CMS user. Content tools apply the CMS access checks for their operation. For example, publishing requires CMS Publish permission. Review [Agent API setup and permissions](agent-api.md) when configuring an integration.
 
-The mapped CMS user must have the appropriate permissions to access and suggest changes to content.
+### How do I pass CMS context to the Agent API?
 
-### Does Agent API support context and attachments?
-
-Yes. You can provide:
-- **Context**: Current page/block being edited (e.g., in the message or `"context": { "contentId": "152_12" }`)
-- **Attachments**: Additional content items as reference (e.g., related pages, images)
-- **Chat history**: Prior conversation for continuity, this part is cached in memory for 24 hours by default and held by sessionId.
-
-All context is used to improve AI relevance and accuracy.
-
+To identify the current CMS item, set `contentid` and `lang` or pass `"context": { "id": "152_12", "language": "en" }`. Use registered content tools to retrieve other CMS items. The request also supports `chatHistory` for importing history and `sessionId` for continuing a cached conversation. See the [Agent API request reference](agent-api.md).
 

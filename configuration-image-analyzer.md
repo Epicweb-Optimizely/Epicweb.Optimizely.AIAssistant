@@ -10,20 +10,24 @@ To enable the Image Analyzer functionality, add the following line to your appli
 app.AddImageAnalyzer();
 ```
 
-This ensures that the image analysis process is triggered when creating or importing content in Optimizely CMS. The analysis automatically populates media object properties based on predefined attributes.
+This registers a background analysis when Optimizely CMS creates an `ImageData` item. The analyzer populates properties marked with `[AnalyzeImage]` or `[AnalyzeImageAltText]`. It saves or publishes the updated image according to the CMS `AutoPublishMediaOnUpload` setting.
+
+The analyzer accepts JPG, JPEG, PNG, BMP, GIF, and WebP files up to 24 MiB. Both dimensions must be between 50 and 5,200 pixels when the file can be decoded.
 
 ---
 
-### Add vision model to appsettings
+### Choose a vision model
 
 ```json
-"Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-       "AIVisionModel": "gpt-5.1"
-     }
+      "AIVisionModel": "<vision-model-or-deployment-name>"
+    }
+  }
 }
 ```
-Defaults to gpt-5-mini if OpenAI provider is used
+If you omit `AIVisionModel`, the CMS plugin leaves the choice to the AI service. The OpenAI service implementation uses `gpt-5-mini` as its fallback.
 
 ## Example Prompts
 The following are examples of prompts that can be used with `AnalyzeImageAttribute`:
@@ -105,23 +109,20 @@ The following are examples of prompts that can be used with `AnalyzeImageAttribu
 
 ### Creating a Custom Attribute
 
-You can create custom attributes for specific use cases. Below is an example of a `CopywriteAttribute` that inherits from `AnalyzeImageAttribute` and implements (not mandatory) the `INoImagePrompt` interface:
-
-- **`INoImagePrompt`**: This interface is used for attributes that do not require an image for their response.
+You can create custom attributes for specific use cases. This example inherits from `AnalyzeImageAttribute` and supplies a reusable prompt.
 
 ```csharp
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-public class CopywriteAttribute : AnalyzeImageAttribute, INoImagePrompt
+public class CopywriteAttribute : AnalyzeImageAttribute
 {
     /// <summary>
     /// Analyze image and create a description. Apply to string or localized string properties.
     /// </summary>
     /// <param name="languageCode">Translate description to specified language. Default English</param>
     /// <param name="prompt">Override with your own prompt</param>
-    public CopywriteAttribute(string prompt = null, string languageCode = null) : base(prompt, languageCode)
+    public CopywriteAttribute(string prompt = null, string languageCode = null)
+        : base(prompt ?? "Always return 'Epicweb AI-Assistant'", languageCode)
     {
-        base._prompt = prompt ?? $"Always return 'Epicweb AI-Assistant'";
-        base._languageCode = languageCode;
     }
 }
 ```
@@ -145,10 +146,6 @@ public class ImageFile : ImageData
 }
 ```
 
-### Key Details
-- **`INoImagePrompt`**: This interface is used for attributes that do not require an image for their response.
-- **`CopywriteAttribute`**: Customizes the prompt and language code for generating descriptions.
-
 ## Example extract AltText from Image
 
 **Template:** 
@@ -156,7 +153,7 @@ public class ImageFile : ImageData
 ```csharp
 @model EPiServer.Core.ContentReference
 @using EPiServer.Web.Mvc.Html
-@using Epicweb.Optimizely.AIAssistant.Extensions
+@using AlloySandbox.Extensions
 @if (Model != null)
 {
     <figure>
@@ -173,6 +170,8 @@ public class ImageFile : ImageData
 **Extension code:**
 ```csharp
 using AlloySandbox.Models.Media;
+using EPiServer;
+using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using Epicweb.Optimizely.AIAssistant.Extensions;
 

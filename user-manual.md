@@ -11,7 +11,7 @@ https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master
 
 ### Suggestions
 
-1. Generating Text Suggestions: After typing your text, click on the blue AI logo button. By default, the AI will offer an improved version of your text, ensuring correct spelling and enhanced clarity.
+1. Generating Text Suggestions: After typing your text, click the blue AI button to request a suggested refinement.
 
 2. Implementing the Suggested Text: To accept and replace your original text with the AI's suggestion, click on "Use this suggestion".
 
@@ -19,7 +19,7 @@ BLOG: https://optimizely.blog/2023/05/enhance-your-writing-with-suggestions-and-
 
 ### Using Prompts
 
-There are two ways, use the "Ask AI Assistant" prompt window which is very user friendly, and second way, using hashtag way into all fields. 
+In an AI-enabled text field, open **Ask AI Assistant** from the shortcuts menu or enter a hashtag prompt directly in the field.
 
 #### hashtag prompting
 
@@ -29,9 +29,9 @@ There are two ways, use the "Ask AI Assistant" prompt window which is very user 
 
 ### Translating Text
 
-1. Automated Translation: If you have a text segment that needs translation and an equivalent exists in another language within the same field, simply press the blue AI logo button. The system will prioritize translating from the master language. If the master language version isn't available, it will use another available language to translate the text into the desired context language.
+1. Automated Translation: To translate an existing language version of the same property, leave the target field empty and click the blue AI button. AI Assistant looks for a source value in the master language first, then tries other available language versions.
 
-2. Contextual Translation: If you're on a Spanish context page/block/product, you can paste English text into the property field. Click the blue AI logo button to initiate translation. The AI will then suggest a Spanish version of the content.
+2. Contextual Translation: To translate text already in the property field into the current content language, choose **Translate** from the shortcuts menu.
 
 3. Prompt Translation: Alternatively, you can use a prompt to specify the desired translation. For example, input #Translate to Spanish: "your English text here" and then click the blue AI logo button to get the translated content.
 
@@ -70,7 +70,7 @@ BLOG: https://optimizely.blog/2023/06/spell-checking-with-ai-assistant/
 
 ### Using the AI Enhancement
 
-1. Getting Suggestions: Ensure you highlight or select the specific text you wish to modify. Once selected, click the 'AI' button. The default action will replace your text with a suggested, correctly spelled version.
+1. Getting Suggestions: Ensure you highlight or select the specific text you wish to modify. Once selected, click the 'AI' button. The AI response replaces the selected text, so review the result before publishing.
 
 2. Comparing Changes: To view the differences between the original text and the AI-modified version, use the Ctrl+z shortcut to undo the change and view the original, and Ctrl+y to redo and view the AI's suggestion.
 
@@ -84,4 +84,4 @@ BLOG: https://optimizely.blog/2023/06/spell-checking-with-ai-assistant/
 
 ### Translating Text
 
-1. Automated Translation: If you have a text segment that needs translation and an equivalent exists in another language within the same field, simply press the 'AI' button. The system will prioritize translating from the master language. If the master language version isn't available, it will use another available language to translate the text into the desired context language.
+1. Automated Translation: Click **AI** in an empty rich text editor to translate from another language version of that property. To translate text already in the editor, select it and use **Translate** from the shortcuts menu.

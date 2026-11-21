@@ -5,6 +5,8 @@ The AI Assistant for Optimizely CMS includes powerful administration tools that 
 ## Table of Contents
 
 - [Administration Overview](#administration-overview)
+  - [Accessing Administration](#accessing-administration)
+  - [Granting SEO Manager access](#granting-seo-manager-access)
 - [Instructions](#instructions)
 - [Assistants](#assistants)
 - [Statistics](#statistics)
@@ -22,9 +24,37 @@ The Administration area provides a centralized place to manage all AI Assistant 
 
 ### Accessing Administration
 
-Navigate to **Addons** → **AI Assistant** to access these features. The clear interface and quick guides make it easier to configure AI Assistant and support editors across your organization.
+Add the user to `AIEditors` or `WebAdmins` in Optimizely CMS or in the identity provider that supplies the CMS roles. The user can then sign in and open **AI Assistant** from the CMS menu. The **Instructions** and **Assistants** menu items appear when `EnableChat` is enabled.
+
+`services.AddAIAssistant()` registers `AIAssistantAdminAccess` for the administration overview, Instructions, Assistants, Statistics, and the associated admin APIs. The built-in policy is equivalent to this registration.
+
+```csharp
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("AIAssistantAdminAccess", policy =>
+        policy.RequireAuthenticatedUser()
+              .RequireRole("AIEditors", "WebAdmins"));
+});
+```
 
 📺 **Video Overview**: [Watch the AI Assistants and Quick Instructions demo](https://aiassistant.optimizely.blog/en/videos/)
+
+### Granting SEO Manager access
+
+Set `EnableSeoManager` to `true` to enable SEO Manager. Users with admin access can use it. To grant SEO Manager access to additional CMS roles, list them in `Epicweb:AIAssistant:AIAssistantSEOManager` in `appsettings.json`. This example grants access to users in `WebEditors`.
+
+```json
+{
+  "Epicweb": {
+    "AIAssistant": {
+      "EnableSeoManager": true,
+      "AIAssistantSEOManager": ["WebEditors"]
+    }
+  }
+}
+```
+
+Users who qualify through the configured SEO roles alone see only **SEO Manager** in the **AI Assistant** menu. The `AIAssistantSeoManagerAccess` policy applies the same requirements to the SEO Manager page and API. If the role list is omitted or empty, SEO Manager is available to admin users only. See [SEO Manager content permissions](seo-manager.md#content-permissions) for the CMS rights each action requires.
 
 ---
 
@@ -60,22 +90,20 @@ Instructions are ideal for:
 
 #### Creating an Instruction
 
-1. Navigate to **Addons** → **AI Assistant** → **Instructions**
+1. Navigate to **AI Assistant** → **Instructions**
 2. Click **Add New Instruction** button
 3. Fill in the following fields:
    - **Name** - Short, descriptive name (e.g., "Improve SEO Title")
-   - **Description** - Explain what the instruction does
-   - **Instruction Text** - The actual prompt that will be sent to AI
-   - **Availability** - Choose where the instruction is available:
-	 - Chat only
-	 - Content fields only
-	 - Everywhere
+   - **Short Description** describes the purpose.
+   - **Instruction** contains the reusable prompt.
+   - **Type** offers **Organization** and **Personal**.
+   - **Area** offers **All**, **Chat**, and **Field**. The chat picker lists instructions set to **All** or **Chat**.
 
-4. Click **Save**
+4. Click **Save Instruction**.
 
 #### Editing an Instruction
 
-1. Navigate to **Addons** → **AI Assistant** → **Instructions**
+1. Navigate to **AI Assistant** → **Instructions**
 2. Find the instruction in the list
 3. Click the **Edit** button
 4. Modify the fields as needed
@@ -83,7 +111,7 @@ Instructions are ideal for:
 
 #### Deleting an Instruction
 
-1. Navigate to **Addons** → **AI Assistant** → **Instructions**
+1. Navigate to **AI Assistant** → **Instructions**
 2. Find the instruction in the list
 3. Click the **Delete** button
 4. Confirm the deletion
@@ -92,10 +120,7 @@ Instructions are ideal for:
 
 Instructions can be:
 
-- **Personal** - Only visible to the creator
-- **Shared** - Available to the entire organization
-
-Administrators control the visibility and availability of each instruction.
+The chat picker shows **Personal** instructions to their owner and **Organization** instructions to chat users. The administration list shows all records to users with access to the administration area.
 
 ### Example Instructions
 
@@ -146,7 +171,7 @@ When editors start a chat, they can select an appropriate Assistant that underst
 1. Open **AI Chat** in Optimizely CMS
 2. Select the desired Assistant from the list when starting a new chat
 3. The Assistant appears with its name and description
-4. The Assistant receives the current page/content as context
+4. The assistant starts with its configured instructions and the current CMS item, when available
 5. Interact with the Assistant - it will apply its specialized knowledge
 
 ### Common Use Cases
@@ -165,21 +190,19 @@ Assistants are ideal for:
 
 #### Creating an Assistant
 
-1. Navigate to **Addons** → **AI Assistant** → **Assistants**
+1. Navigate to **AI Assistant** → **Assistants**
 2. Click **Add New Assistant** button
 3. Fill in the following fields:
    - **Name** - The assistant's name (e.g., "SEO Expert")
-   - **Description** - What this assistant specializes in
-   - **Instructions** - Custom system prompt that defines the assistant's behavior and expertise
-   - **Type** - Choose visibility:
-	 - Organization-wide (available to all users)
-	 - Personal (only for the creator)
+   - **Short Description** describes the assistant's purpose.
+   - **Instructions** contains the prompt that defines the assistant's behavior.
+   - **Type** controls which chat users see it. Choose **Organization** or **Personal**.
 
-4. Click **Save**
+4. Click **Save Assistant**. Drag rows in the assistants list to change their order.
 
 #### Editing an Assistant
 
-1. Navigate to **Addons** → **AI Assistant** → **Assistants**
+1. Navigate to **AI Assistant** → **Assistants**
 2. Find the assistant in the list
 3. Click the **Edit** button
 4. Modify the fields as needed
@@ -187,7 +210,7 @@ Assistants are ideal for:
 
 #### Deleting an Assistant
 
-1. Navigate to **Addons** → **AI Assistant** → **Assistants**
+1. Navigate to **AI Assistant** → **Assistants**
 2. Find the assistant in the list
 3. Click the **Delete** button
 4. Confirm the deletion
@@ -255,13 +278,13 @@ The Statistics view monitors:
 - **Total AI Calls** - Number of AI requests made
 - **Token Usage** - Input and output tokens consumed
 - **Cost Estimation** - Estimated AI service costs based on token prices
-- **Usage Trends** - Daily, weekly, or monthly usage patterns
-- **Feature Breakdown** - Usage by specific features or content fields
-- **Session Details** - Individual chat sessions and their token usage
+- **Usage Trends** - Daily counts within the selected date range
+- **Source Breakdown** - Usage by reported source
+- **Session Details** - Session IDs and their usage totals
 
 ### Accessing Statistics
 
-1. Navigate to **Addons** → **AI Assistant** → **Statistics**
+1. Navigate to **AI Assistant** → **Statistics**
 2. View the overview dashboard with key metrics
 3. Use filters to narrow down data
 
@@ -270,16 +293,8 @@ The Statistics view monitors:
 You can filter statistics by:
 
 - **Date Range** - View usage for specific time periods
-- **Feature/Source** - See usage by:
-  - AI Chat
-  - Content fields
-  - Image operations
-  - Specific modules
-- **Reporting Type** - Choose how data is displayed:
-  - Total usage overview
-  - Daily activity breakdown
-  - Usage by feature or field
-  - Individual session details
+- **Type** offers **Total**, **Daily**, **Session**, and **Source**.
+- **Source** filters the returned sources when **Type** is set to **Source**.
 
 ### Understanding Metrics
 
@@ -299,15 +314,7 @@ Estimated cost based on:
 
 ### Cost Settings
 
-Administrators can configure token pricing:
-
-1. Navigate to **Addons** → **AI Assistant** → **Statistics** → **Cost Settings**
-2. Enter the current input token price
-3. Enter the current output token price
-4. Select your currency
-5. Save changes
-
-These prices are used to calculate estimated costs in the statistics dashboard.
+Use **Cost Settings** on the **Statistics** page to enter input and output prices per million tokens and select a currency. The page calculates the estimated cost for the displayed data and saves the values in the current browser.
 
 ### Use Cases for Statistics
 
@@ -330,10 +337,9 @@ These prices are used to calculate estimated costs in the statistics dashboard.
 - Identify high-value features
 - Plan feature rollouts and training
 
-**User Adoption Analysis**
-- Track which departments or users are adopting AI Assistant
-- Identify power users and usage patterns
-- Plan targeted training initiatives
+**Session Usage Analysis**
+- Check how many calls and tokens each reported session used.
+- Look for sessions with unusually high token usage.
 
 ---
 

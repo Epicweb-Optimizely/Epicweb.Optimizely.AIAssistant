@@ -13,13 +13,7 @@ The AI Assistant provides two translation workflows:
 
 ### For Developers
 
-The solution offers:
-
-- Flexible configuration of translation behavior
-- Integration with LanguageManager for automated translation workflows
-- Configurable exclusion and preservation rules for specific content types and properties
-- Per-language URL segment handling strategies
-- Custom instruction support via IAssistantInstructionsResolver
+The AI Assistant translation provider integrates with LanguageManager and supports custom instructions via `IAssistantInstructionsResolver`. A project that adds LanguageManager Overrides can also configure content exclusions, existing-branch handling, and URL segments.
 
 ---
 
@@ -32,11 +26,7 @@ The solution offers:
 
 ### Bulk Translation with LanguageManager
 - Translate entire pages or block hierarchies at once
-- Configurable content type and property exclusions
-- Automatic URL segment generation strategies per language
-- Skip existing translations by default with optional force-retranslation
-- Recursive nested content translation support
-- Preserve specific properties from being translated (e.g., identifiers, technical fields, block names)
+- LanguageManager handles language branches and nested content using its configured branch manager
 
 ---
 
@@ -44,7 +34,7 @@ The solution offers:
 
 ### Step 1: Install NuGet Packages
 
-Install the latest versions:
+Install versions compatible with your CMS and .NET target. See the [LanguageManager package requirements](translations-with-LanguageManager.md).
 
 ```
 Install-Package EPiServer.Labs.LanguageManager
@@ -60,9 +50,10 @@ Or via Package Manager:
 Add to Program.cs or Startup.cs:
 
 ```csharp
-services.AddLanguageManager();
+using Epicweb.Optimizely.AIAssistant.LanguageManager;
+
+// CMS 13 projects also register LanguageManager with services.AddLanguageManager().
 services.AddLanguageManagerAIAssistant();
-services.AddLanguageManagerOverrides(Configuration);  // Optional: for advanced configuration
 ```
 
 ### Step 3: Configure AI Provider (Editor UI)
@@ -78,7 +69,9 @@ services.AddLanguageManagerOverrides(Configuration);  // Optional: for advanced 
 
 ### Basic Instructions
 
-All translation instructions are defined through the IAssistantInstructionsResolver interface, which allows you to:
+The translation service uses `IAssistantInstructionsResolver.GetInstructionsForTranslations`. With the default resolver, add `Instructions/Translation/General.md` to your registered embedded instructions, or use a language-specific file such as `General.sv.md`. See [configuration](configuration.md#iassistantinstructionsresolver).
+
+A custom resolver can:
 
 - Set global translation instructions
 - Override instructions per language
@@ -89,13 +82,12 @@ All translation instructions are defined through the IAssistantInstructionsResol
 ```csharp
 public interface IAssistantInstructionsResolver
 {
-    string GetInstructions();
     string GetInstructions(CultureInfo language);
     string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null);
 }
 ```
 
-Register your implementation:
+Register your implementation after `AddAIAssistant()`.
 
 ```csharp
 services.AddSingleton<IAssistantInstructionsResolver, YourCustomResolver>();
@@ -115,15 +107,10 @@ public class CustomInstructionsResolver : IAssistantInstructionsResolver
         _configuration = configuration;
     }
 
-    public string GetInstructions()
-    {
-        return GetInstructions(null);
-    }
-
     public string GetInstructions(CultureInfo language)
     {
         ContentReference start = ContentReference.StartPage;
-        if (_contentLoader.TryGet(start, out PageData startpage) && 
+        if (_contentLoader.TryGet(start, language, out PageData startpage) &&
             startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
         {
             return value;
@@ -134,7 +121,7 @@ public class CustomInstructionsResolver : IAssistantInstructionsResolver
     public string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null)
     {
         ContentReference start = ContentReference.StartPage;
-        if (_contentLoader.TryGet(start, toLanguage, out PageData startpage) && 
+        if (_contentLoader.TryGet(start, toLanguage, out PageData startpage) &&
             startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
         {
             return value;
@@ -146,231 +133,64 @@ public class CustomInstructionsResolver : IAssistantInstructionsResolver
 
 ### Advanced Configuration: LanguageManager Overrides
 
-The LanguageManager Overrides system allows fine-grained control over which content and properties are translated. This is configured through appsettings.json.
+These settings apply to projects with a custom LanguageManager branch manager that supplies `AddLanguageManagerOverrides`. Check that the override extension and its options exist in your LanguageManager build before adding this setup.
 
-#### Configuration Structure
+```csharp
+using EPiServer.Labs.LanguageManager;
 
-Add the LanguageManagerOverrides section to your appsettings.json:
-
-```json
-
-  "LanguageManagerOverrides": {
-    // When true: base configured type excludes derived types too. When false: only exact type match.
-    "ApplyToDerivedContentTypes": true,
-    // Content types that should NOT be translated - values are copied/preserved from source instead
-    "ExcludedContentTypes": [
-      // EPiServer Forms blocks are excluded from translation, block reference is preserved
-      "EPiServer.Forms.Implementation.Elements.FormContainerBlock",
-      // Alloy TextBlock is excluded from translation, block reference is preserved
-      "AlloySandbox.Models.Blocks.TextBlock"
-    ],
-    // Properties that should not be translated
-    "ExcludedProperties": {
-      // Global: Property names excluded on all content types (supports Provider.PropertyName format)
-      "Global": [
-        // "PageURLSegment", // Uncomment to globally prevent URL segment changes
-        // CatalogContent.SeoUri is excluded on all content types
-        "CatalogContent.SeoUri",
-        // Technical identifier field is never translated
-        "TechnicalIdentifier"
-      ],
-      // Per-type property exclusions: Properties excluded only on specific content types
-      "ByContentType": {
-        // ArticlePage type-specific excluded properties (if this content type exists in your project)
-        "MyProject.Models.Pages.ArticlePage": [
-          // ExternalUrl property is excluded from translation for ArticlePages
-          "ExternalUrl",
-          // CustomMetadata property is excluded from translation for ArticlePages
-          "CustomMetadata"
-        ],
-        "AlloySandbox.Models.Blocks.TestBlock": [
-          // Copyright property should not be copied from source for TestBlocks, it is excluded from translation
-          "Copyright"
-        ],
-        // TeaserBlock type-specific excluded properties (if this content type exists in your project)
-        "MyProject.Models.Blocks.TeaserBlock": [
-          // TrackingCode property is excluded from translation for TeaserBlocks
-          "TrackingCode"
-        ]
-      }
-    },
-    // Properties that should always be copied from source (never translated)
-    "PreserveSourceProperties": {
-      // Global
-      "Global": [ "PageName" ],
-      // Per-type preserve-source properties: Matching properties are copied from source during translation
-      "ByContentType": {
-        "AlloySandbox.Models.Blocks.TestBlock": [
-          // Copyright property is preserved from source without translation
-          "Copyright"
-        ],
-        // "EPiServer.Core.PageData": [ "PageName" ], // Uncomment to preserve page names from source
-        // BlockData base type: Name property is preserved/copied from source without translation
-        // Note: With ApplyToDerivedContentTypes=true, this applies to all derived BlockData types
-        "EPiServer.Core.BlockData": [ "Name" ]
-        // TestBlock type-specific: Copyright property is preserved from source
-        "AlloySandbox.Models.Blocks.TestBlock": [
-          // Copyright property is preserved from source without translation
-          "Copyright"
-        ]
-      }
-    },
-    // Translation behavior controls
-    "Translation": {
-      // When true: skip translation if target branch already contains meaningful values (default behavior)
-      "SkipExistingTranslations": true,
-      // When true: forces update of existing translations and overrides skip behavior
-      "ForceRetranslation": false
-    },
-    // URL segment behavior per language
-    "UrlSegments": {
-      // Fallback mode for languages not explicitly mapped (Default, PreserveSource, or FromName)
-      // Default: translate URL segment with BuildAsciiSlug()
-      // PreserveSource: copy source PageURLSegment without modification
-      // FromName: generate ASCII-safe slug from translated page title (PageName)
-      "DefaultMode": "Default",
-      // Per-language URL segment mode override
-      "Languages": {
-        // Chinese (simplified): preserve URL segment from source (Page/Block Name still translates unless configured separately)
-        "zh": "PreserveSource",
-        // French: preserve URL segment from source (Page/Block Name still translates unless configured separately)
-        // Important: To also preserve Name/PageName, configure it separately in PreserveSourceProperties
-        "fr": "PreserveSource",
-        // Swedish: generates URL segment from translated Title (uncomment if Title field exists and is translated)
-        "sv": "FromName"
-      }
-    }
-  }
+services.AddLanguageManagerOverrides(Configuration);
 ```
 
-#### Configuration Options Reference
-
-| Setting | Type | Description |
-|---------|------|-------------|
-| **ApplyToDerivedContentTypes** | boolean | When true, exclusion rules for base types apply to all derived types (e.g., rules for BlockData apply to all blocks). Default: true |
-| **ExcludedContentTypes** | string[] | Content type names (full CLR names) that should never be translated. AI translation is skipped; values are copied from source. |
-| **ExcludedProperties.Global** | string[] | Properties excluded from translation on ALL content types. Supports provider-qualified format (Provider.PropertyName) and plain property names. |
-| **ExcludedProperties.ByContentType** | object | Per-content-type property exclusions. Maps content type names to arrays of property names. |
-| **PreserveSourceProperties.Global** | string[] | Properties that should always be copied directly from source language without translation, on all content types. |
-| **PreserveSourceProperties.ByContentType** | object | Per-content-type properties that preserve source values. Maps content type names to arrays of property names. |
-| **Translation.SkipExistingTranslations** | boolean | When true, skips translation if the target language branch already contains meaningful values. Default: true |
-| **Translation.ForceRetranslation** | boolean | When true, forces re-translation of existing branches. Overrides skip behavior. Default: false |
-| **UrlSegments.DefaultMode** | string | Default URL segment generation strategy for languages not explicitly configured. Options: Default, PreserveSource, FromName. Default: Default |
-| **UrlSegments.Languages** | object | Per-language URL segment strategies. Maps language codes to strategy names. |
-
-#### URL Segment Strategies
-
-The URL segment (page slug) can be handled differently per language:
-
-- **Default**: Translates the URL segment along with other content using AI, then applies ASCII-safe slug formatting
-- **PreserveSource**: Copies the source language URL segment without modification (useful for languages like Chinese or Japanese where translated slugs may not be meaningful)
-- **FromName**: Generates URL segment from the translated page/block Name/PageName, ensuring title-based, language-appropriate slugs
-
-> **Important**: Preserving the URL segment does NOT automatically preserve the page/block Name. If you want both to remain unchanged, configure the Name separately in PreserveSourceProperties.
-
-#### Common Configuration Scenarios
-
-**Scenario 1: Exclude form blocks and technical properties globally**
+The override implementation binds the `LanguageManagerOverrides` section in `appsettings.json`.
 
 ```json
 {
   "LanguageManagerOverrides": {
+    "ApplyToDerivedContentTypes": true,
     "ExcludedContentTypes": [
       "EPiServer.Forms.Implementation.Elements.FormContainerBlock"
     ],
     "ExcludedProperties": {
-      "Global": [
-        "TechnicalIdentifier",
-        "TrackingCode",
-        "CustomMetadata"
-      ]
-    }
-  }
-}
-```
-
-**Scenario 2: Preserve block names and handle Chinese URLs**
-
-```json
-{
-  "LanguageManagerOverrides": {
-    "PreserveSourceProperties": {
+      "Global": ["TechnicalIdentifier", "CatalogContent.SeoUri"],
       "ByContentType": {
-        "EPiServer.Core.BlockData": [ "Name" ]
+        "MyProject.Models.Pages.ArticlePage": ["ExternalUrl", "CustomMetadata"]
       }
     },
+    "Translation": {
+      "SkipExistingTranslations": true,
+      "ForceRetranslation": false
+    },
     "UrlSegments": {
-      // Fallback mode for languages not explicitly mapped (Default, PreserveSource, or FromName)
-      // Default: translate URL segment with BuildAsciiSlug()
-      // PreserveSource: copy source PageURLSegment without modification
-      // FromName: generate ASCII-safe slug from translated page title (PageName)
       "DefaultMode": "Default",
       "Languages": {
         "zh": "PreserveSource",
-        "zh-CN": "PreserveSource",
-        "zh-TW": "PreserveSource",
-        "sv": "FromName"
+        "sv": "AsciiSlug"
       }
     }
   }
 }
 ```
 
-**Scenario 3: Exclude specific properties per content type**
+| Setting | Behavior |
+| --- | --- |
+| `ApplyToDerivedContentTypes` | Applies rules for resolved base types to derived types. Defaults to `true`. |
+| `ExcludedContentTypes` | Skips AI translation for matching content types. Use fully qualified CLR type names. |
+| `ExcludedProperties.Global` and `ExcludedProperties.ByContentType` | Skips excluded properties during translation and copying. Accepts property names or provider-qualified names such as `CatalogContent.SeoUri`. `PageName` is handled separately and keeps the source name when excluded. |
+| `Translation.SkipExistingTranslations` | Skips target branches that already contain meaningful values. Defaults to `true`. |
+| `Translation.ForceRetranslation` | Forces translation of existing branches and takes precedence over the skip option. Defaults to `false`. |
+| `UrlSegments.DefaultMode` and `UrlSegments.Languages` | Selects the URL segment behavior. Exact language codes take precedence, followed by the two-letter language code and then the default mode. |
 
-```json
-{
-  "LanguageManagerOverrides": {
-    "ExcludedProperties": {
-      "ByContentType": {
-        "MyProject.Models.Pages.ArticlePage": [
-          "MyProperty",
-          "OtherProperty"
-        ],
-        "MyProject.Models.Pages.ProductPage": [
-          "SKU",
-          "Price"
-        ]
-      }
-    }
-  }
-}
-```
+The checked override implementation supports these modes for `PageURLSegment`.
 
-**Scenario 4: Force retranslation of all branches**
-
-```json
-{
-  "LanguageManagerOverrides": {
-    "Translation": {
-      "SkipExistingTranslations": false,
-      "ForceRetranslation": true
-    }
-  }
-}
-```
+- `Default` translates the source URL segment and formats it using the CMS URL rules.
+- `PreserveSource` copies the source segment as is. Use a separate `PageName` exclusion if you also want to keep the source page name.
+- `AsciiSlug` builds an ASCII slug from the source segment or, when empty, the source content name.
 
 ---
 
 ## Using the Translation API
 
-For programmatic translation (e.g., in scheduled tasks or custom workflows), use the TranslationService:
-
-```csharp
-public class TranslationService
-{
-    public Task<string> TranslateText(
-        string input, 
-        CultureInfo? fromLanguage, 
-        CultureInfo toLanguage, 
-        string source = null)
-    {
-        // Translates text from source language to target language
-    }
-}
-```
-
-Inject and use it in your custom code:
+For programmatic translation in scheduled tasks or custom workflows, inject `Epicweb.Optimizely.AIAssistant.Services.TranslationService`. Call `TranslateText` with the input, source culture, target culture, and an optional source label.
 
 ```csharp
 [Inject]
@@ -382,7 +202,7 @@ public async Task TranslateMyContent()
         "Hej världen",           // input text
         new CultureInfo("sv"),   // from Swedish
         new CultureInfo("en"),   // to English
-        "My content page"        // source context
+        "My content page"        // source label for tracing the request
     );
 }
 ```
@@ -430,7 +250,7 @@ Translate entire pages and their blocks with a single action:
 2. Select source language and target language
 3. Select content to translate
 4. Choose "Translate and Copy" action
-5. All content and nested blocks are translated according to your configuration
+5. Review the new language version and any translated nested content
 
 [Video: Language Manager Bulk Translation](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/aea7c323-47f7-45c1-93a9-9185e5074e0f)
 
