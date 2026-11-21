@@ -1,29 +1,37 @@
-# Image generation with Recraft AI (depcrecated)
+# Image generation with Recraft AI
 
-This integration brings the next generation of image generation capabilities directly into your content management system, revolutionizing the way you create and manage visual assets.
+This page records the Recraft integration settings used by the earlier image editor setup. The plugin still passes these options to the AI service. Confirm the provider and model names supported by your AI service before reusing the example values.
 
 Blog posts: https://optimizely.blog/?tag=RecraftAI
 
 ## Get started
 
-You will need an account on recraft.ai => https://www.recraft.ai/profile/api and then purchase API credits. 
+Use your Recraft API credentials with the image provider configured for your AI service. [Recraft API account](https://www.recraft.ai/profile/api)
 
 
-## appsettings config: 
+## Application settings
 
+Configure image options under `Epicweb:AIAssistant`. The earlier integration used provider names such as `RecraftAI` and `RecraftAIOpenAI`. Use the provider and model names accepted by your AI service.
+
+```json
+{
+  "Epicweb": {
+    "AIAssistant": {
+      "ImageProviderName": "RecraftAI",
+      "ApiKeyImage": "<recraft-api-key>",
+      "ImageModel": "recraftv3"
+    }
+  }
+}
 ```
-      //"ImageProviderName": "RecraftAIOpenAI",//use this one in combination with OpenAI.com
-      "ImageProviderName": "RecraftAI", //use this one in combination with Azure OpenAI Services
-      "ApiKeyImage": "a65BEDVYTO..............", //retrieved from https://www.recraft.ai/profile/api
-      "ImageModel": "recraftv3", //or recraft20b
-```
 
-# Config Size, Actions, Styles and substyle
+## Image selections and actions
 
-Find all styles here: https://www.recraft.ai/docs#list-of-styles
+The plugin passes `ImageSelectionValues` and `ImageActions` through when the image dialog initializes. Merge the following example settings into `Epicweb:AIAssistant`. Action IDs are case-sensitive. The style and size values come from the earlier Recraft setup. [Recraft style reference](https://www.recraft.ai/docs#list-of-styles)
 
-```
-"ImageSelectionValues": [
+```json
+{
+  "ImageSelectionValues": [
         {
           "property": "style",
           "name": "realistic_image",
@@ -209,33 +217,31 @@ Find all styles here: https://www.recraft.ai/docs#list-of-styles
           ]
         }
       ],
-      "ImageActions":       "ImageActions": [
+      "ImageActions": [
         {
-          "id": "removeBackground", //case sensitive
+          "id": "removeBackground",
           "name": "Remove Background"
         },
         {
-          "id": "replaceBackground", //case sensitive
+          "id": "replaceBackground",
           "name": "Replace Background",
           "prompt": true
         },
         {
-          "id": "imageToImage", //case sensitive
+          "id": "imageToImage",
           "name": "Generate variation",
           "prompt": true
         }
       ]
+}
 ```
 
+## AI Assistant attributes on properties
 
-## AIAssistant Attributes on properties
+Use `ImageGenerationStyle` and `ImageGenerationSize` to set defaults for the property. Selections in the dialog take precedence over the property's style. The AI service interprets the style string for the provider.
 
-This is a hack, but you can add a querystring in the ImageGenerationStyle for default behavior, the user can override this in UI
-
-It will add top level parameters to the request https://www.recraft.ai/docs#generate-image
-
-```
-    [UIHint(AIHint.Image)]
-    [AIAssistant(ImageGenerationStyle = "style=digital_illustration|cosmics&model=recraftv3", ImageGenerationSize = "1820x1024")]
-    public virtual ContentReference Image90 { get; set; }
+```csharp
+[UIHint(AIHint.Image)]
+[AIAssistant(ImageGenerationStyle = "style=realistic_image", ImageGenerationSize = "1820x1024")]
+public virtual ContentReference Image90 { get; set; }
 ```

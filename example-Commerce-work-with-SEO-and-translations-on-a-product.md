@@ -1,8 +1,8 @@
-# Example AI-Assistant and Optimizely Commerce, how to work with SEO and translations on a product
+# Example SEO and translation workflow in Optimizely Commerce
 
-In this example, we showcase the remarkable speed at which you can handle SEO content and localization.
+This recording shows the AI Assistant in individual properties of an Optimizely Commerce product. The editor requests suggestions for the SEO title, a summary, and keywords, then translates the text into French and Swedish. The shortcuts you see depend on the product properties and shortcuts configured for the site. See [Prompt Shortcuts](promptshortcuts.md).
 
-Our AI assistant will assist us in optimizing the title, summarizing the content, and extracting relevant keywords. Additionally, it will generate the texts in both French and Swedish, streamlining the process even further.
+[SEO Manager](seo-manager.md) works on CMS pages with mapped SEO fields. The recording shows the property editor workflow.
 
 | ![Epicweb Optimizely AIAssistant_product_translate_seo](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/972985f2-4cc6-4c16-b1f0-16d595a8ab31) | 
 |-|

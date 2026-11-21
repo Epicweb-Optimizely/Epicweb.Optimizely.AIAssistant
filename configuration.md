@@ -21,36 +21,40 @@ To ensure this functions correctly, you should annotate the model's property wit
 #### For text fields
 **[AIAssistant(Model = "gpt-4o-mini")]** => The model to use => https://platform.openai.com/docs/models 
 
-For Azure, use only the models you deployed in your azure instance.
+For Azure OpenAI, use the deployment name.
 
 **[AIAssistant(AssistantInstructions = "You are a selling professional sales assistant")]** => It's designed to set the behavior of the assistant. You might use the message to specify a role or provide some context for the assistant.
 
 **[AIAssistant(MinimalMode = true)]** => Default is false, hides the "AI Wheel" by default
 
-**[AIAssistant(AutoSuggest = false)]** => Default is true, When you leave the field, it will execute the AI to AutoSuggest an alternative suggestion
+Set `[AIAssistant(AutoSuggest = true)]` to request a suggestion when the editor leaves an AI textarea. If the attribute omits `AutoSuggest`, the textarea uses the application setting, which defaults to `false`.
 
-**[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on this property
+Set `[AIAssistant(ShortcutsDisabled = true)]` to hide shortcuts in the AI text editor for this property.
 
 See [Shortcuts Guide](./promptshortcuts.md) for detailed information on available shortcuts, configuration, and creating custom shortcuts.
 
 **[AIAssistant(CustomJson = "{\"prop\":\"fromAttribute\"}")]** => Any custom data you want to send to your API, to be used with CustomAI Provider
 
 ```json
- "Epicweb": {
-    "AIAssistant": {      
-      "CustomJson": "{\"prop\":\"fromAppsettings\"}",// Any custom data you want to send to your API
-      }
+{
+  "Epicweb": {
+    "AIAssistant": {
+      "CustomJson": "{\"prop\":\"fromAppsettings\"}"
     }
+  }
+}
 ```
 
-**[AIAssistant(Roles = new[] { "AIEditors", "SomeRole" })** User roles can be assigned globally or on a per-property basis to manage access to AI-Assistant
+Use `[AIAssistant(Roles = new[] { "AIEditors", "SomeRole" })]` to restrict this property to specific roles. A nonempty property role list takes precedence over the application role list.
 
 ```json
- "Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-      "Roles": [ "AIEditors", "SomeRole" ] //sets globally
-      }
+      "Roles": ["AIEditors", "SomeRole"]
     }
+  }
+}
 ```
 
 **[AIAssistant(Shortcuts = new[] {
@@ -64,17 +68,10 @@ See [Shortcuts Guide](./promptshortcuts.md) for detailed information on availabl
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.ChangeTonePromptShortcut),
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.HumorPromptShortcut),//you need to add all subprompts for "Change tone" if you want to use them
         typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.SeriousPromptShortcut),
-        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.CheckSpellingPromptShortcut) })]** => Only specify the ones you want to use on this property. See [Shortcuts Guide](./shortcuts.md) for available options and configuration examples.
+        typeof(Epicweb.Optimizely.AIAssistant.Shortcuts.CheckSpellingPromptShortcut) })]** => Only specify the ones you want to use on this property. See the [Shortcuts Guide](promptshortcuts.md) for available options and configuration examples.
 
-**Additional shortcut of value: **
-
-SeoTitlePromptShortcut (for creation of SEO titles based on page content) 
-
-SEOKeywordsPromptShortcut (for creation of keywords based on page content)
-
-you need to add them to services => 
+Register `SeoTitlePromptShortcut` to offer SEO title suggestions based on page content.
 ```csharp
-services.AddSingleton<IPromptShortcut, SEOKeywordsPromptShortcut>();
 services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 ```
 
@@ -82,75 +79,77 @@ services.AddSingleton<IPromptShortcut, SeoTitlePromptShortcut>();
 
 **[AIAssistant(QueryParameters = "")]** => Additional querystring appended to imageurl into XHtmlString (TinyMCE) eg width=100&height=300&format=webp&quality=75
 
-**[AIAssistant(ImageWidth = "")]** => Default Imagewidth added to attribute width on img-tag into XHtmlString (TinyMCE)
+Use `[AIAssistant(ImageWidth = 1024)]` to set the `width` attribute on images inserted into the TinyMCE field when `QueryParameters` is unset.
 
-**[AIAssistant(Shortcuts = new[] { ... })]** => Same as above for text fields. See [Shortcuts Guide](./shortcuts.md) for RTE-specific shortcuts and all configuration options.
+**[AIAssistant(Shortcuts = new[] { ... })]** => Same as above for text fields. See the [Shortcuts Guide](promptshortcuts.md) for RTE-specific shortcuts and configuration options.
 
-**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - RecraftAI: 1024x1024, 1365x1024, 1024x1365, 1536x1024, 1024x1536, 1820x1024, 1024x1820, 1024x2048, 2048x1024, 1434x1024, 1024x1434, 1024x1280, 1280x1024, 1024x1707, 1707x1024
-
-**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural for Dalle-3. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
-For Recraft AI: https://www.recraft.ai/docs#list-of-styles create a querystring "style=digital_illustration|pixel_art", default is realistic_image  [Link to config](recraftai-image-generation.md)
-    
-
-**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or recraft), default to dall-e-3 on latest version
+TinyMCE uses the same [image generation settings](#image-properties) as image fields.
 
 #### For Image fields (ContentReference or Url)
 
-**[AIAssistant(ImageGenerationSize = "1024x1024")]** =>  ImageSize to generate Image in, dall-e-3: 1024x1024, 1024x1792 or 1792x1024 - RecraftAI: 1024x1024, 1365x1024, 1024x1365, 1536x1024, 1024x1536, 1820x1024, 1024x1820, 1024x2048, 2048x1024, 1434x1024, 1024x1434, 1024x1280, 1280x1024, 1024x1707, 1707x1024
-   
-**[AIAssistant(ImageGenerationStyle = "vivid")]** => The style of the generated images. Must be one of vivid or natural for Dalle-3. Vivid causes the model to lean towards generating hyper-real and dramatic images. Natural causes the model to produce more natural, less hyper-real looking images. This param is only supported for dall-e-3. Defaults to vivid.
-For Recraft AI: https://www.recraft.ai/docs#list-of-styles create a querystring "style=digital_illustration|pixel_art", default is realistic_image  
-
-**[AIAssistant(ImageModel = "dall-e-3")]** => The Dall-e model to use => https://platform.openai.com/docs/models/dall-e (dall-e-3 or recraft), default to dall-e-3 on latest version
+Select the editor with `[UIHint(AIHint.Image)]`. Use the [image generation settings](#image-properties) to customize model, size, or style.
 
 ## Appsettings
 
-### Disable AutoSuggest behavior
+### Administration and SEO Manager access
 
-**[AIAssistant(AutoSuggest = false)]** => Disable Auto Suggest on leavning the field
+Administration pages use the `AIAssistantAdminAccess` policy. Under `Epicweb:AIAssistant`, `Roles` controls access to field assistance and `ChatRoles` controls visibility of AI Chat in the CMS editor.
 
-#### Disable Auto Suggest globaly => add in appsetting:  
+| Setting under `Epicweb:AIAssistant` | Default | Effect |
+| --- | --- | --- |
+| `EnableSeoManager` | `false` | Enables the SEO Manager page and API. |
+| `AIAssistantSEOManager` | `[]` | Adds CMS roles that can open SEO Manager when it is enabled. `AIEditors` and `WebAdmins` already qualify. |
+
+See [Granting SEO Manager access](admin-features.md#granting-seo-manager-access) for the JSON configuration and [Content permissions](seo-manager.md#content-permissions) for the rights on individual CMS pages.
+
+### Configure AutoSuggest
+
+`AutoSuggest` defaults to `false`. Set it to `true` to enable suggestions on blur across eligible fields. A property can override the application setting with `[AIAssistant(AutoSuggest = false)]`.
 
 ```json
- "Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-      "AutoSuggest": false //sets globally, default true
-      }
+      "AutoSuggest": true
     }
+  }
+}
 ```
 ### Enable Minimal Mode
 
-Field is minimal - hides the "AI Wheel" by default
-
-**[AIAssistant(MinimalMode = true)]** => Default is false, 
-
-#### Enable MinimalMode globally => add in appsetting:  
+Minimal mode hides the AI wheel initially. Enable it per field with `[AIAssistant(MinimalMode = true)]` or for all eligible fields in `appsettings.json`. The default is `false`.
 
 ```json
- "Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-      "MinimalMode": true //sets globally, default false
-      }
+      "MinimalMode": true
     }
+  }
+}
 ```
 
-#### Disable AI functionaliy on Site level => add in appsetting:  
+### Disable AI Assistant on selected sites
+
+`DisabledSites` accepts site IDs and site names.
 
 ```json
- "Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-      "DisabledSites": [ "025c64b0-c66d-4d75-8606-92c2866cb555", "MySiteName" ] //set name or siteid
-      }
+      "DisabledSites": ["025c64b0-c66d-4d75-8606-92c2866cb555", "MySiteName"]
     }
+  }
+}
 ```
 
 ## TinyMCE Rich Text Editor (XHtmlString-properties)
 
 Add "ai_assistant_execute ai_assistant_choices ai_assistant_image" to Toolbar in TinyMceConfiguration
 
-You can remove the AI integration from the RTE by using services.AddAIAssistant(addToDefaultTinyMCE: false).
+Use `services.AddAIAssistant(addToDefaultTinyMCE: false)` to skip automatic registration on the default TinyMCE configuration.
 
-To add AI to a custom configuration of blocks and pages, use ((TinyMceSettings)config).AddAIAssistantToTinyMCE().
+To register the plugin on a custom TinyMCE configuration, call `AddAIAssistantToTinyMCE()` on its `TinyMceSettings` and add the AI toolbar entries.
 
 ## Image Generation
 
@@ -158,36 +157,42 @@ Add [UIHint(AIHint.Image)] for image fields (ContentReference or Url)
 
 Add "ai_assistant_image" to Toolbar in TinyMceConfiguration
 
-Files are automatically saved in "For this page" - except for Commerce products or other object that do not have "For this page", then it saved to the Global Root Asset folder. This default behavior can be modified either by implementing the IFolderResolver interface or by overriding the DefaultFolderResolver.
+The default folder resolver uses the content item's asset folder when available and otherwise uses the site's global asset root. To customize this behavior, register your own `IFolderResolver` after `AddAIAssistant()`.
 
 ### Modifying File Names and Image Descriptions
 
-By implementing your own IMediaPropertyResolver, you can modify media data through post-processing. This includes updating the Description property, setting the Name property, and adjusting the image size as necessary.
+Register your own `IMediaPropertyResolverResolver` after `AddAIAssistant()` to modify generated media before saving. The hook can update the `Description`, `Name`, or image binary data.
 
-### OpenAI Api key
+### Image provider credentials
 
-You need your own API key for the Image Generation to work, you can obtain a key by registering and create an key here => https://platform.openai.com/account/api-keys 
-
-add the key to your appsettings: 
+Set the credentials for your configured image provider. The plugin sends `ApiKey` and also supports a separate image key via `ApiKeyImage`. Use `ImageProviderName` and `ServiceUrlImage` for a separate provider or image endpoint. The example supplies a separate key for OpenAI image generation.
 ```json
- "Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-      "ApiKey": "sk-NpPD....jrwm"
-      }
+      "ImageProviderName": "OpenAI",
+      "ApiKeyImage": "<image-provider-key>"
     }
+  }
+}
 ```
 
 ### Image Properties
 
-If you need to change default behavior, these fields kan be override by AIAssistantAttribute on each property 
+Set `ImageModel` explicitly for your provider. This example uses `gpt-image-2` with OpenAI. For Azure OpenAI, use the deployed image model's deployment name. The CMS plugin still sends the legacy `dall-e-3` identifier when no image model is configured. See the [change log](change-log.md) for image model support by release.
+
 ```json
- "Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-        "ImageModel": "dall-e-3", // or dall-e-2
-        "ImageStyle": null // vivid or natural, Defaults to vivid
-      }
+      "ImageProviderName": "OpenAI",
+      "ImageModel": "gpt-image-2"
     }
+  }
+}
 ```
+
+The `AIAssistant` attribute can override `ImageModel` and specify `ImageGenerationSize` or `ImageGenerationStyle` per property. Sizes and styles are provider-specific. Use `ImageStyle` to set an application-wide style where the provider supports it.
 
 [Recraft Image Generation Configuration](recraftai-image-generation.md)
 
@@ -197,33 +202,27 @@ You can override these implementations if you want to implement different logic
 
 ### IAssistantInstructionsResolver
 
-This allows for the implementation of global 'Assistant Instructions'.
+The default resolver reads general instructions from `Instructions/General/Default.md` and translation instructions from `Instructions/Translation/General.md` when those resources are registered. Each lookup falls back to the `AssistantInstructions` property on the start page in the requested language if the instruction stores have no match. See [registering embedded instructions](chat-instructions.md#customizing-chat-instructions).
 
-The default setup dictates that if the Startpage contains a field named 'AssistantInstructions', that field's content will be sent to AI. This approach is recommended, as it enables site editors to easily alter and optimize the instruction.
-
-When working with translations, we have a dedicated API called "GetInstructionsForTranslations." This API allows you to provide translation instructions by language. You can also include information on how to translate, along with a list of terms or translation rules. 
+Implement `IAssistantInstructionsResolver` if you need to resolve instructions programmatically. The chat method has a default implementation that calls `GetInstructions(language)`.
 
 ```csharp
 public interface IAssistantInstructionsResolver
 {
-    string GetInstructions();
     string GetInstructions(CultureInfo language);
     string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo? fromLanguage = null);
+    string GetInstructionsForChat(CultureInfo language, string mode = "General")
+        => GetInstructions(language);
 }
 ```
 
-Remember to register your implementation => services.AddSingleton<IAssistantInstructionsResolver, ...>();
+Register the implementation after `AddAIAssistant()`.
 
 ```csharp
- public string GetInstructions()
-{
-    return this.GetInstructions(null);
-}
-
 public string GetInstructions(CultureInfo language)
 {
     ContentReference start = ContentReference.StartPage;
-    if (contentLoader.TryGet(start, out PageData startpage) && startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
+    if (contentLoader.TryGet(start, language, out PageData startpage) && startpage.Property.TryGetPropertyValue("AssistantInstructions", out string value))
     {
         return value;
     }
@@ -237,7 +236,7 @@ public string GetInstructionsForTranslations(CultureInfo toLanguage, CultureInfo
     {
         return value;
     }
-    return configuration["Epicweb:AIAssistant:AssistantInstructions"];
+    return configuration["Epicweb:AIAssistant:AssistantTranslationInstructions"];
 }
 ```
 ### IAITinyMceTemplateResolver
@@ -270,7 +269,7 @@ Create your custom placeholders. Within a text field, you can use patterns like 
     public interface IPlaceholderResolver
     {
         /// <summary>
-        /// Order of the resolver agaist other, build in has -100 if needed to override
+        /// Lower values run first. The built-in resolvers use -120 and -110.
         /// </summary>
         int SortOrder { get; } 
 
@@ -362,7 +361,7 @@ namespace Foundation.Infrastructure
                 var reference = _referenceConverter.GetContentLink(productCode);
                 if (_contentLoader.TryGet<IContent>(reference, currentCulture, out currentContent))
                 {
-                    return AIHelperService.GetContentFromObject(currentContent);
+                    return HelperService.GetContentFromObject(currentContent);
                 }
             }
 
@@ -427,43 +426,45 @@ remember to register your shortcut =>  services.AddSingleton<IPromptShortcut, My
 
 ### Disable shortcuts
 
-**[AIAssistant(ShortcutsDisabled = false)]** => Disable and hide Shortcuts on a property
+Set `[AIAssistant(ShortcutsDisabled = true)]` to hide shortcuts on a property in the AI text editor.
 
-#### Disable shortcuts globaly => add in appsetting:  
+#### Disable shortcuts in AI text editors
 
 ```json
- "Epicweb": {
+{
+  "Epicweb": {
     "AIAssistant": {
-      "DisableShortcuts": false
-      }
+      "DisableShortcuts": true
     }
+  }
+}
 ```
 
 #### Disable a specific shortcut 
 
-ServiceLocator.Current.GetAllInstances<IPromptShortcut>().FirstOrDefault(x => x.Name == SalesPromptShortcut.GetName)?.Enabled = false;
+Set the shortcut's `Enabled` and `EnabledInRichTextEditor` properties to `false` to hide it from both default lists. Remove it from any property's explicit `Shortcuts` list as well.
 
 
 ## Azure Open AI Provider
 
-Native out of the box support of Azure OpenAI Services. In order to use this service, you must establish your own service within your Azure instance. Currently, Azure Models are accessible in the following regions: Australia East, Canada East, East US, East US 2, France Central, Japan East, North Central US, Sweden Central, Switzerland North, and UK South. For the most recent information, please refer to the following resource: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
+Create an Azure OpenAI resource and deploy a model. Use the deployment name in `AIModel`. `ServiceUrl` is the resource endpoint. `ApiUrl` is the AI Assistant service URL and can be set separately if Epicweb supplied a custom URL.
 
 ```json
+{
   "Epicweb": {
     "AIAssistant": {
-      "ApiUrl": "", //azure service url provided by Epicweb upon registration of add-on
-      "ApiKeyImage": "sk-NpPD*****", //open ai key for Images (if used)
-      "ApiKey": "06de6816f*****", //azure key
-      "ServiceUrl": "https://[changethis].openai.azure.com/",
+      "ApiKey": "<azure-resource-key>",
+      "ServiceUrl": "https://<resource-name>.openai.azure.com/",
       "ProviderName": "AzureOpenAI",
-      "AIModel": "gpt-4o-mini",//the default model if nothing else is specified on property
-      }
+      "AIModel": "<azure-deployment-name>"
     }
+  }
+}
 ```
 
 ### Setup Azure OpenAI service models
 
-Read more here https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration-azure-openai.md
+See [how to set up Azure OpenAI](configuration-azure-openai.md).
 
 ## Pre process the AI Request (IPreProcessAiRequest)
 

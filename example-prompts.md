@@ -1,5 +1,9 @@
 # EXAMPLE PROMPTS
 
+Enter these examples in an AI-enabled field and click **AI**, or use **Ask AI Assistant** to enter a prompt separately. In TinyMCE, select the hashtag prompt and any text it should use.
+
+`::this::` inserts text from the current content item. A placeholder such as `::Main body::` uses a property on that item, and `::pageid:6:main body::` uses a property from another content item. Replace the example property names and IDs with values from your site.
+
 #generate intro text of selling yellow paint color with max 20 words 
 
 #summarize from field ::Main body::
@@ -92,7 +96,7 @@
 #check spelling: SEO stands for search engine optimization, which is a set of practices designed to improve the appearance and positioning of web pages in organic search results. Because organic search is the most prominent way for people to discover and access online content, a good SEO strategy is essential for improving the quality and quantity of traffic to your website.
 
 
-#summarize in a selling way ::productcode:P-654987:: => this needs implementation of Epicweb.Optimizely.AIAssistant.IPlaceholderResolver as of version 1.0.0.3
+To use `#summarize in a selling way ::productcode:P-654987::`, register a site-specific `Epicweb.Optimizely.AIAssistant.IPlaceholderResolver` that resolves product codes.
 
 
 
@@ -101,7 +105,9 @@
 
 
 
-## IN TINYMCE Rich Text Editor: (SELECT THE PROMPT AND CLICK "AI"-button)
+## TinyMCE rich text editor
+
+Use the image generator in the toolbar for the image examples. Image generation requires a configured provider. Prompts for current rankings or exchange rates need a tool or source that supplies current data.
 
 #Create realistic photo of a small cute white bichon frise puppy sitting in the green gras in daylight
 
@@ -138,8 +144,10 @@
 
 ## GIVE ASSISTANT INSTRUCTIONS / Per Property
 
-[AIAssistant(AssistantInstructions = "You are a code assistant return ONLY javascript code, without explaination nor script-tag.")]
-    public virtual string InlineCode
+```csharp
+[AIAssistant(AssistantInstructions = "Return only JavaScript code without a script tag.")]
+public virtual string InlineCode { get; set; }
+```
 
 Example prompt:
 

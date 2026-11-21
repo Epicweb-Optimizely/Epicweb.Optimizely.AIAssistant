@@ -1,6 +1,6 @@
 # Example of the AI-Assistant
 
-Examples on this page may be early version of the AI-Assistant and therefor do not reflect all the features that exists in latest versions 
+These recordings show earlier versions of AI Assistant. For the current editor controls, see the [User Manual](user-manual.md).
 
 ## Video shorts and guides
 
@@ -8,7 +8,7 @@ Examples on this page may be early version of the AI-Assistant and therefor do n
 
 ## Provides suggestions or alternatives for your text
 
-Write your text, get suggestion automatically, or by spinning the wheel
+Enter text in an AI-enabled property and use the AI Assistant action or the **Refine** shortcut to request a suggestion.
 
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Suggestion](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/1edc64b4-701c-40e5-a587-13358ef6c732) |
@@ -18,21 +18,21 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 ### Translates your text into other languages
 
-**Scenario 1:** English page exists with text in the property "page description", change to Swedish context of the page, spinn the wheel and it translates the field.
+**Scenario 1:** An English version contains a page description. Open the Swedish version and run AI Assistant from the empty description field to suggest a translation from the existing version.
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations1](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/5973da64-f645-43f0-93eb-6769bb1170fb) |
 |-|
 
 <br /><br />
 
-**Scenario 2:** Go to Swedish context of the page, paste in the English text, spinn the wheel and it translates the field to Swedish automatically.
+**Scenario 2:** Paste English text into a property on the Swedish version of the page and choose the **Translate** shortcut.
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations2](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/110e46a3-0538-462e-adde-ea0e47ca0d98) |
 |-|
 
 <br /><br />
 
-**Scenario 3:** Translate text to any language
+**Scenario 3:** Request a translation into a language supported by the configured model.
 
 | ![Epicweb Optimizely AIAssistant_Scenario_Translations3](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/96da3776-8fde-4e4e-b81a-cb076d6ea8ae) |
 |-|
@@ -70,7 +70,7 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 <br /><br />
 
-### Run your own commands to ChatGPT 
+### Run a custom prompt
 
 #what is important to think of when you write a SEO Page description?
 
@@ -91,28 +91,28 @@ Write your text, get suggestion automatically, or by spinning the wheel
 
 ### Shortcut examples
 
-With Shortcuts, you can programmatically commonly used prompts for quick and easy access.
+Shortcuts let you run reusable prompts from the property editor.
 
-- Suggestion: will suggest an alternate text of the content in the textarea
-- Translate: will translate if field is filled in an other language
-- Summarize Short: will condence the page content into 20 words
-- Summarize Sales Pitch: will condence the page content into a sales pitch
-- Spell-check: Will suggest the text in textarea without any spelling errors
+- **Refine** suggests alternative wording for the text in the field.
+- **Translate** requests a translation into the edited language.
+- **Summarize short** asks for a 20-word summary of the field text or, when the field is empty, the current content.
+- **Summarize Sales Pitch** turns the field text or current content into a sales pitch.
+- **Fix spelling & grammar** suggests spelling and grammar corrections.
 
-You can add your most commonly used prompts for quick and easy access. See [Shortcuts Guide](./shortcuts.md) for a complete list of built-in shortcuts, usage examples, and how to create custom shortcuts.
+You can add your most commonly used prompts for quick and easy access. See [Shortcuts Guide](promptshortcuts.md) for a complete list of built-in shortcuts, usage examples, and how to create custom shortcuts.
 
 | ![Epicweb Optimizely AIAssistant-shorcuts](https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/bce3581f-0039-45b5-8fc1-b9ec8705d5a0) |
 |-|
 
 <br /><br />
 
-#### ‘Change Tone’ Shortcut
+#### Change Tone shortcut
 
 - Sales and Provocative: Perfect for crafting compelling marketing pitches.
 - Formal and Serious: Ideal for professional and official documents.
 - Informal and Humoristic: Suitable for creating light-hearted and engaging content.
 - Empathetic and Optimistic: Best for generating content that resonates emotionally and radiates positivity.
 - Confident and Passionate: Excellent for delivering strong, fervent messages.
-- Simplistic: Recommended for crafting content that’s easy to comprehend.
+- Simplistic: Recommended for crafting content that is easy to comprehend.
   
 https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/assets/9716195/33b81741-4334-4fe5-a3de-12cca418a645

@@ -41,7 +41,7 @@ AI: [Updates SEO title, meta description, and heading structure] "Done! Review t
 
 ### 🚀 Boost Productivity
 
-- **10x faster content creation** - Generate SEO-optimized content in seconds
+- **Draft content** - Generate titles, descriptions, and other text for review
 - **Automated workflows** - Let AI handle repetitive tasks
 - **Smart suggestions** - Get intelligent recommendations based on your content
 - **Instant operations** - Update content through natural conversation
@@ -50,13 +50,13 @@ AI: [Updates SEO title, meta description, and heading structure] "Done! Review t
 
 - **SEO optimization** - AI suggests search-friendly titles, descriptions, and structure
 - **Consistency** - Maintain brand voice across all content
-- **Accessibility** - Automatic alt text and WCAG compliance checks
+- **Accessibility** - Suggest alt text and flag issues for editorial review
 - **Multi-language** - Seamless translation with context awareness
 
 ### 💡 Intelligent Assistance
 
 - **Context-aware** - Understands what you're working on
-- **Learning capabilities** - Adapts to your content guidelines
+- **Custom instructions** - Apply your content guidelines to chat responses
 - **Real-time help** - Get answers without leaving the CMS
 - **Content analysis** - Instant feedback on readability, tone, and structure
 
@@ -72,7 +72,6 @@ AI: [Updates SEO title, meta description, and heading structure] "Done! Review t
 - **Lower barrier to entry** - New editors productive from day one
 - **Best practices built-in** - AI guides editors toward quality content
 - **Role-based access** - Control who can use AI features (optional)
-- **Audit trail** - Track all AI-assisted changes
 
 ---
 
@@ -80,11 +79,10 @@ AI: [Updates SEO title, meta description, and heading structure] "Done! Review t
 
 Before installing AI Chat, ensure you have:
 
-✅ **Optimizely CMS 12.18+** or **Optimizely Commerce 14+**  
-✅ **Epicweb.Optimizely.AIAssistant 3.0+** installed  
+✅ **Optimizely CMS 12.18 or later in the 12.x series on .NET 8**, or **Optimizely CMS 13.x on .NET 10**
+✅ **Epicweb.Optimizely.AIAssistant** for the installed CMS version
 ✅ **OpenAI API key** or compatible AI provider (Azure OpenAI, Google Gemini)  
 ✅ **Developer access** to your solution's source code  
-✅ **.NET 6.0+** (or compatible with your CMS version)
 
 ---
 
@@ -111,7 +109,7 @@ https://nuget.optimizely.com/package/?id=Epicweb.Optimizely.AIAssistant
 
 ### Step 2: Install Built-in Tools Package
 
-AI Chat requires tools to function. The built-in tools package provides essential functionality:
+Install the built-in tools package to let AI Chat read and update CMS content.
 
 **Via NuGet Package Manager Console:**
 ```powershell
@@ -150,8 +148,9 @@ public void ConfigureServices(IServiceCollection services)
         .RegisterMcpToolType(typeof(BuiltinChatTools))          // Content reading
         .RegisterMcpToolType(typeof(BuiltinPublishChatTools))   // Publishing operations
         .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))    // Content updates
-        .RegisterMcpToolType(typeof(BuiltinChatImageTools))     // Image analysis
-        .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools)); // Image generation
+        .RegisterMcpToolType(typeof(BuiltinCreateChatTools))   // Page and block creation
+        .RegisterMcpToolType(typeof(BuiltinChatImageTools))    // Image analysis
+        .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools)); // Image creation instructions
         
     // ... other registrations ...
 }
@@ -161,12 +160,13 @@ public void ConfigureServices(IServiceCollection services)
 
 | Tool Pack | Purpose | Example Operations |
 |-----------|---------|-------------------|
-| `BuiltinTools` | Core helper utilities | Date formatting, string manipulation |
+| `BuiltinTools` | Content lookup | Get content by ID, URL, or name |
 | `BuiltinChatTools` | Content reading | Get page content, search, list children |
 | `BuiltinPublishChatTools` | Publishing | Publish, unpublish, schedule |
 | `BuiltinUpdateChatTools` | Content editing | Update properties, create drafts |
-| `BuiltinChatImageTools` | Image operations | Analyze images, generate alt text |
-| `BuiltinChatCreateImageTools` | Image creation | Intruction how to create images |
+| `BuiltinCreateChatTools` | Content creation | Discover content types and create pages or blocks |
+| `BuiltinChatImageTools` | Image operations | Read image properties and ask questions about images |
+| `BuiltinChatCreateImageTools` | Image creation instructions | Return guidance for creating images |
 
 ---
 
@@ -202,18 +202,18 @@ Add AI Chat configuration to your `appsettings.json`:
 {
   "Epicweb": {
     "AIAssistant": {
-      "ApiKey": "sk-proj-your-openai-api-key-here", //optional on localhost
-      "Provider": "OpenAI", //optional on localhost
-      "Model": "gpt-5.2",
+      "ApiKey": "<provider-api-key>",
+      "ProviderName": "OpenAI",
+      "AIModel": "gpt-5.2",
       "EnableChat": true,
-      "ChatRoles": [ //optional
+      "ChatRoles": [
         "AIEditors",
-        "WebEditors", 
+        "WebEditors",
         "WebAdmins",
         "CmsAdmins",
         "CmsEditors"
       ],
-      "MaxToolIterations": 8 //optional
+      "MaxToolIterations": 8
     }
   }
 }
@@ -223,11 +223,11 @@ Add AI Chat configuration to your `appsettings.json`:
 
 | Setting | Type | Description | Default |
 |---------|------|-------------|---------|
-| `ApiKey` | string | Your OpenAI API key from https://platform.openai.com/account/api-keys | **Required** |
-| `Provider` | string | AI provider: `OpenAI`, `AzureOpenAI`, `Gemini` | `OpenAI` |
-| `Model` | string | AI model to use (see recommendations below) | `gpt-5.2` |
+| `ApiKey` | string | Key for the configured provider | Unset |
+| `ProviderName` | string | Provider such as `OpenAI`, `AzureOpenAI`, or `Gemini` | Unset in the CMS plugin |
+| `AIModel` | string | Model ID, or deployment name for Azure OpenAI | Unset in the CMS plugin |
 | `EnableChat` | bool | Enables the AI Chat window in CMS toolbar | `false` |
-| `ChatRoles` | string[] | User roles that can access AI Chat (**optional**, if not specified all authenticated users can access) | All users |
+| `ChatRoles` | string[] | Optional role filter for showing AI Chat in the CMS editor | Unset |
 | `MaxToolIterations` | int | **optional** Prevents infinite tool calling loops | `8` |
 
 #### Getting Your API Key
@@ -236,7 +236,7 @@ Add AI Chat configuration to your `appsettings.json`:
 2. Sign up or log in
 3. Click "Create new secret key"
 4. Copy the key (starts with `sk-`)
-5. Add to `appsettings.json`
+5. Supply it as `Epicweb:AIAssistant:ApiKey` through your application's secret configuration
 
 **🔒 Security Tip:** Never commit API keys to source control. Use:
 - Azure Key Vault
@@ -245,66 +245,19 @@ Add AI Chat configuration to your `appsettings.json`:
 
 ---
 
-### Step 6: Choose the Right AI Model
+### Step 6: Choose the AI model
 
-⚠️ **Critical:** AI Chat requires advanced models with robust tool calling capabilities.
-
-#### ✅ Recommended Models
-
-**OpenAI:**
-- `gpt-5.2` - Latest, best overall performance (recommended)
-- `gpt-5.1` - Excellent tool coordination and reasoning
-- `gpt-5` - Solid performance with tool calling
-- `gpt-5.5-mini` - Budget-friendly option with good tool support
-
-**Azure OpenAI:**
-- `gpt-5.2` - Same as OpenAI, but hosted in Azure
-- `gpt-5.1` - Robust enterprise option
-
-**Google Gemini:**
-- `gemini-2.5-pro` - Latest stable version (recommended)
-- `gemini-2.5-flash` - Faster, cost-effective option
-
-#### ❌ Models NOT Compatible with AI Chat
-
-- ❌ `gpt-4o`, `gpt-4-turbo`, `gpt-4` - Older generation, incompatible tool calling
-- ❌ `gpt-3.5-turbo` - No advanced tool coordination
-- ❌ `gemini-1.5-pro`, `gemini-1.5-flash` - Older Gemini versions not supported
-
-**Why model choice matters:** AI Chat uses advanced "function calling" to execute multiple tools in complex sequences. Only GPT-5+ and Gemini 2.5+ models have the necessary capabilities to:
-- Chain multiple tool calls together
-- Handle errors and retry with different approaches
-- Maintain context across long conversations
-- Understand when to use specific tools
+Choose a model that supports tool calling with your configured provider. For Azure OpenAI, set `AIModel` to the deployment name. The CMS plugin passes the configured model to the AI service. Check the provider's documentation for availability and supported features.
 
 ---
 
 ### Step 7: Configure Role-Based Access (Optional)
 
-By default, all authenticated CMS users can access AI Chat. To restrict access to specific roles:
+The editor uses `ChatRoles` to decide whether to show AI Chat. Its CMS endpoints require membership in at least one of `AIEditors`, `WebEditors`, `WebAdmins`, `CmsAdmins`, or `CmsEditors`.
 
-**Example: Restrict to admins only**
-```json
-"ChatRoles": ["CmsAdmins", "WebAdmins"]
-```
-
-**Example: Allow specific editor roles**
-```json
-"ChatRoles": ["CmsEditors", "WebEditors", "AIEditors", "CmsAdmins"]
-```
-
-**Example: Custom roles**
-```json
-"ChatRoles": ["ContentCreators", "SEOSpecialists"]
-```
-
-**To allow all users:** Simply omit the `ChatRoles` setting or set it to an empty array:
-```json
-"ChatRoles": []
-```
-
-Make sure users are assigned these roles in Optimizely's admin interface under:  
-**Admin → Administer Groups**
+- Set `ChatRoles` to `["CmsAdmins", "WebAdmins"]` to show AI Chat only to those admins.
+- You can filter the editor UI by custom roles such as `["ContentCreators", "SEOSpecialists"]`. Assign each user a built-in endpoint role as well.
+- Omit `ChatRoles` or set it to `[]` to leave the button visible to editors on enabled sites. Endpoint authorization still applies.
 
 ---
 
@@ -350,10 +303,11 @@ Create a folder structure in your project:
 ```
 YourProject/
   Instructions/
-    chat/
-      global.md          # Overall behavior
-      general.md         # Content guidelines
-      context.md         # Context handling rules
+    Chat/
+      Global.md          # Chat without a content context
+      Context.md         # Chat with a content context
+    General/
+      Default.md         # Shared instructions
     ContentType/
       ProductPage.md     # Product-specific rules
       NewsPage.md        # News-specific rules
@@ -365,7 +319,7 @@ YourProject/
 
 #### 2. Example: Global Instructions
 
-**Instructions/chat/global.md**
+**Instructions/Chat/Global.md**
 ```markdown
 # AI Chat Instructions for Acme Corporation
 
@@ -631,7 +585,7 @@ AI: "✅ Spanish translation complete and published:
 
 You can directly reference tools in your chat messages using the `@` symbol. This helps you:
 - Discover available tools quickly
-- Explicitly invoke specific tools
+- Refer to a specific tool in your request
 - See tool parameters and descriptions
 
 **How to use @ mentions:**
@@ -655,70 +609,16 @@ AI: [Updates the SEO title]
 
 ### Loading Tool Packs
 
-Instead of waiting for the AI to auto-load tools, you can explicitly load tool packs:
+Ask chat to load a pack by name, for example `Load the Update tool pack`. You can ask chat to list available packs first. Availability depends on the tool types your application registered.
 
-**Syntax:**
-```
-@LoadToolPack "toolpack-name"
-```
+- `Update` updates content properties.
+- `Publish` provides publishing, unpublishing, scheduling, and language-version operations.
+- `Create` provides page and block creation tools.
+- `Image` provides image analysis tools.
+- `ContentLookup` finds content by name or URL.
+- `ContentDetails` reads properties and version details.
 
-**Available Tool Packs:**
-- `update` - Content update tools
-- `publish` - Publishing and scheduling tools
-- `create` - Content creation tools
-- `image` - Image analysis and generation tools
-- `workcontent` - Content reading and search tools
-
-**Examples:**
-
-```
-You: "@LoadToolPack update"
-AI: "✅ Update tool pack loaded! You can now:
-     - Update content properties
-     - Create drafts
-     - Modify multiple fields
-     
-     What would you like to update?"
-
-You: "@LoadToolPack publish"
-AI: "✅ Publish tool pack loaded! Available operations:
-     - Publish content
-     - Unpublish content
-     - Schedule publishing
-     - Check publish status"
-
-You: "@LoadToolPack create"
-AI: "✅ Create tool pack loaded! You can now:
-     - Create Language Version
-     - Create blocks
-     - Set up content structure"
-```
-
-**Why load tool packs explicitly?**
-- **Faster responses** - Tools are ready immediately
-- **See capabilities** - AI lists what you can do with the pack
-- **Control context** - Only load what you need for your task
-- **Troubleshoot** - Verify tools are working correctly
-
-**Pro workflow example:**
-
-```
-You: "@LoadToolPack update"
-AI: "✅ Update tool pack loaded!"
-
-You: "Update the SEO title on this page to include our brand name"
-AI: [Uses UpdateContentProperty tool]
-AI: "✅ SEO title updated to: 'Sustainable Products | Acme Corporation'"
-
-You: "@LoadToolPack publish"
-AI: "✅ Publish tool pack loaded!"
-
-You: "Schedule this page to publish tomorrow at 9 AM"
-AI: [Uses SchedulePublish tool]
-AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
-```
-
-**Tip:** You can load multiple tool packs in one session. The AI will remember which packs are loaded and use the appropriate tools for your requests.
+After a pack loads, ask for the action you need. For example, load `Publish` and ask to schedule the current page for tomorrow at 9 AM.
 
 ---
 
@@ -729,12 +629,12 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 **Possible causes:**
 - `EnableChat` is `false` in appsettings.json
 - User role not in `ChatRoles` array (if roles are configured)
-- Hub endpoint not registered
+- AI Assistant disabled for the current site
 
 **Solution:**
 1. Verify `appsettings.json` has `"EnableChat": true`
 2. If using role-based access, check user is in allowed role
-3. Confirm `endpoints.MapAIAssistantHub()` is in Startup.cs
+3. Check `Epicweb:AIAssistant:DisabledSites`
 
 ---
 
@@ -742,12 +642,12 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 
 **Possible causes:**
 - Tools not registered in Startup.cs
-- Using incompatible AI model (must be GPT-5+ or Gemini 2.5+)
+- The configured provider or model lacks tool calling for this workflow
 - API errors or rate limits
 
 **Solution:**
 1. Verify all `RegisterMcpToolType` calls in Startup.cs
-2. **Check you're using GPT-5, GPT-5.1, GPT-5.2, GPT-5.5-mini, or Gemini 2.5+**
+2. Check that the configured model supports tool calling with your provider
 3. Review application logs for errors
 4. Check OpenAI dashboard for API status
 
@@ -756,14 +656,12 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 ### "Model not supported" or Tool Calling Fails
 
 **Possible causes:**
-- Using older model (GPT-4, GPT-4o, Gemini 1.5)
-- Model doesn't support advanced function calling
+- The model ID or Azure deployment name is incorrect
+- The provider or model lacks the required tool calling support
 
 **Solution:**
-1. **Update to GPT-5 or later** (gpt-5, gpt-5.1, gpt-5.2, gpt-5.5-mini)
-2. **For Gemini, use 2.5 or later** (gemini-2.5-pro, gemini-2.5-flash)
-3. Verify model name is correct in appsettings.json
-4. Check provider documentation for model availability
+1. Verify `ProviderName` and `AIModel` in `appsettings.json`
+2. Check your provider's model availability and tool calling support
 
 ---
 
@@ -774,7 +672,7 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 - Tool not registered for chat scope
 
 **Solution:**
-1. Ensure tool has `[ToolScope(ToolScope.Chat)]` attribute
+1. Check that the tool's registration and attributes allow the Chat scope
 2. Verify tool is in a registered `McpServerToolType` class
 3. Check tool name matches exactly (case-sensitive)
 
@@ -810,7 +708,7 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 
 ### ✅ Do's
 
-- **Start with built-in tools** - They cover 90% of use cases
+- **Start with built-in tools** - Use them for common CMS operations
 - **Test with simple commands** - "What's on this page?" before complex operations
 - **Review before publishing** - Always check AI suggestions
 - **Use specific instructions** - Clear requests get better results
@@ -821,7 +719,6 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 ### ❌ Don'ts
 
 - **Don't blindly publish** - Always review AI-generated content
-- **Don't use old models** - Must be GPT-5+ or Gemini 2.5+
 - **Don't attach too much** - Keep context focused and relevant
 - **Don't skip testing** - Verify changes in staging first
 - **Don't ignore errors** - Check logs and fix configuration issues
@@ -838,12 +735,7 @@ AI: "✅ Scheduled for January 16, 2024 at 9:00 AM"
 
 2. **Cache common operations** in custom tools
 
-3. **Use Azure OpenAI** for enterprise pricing and limits
-
-**Estimated Costs (OpenAI, approximate):**
-- Simple request (1-2 tools): $0.01-0.03
-- Complex workflow: $0.05-0.15
-- Translation task: $0.08-0.20
+Costs depend on the configured model, the context size, and how many requests the workflow makes. Check usage and pricing with the configured provider.
 
 ---
 

@@ -1,4 +1,4 @@
-# AI Assitance for DBLocalizationProvider
+# AI Assistant for DbLocalizationProvider
 
 ## Introduction
 The LocalizationProvider is a powerful tool designed to enhance the localization capabilities of Optimizely CMS. It allows editors to manage translations efficiently and effectively, ensuring that applications can cater to a global audience.
@@ -18,9 +18,13 @@ To get started with the LocalizationProvider, download the package: `Epicweb.Opt
 To integrate the LocalizationProvider into your application, add the following service in your Startup configuration:
 
 ```csharp
+using Epicweb.Optimizely.AIAssistant.DbLocalizationProvider;
+
 services.AddAIAssistantDbLocalizationProvider();
 ```
 
 ### Dependencies
 
-The package is dependent on the `Epicweb.Optimizely.AIAssistant` and `Epicweb.Optimizely.AIAssistant.LanguageManager` package.
+Register [AI Assistant](installation.md) and DbLocalizationProvider before adding the integration. It registers AI Assistant's translation service as the DbLocalizationProvider translator and uses the existing AI Assistant settings.
+
+The package depends on `Epicweb.Optimizely.AIAssistant.LanguageManager`, which depends on the base AI Assistant package. The .NET 8 build uses `DbLocalizationProvider.AdminUI.EPiServer` 8.2.4 through 8.x. The .NET 10 build uses 9.x.

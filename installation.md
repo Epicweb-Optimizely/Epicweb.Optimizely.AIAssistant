@@ -4,21 +4,21 @@ The installation should be done by a developer who has access to the source code
 
 Install it thru nuget package management:  https://nuget.optimizely.com/package/?id=Epicweb.Optimizely.AIAssistant
 
-For demo and evaluation, the only required configuration is to include the **AI**HINT attribute for the property.
+For property-level assistance, register AI Assistant and enable it on the properties or TinyMCE toolbars you want to use.
 
 1. Add to startup.cs: ```services.AddAIAssistant(); ```
 
-2. Decorate your string property with [UIHint(AIHint.Image)], [UIHint(AIHint.Textarea)] or [UIHint(AIHint.Input)] for single line strings
+2. Use `[UIHint(AIHint.Input)]` or `[UIHint(AIHint.Textarea)]` for `string` properties. Use `[UIHint(AIHint.Image)]` for image properties of type `ContentReference` or `Url`.
 
 3. Decorate properties with [AIUseToAnalyzeContent] - used to analyze a page or block for important content if referred - add this only on properties that give meaning for the context
 
 4. Add "ai_assistant_execute ai_assistant_choices ai_assistant_image" to Toolbar in TinyMceConfiguration
 
-5. Use [AIAssistant]-attribute to configure properties and give assistant instruction => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#aiassistant
+5. Use the [`AIAssistant` attribute](configuration.md#aiassistant-attribute) to configure properties and supply instructions.
 
-6. For image generations to work, you need to register an account and create a api-key https://platform.openai.com/account/api-keys => then add it to appsettings.json "Epicweb": { "AIAssistant": { "ApiKey": "sk-4ks...." }}
+6. For image generation, configure the [image provider and its credentials](configuration.md#image-generation).
 
-7. For global instructions to AI Assistant => implement IAssistantInstructionsResolver => https://github.com/Epicweb-Optimizely/Epicweb.Optimizely.AIAssistant/blob/master/configuration.md#iassistantinstructionsresolver
+7. For global instructions, see [`IAssistantInstructionsResolver`](configuration.md#iassistantinstructionsresolver) and [embedded instructions](chat-instructions.md#customizing-chat-instructions).
 
 8. For Analyzing Images use [AnalyzeImageAltText], [AnalyzeImage] on imagedata models properties and add ```app.AddImageAnalyzer();``` in startup.
 
@@ -26,6 +26,7 @@ For demo and evaluation, the only required configuration is to include the **AI*
 
 Register the tools in `Startup.cs`:
 ```csharp
+using Epicweb.Optimizely.AIAssistant;
 using Epicweb.Optimizely.AIAssistant.Tools;
 
 services
@@ -36,32 +37,24 @@ services
    .RegisterMcpToolType(typeof(BuiltinChatTools)) 
    .RegisterMcpToolType(typeof(BuiltinPublishChatTools))
    .RegisterMcpToolType(typeof(BuiltinUpdateChatTools))   
+   .RegisterMcpToolType(typeof(BuiltinCreateChatTools))
    .RegisterMcpToolType(typeof(VisitorGroupTools))  // Visitor group discovery for AI context
    .RegisterMcpToolType(typeof(DisplayOptionTools))// Use this to understand what display options are available for ContentArea items.
    .RegisterMcpToolType(typeof(BuiltinChatImageTools)) //only together with image analysation module (licensed)
    .RegisterMcpToolType(typeof(BuiltinChatCreateImageTools));//only Image Creation Instructions, only together with image generation module (licensed)
-
-
-   // ... other registrations
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapControllers();
-        endpoints.MapContent();
-        endpoints.MapAIAssistantHub(); // Required when Chat is enabled
-    });
 ```
 
-**Note:** Built-in tools are essential for AI Chat functionality and enable features like content reading, updates, publishing, and image operations.
+Register the built-in tools for the CMS operations you want chat to perform, such as reading content, editing pages, publishing, or analysing images.
 
-10. **[NEW in 3.0]** Enable AI Chat Window - Add to `appsettings.json`:
+10. To enable AI Chat, add these settings to `appsettings.json`.
 ```json
 {
   "Epicweb": {
     "AIAssistant": {
       "ApiKey": "sk-...",
       "EnableChat": true,
-      "ChatRoles": ["AIEditors", "WebEditors", "WebAdmins", "CmsAdmins", "CmsEditors"], // Roles that can access the chat
-      "MaxToolIterations": 8 // Prevent infinite loops in tool calling
+      "ChatRoles": ["AIEditors", "WebAdmins"],
+      "MaxToolIterations": 8
     }
   }
 }
@@ -69,20 +62,21 @@ services
 
 **Configuration Options:**
 - `EnableChat` - (bool) Enables the AI Chat window in CMS toolbar. Default: `false`
-- `ChatRoles` - (string[]) User roles that have access to AI Chat. Default: `["AIEditors", "WebEditors", "WebAdmins", "CmsAdmins", "CmsEditors"]`
+- `ChatRoles` filters who sees AI Chat in the CMS editor. The list is unset by default. The CMS chat endpoints require one of `AIEditors`, `WebEditors`, `WebAdmins`, `CmsAdmins`, or `CmsEditors`.
 - `MaxToolIterations` - (int) Maximum number of tool call iterations to prevent infinite loops. Default: `8`
 
 **IMPORTANT:** When `EnableChat` is `true`, you must also register the endpoints.MapAIAssistantHub hub in your `Startup.cs`:
-**IMPORTANT:** With the chat it is important to use the right model, do not use GPT-4 legacy models nor Gemini flash 1.5
+Use a provider and model that support tool calling for chat workflows that use tools.
 
 ```csharp
-using Epicweb.Optimizely.AIAssistant.Hub;
+using Epicweb.Optimizely.AIAssistant;
+using Epicweb.Optimizely.AIAssistant.Tools;
 
 public void ConfigureServices(IServiceCollection services)
 {    
     services
         .AddAIAssistant()
-        .RegisterMcpToolType(typeof(BuiltinChatTools))
+        .RegisterMcpToolType(typeof(BuiltinChatTools));
         // ... other registrations
 }
 
@@ -104,14 +98,14 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 For a free evaluation without any licensing messages in the production environment, please complete the form at https://aiassistant.optimizely.blog
 
-## AI Chat Feature (New in 3.0)
+## AI Chat Feature
 
 The AI Chat feature provides a conversational interface for content editors to interact with AI directly in the CMS.
 
 ### Getting Started with AI Chat
 
 1. **Enable Chat** in `appsettings.json` (see step 10 above)
-2. **Register Tools** - Chat requires tools to be registered for full functionality
+2. **Register Tools** for the CMS operations you want to enable
 3. **Configure Roles** - Specify which user roles can access the chat
 4. **Customize Instructions** - Optional: Add custom chat instructions (see below)
 
@@ -119,7 +113,7 @@ The AI Chat feature provides a conversational interface for content editors to i
 
 For detailed information on using AI Chat, see:
 - [AI Chat - Getting Started Guide](chat-instructions.md) - Complete guide to using the chat feature
-- [AI Tools - Function Calling and MCP](Tools.md) - Understanding and creating custom tools
+- [AI Tools - Function Calling and MCP](tools.md) - Understanding and creating custom tools
 
 ### Chat Configuration in appsettings.json
 
@@ -129,11 +123,11 @@ Full configuration example:
   "Epicweb": {
     "AIAssistant": {
       "ApiKey": "sk-...",
-      "Provider": "OpenAI",
-      "Model": "gpt-5.2",
+      "ProviderName": "OpenAI",
+      "AIModel": "gpt-5.2",
       "EnableChat": true,
-      "ChatRoles": ["AIEditors", "WebEditors", "WebAdmins", "CmsAdmins", "CmsEditors"], // Roles that can access the chat
-      "MaxToolIterations": 8 // Prevent infinite loops in tool calling
+      "ChatRoles": ["AIEditors", "WebAdmins"],
+      "MaxToolIterations": 8
     }
   }
 }
@@ -143,10 +137,9 @@ Full configuration example:
 
 You can customize AI Chat behavior by creating instruction files:
 
-1. Create `Instructions/chat/` folder in your project
-2. Add markdown files (e.g., `global.md`, `general.md`)
-3. Mark as Embedded Resource in `.csproj`
-4. Register in `Startup.cs`:
+1. Add the relevant [instruction files](chat-instructions.md#customizing-chat-instructions). For example, `Instructions/Chat/Global.md` applies to chat without a content context.
+2. Mark the Markdown files as embedded resources in `.csproj`.
+3. Register the application assembly with `AddEmbeddedInstructionStore()`.
 
 ```csharp
 services.AddAIAssistant()
@@ -158,11 +151,15 @@ services.AddAIAssistant()
 
 See [Chat Instructions Guide](chat-instructions.md) for more details.
 
+## Administration and SEO Manager access
+
+Assign `AIEditors` or `WebAdmins` to give a user access to the AI Assistant administration pages. To give another CMS role access to SEO Manager, enable `EnableSeoManager` and add the role to `AIAssistantSEOManager` under `Epicweb:AIAssistant` in `appsettings.json`. See [admin roles and configuration examples](admin-features.md#accessing-administration).
+
 ## Further Configurations
 
 [More configuration](configuration.md) - General configuration options
 
-[AI Tools - Function Calling and MCP](Tools.md) - Complete guide to AI tools, including creating custom tools
+[AI Tools - Function Calling and MCP](tools.md) - Complete guide to AI tools, including creating custom tools
 
 [Configuration translations](configuration-translations.md) - Translation settings
 
@@ -172,13 +169,12 @@ See [Chat Instructions Guide](chat-instructions.md) for more details.
 
 ## Dependencies
 
-Episerver.CMS > 12.18
+The NuGet package has separate builds for each CMS major version.
 
-Episerver.Commerce > 14
-
-Episerver.CMS > 13
-
-Episerver.Commerce > 15
+| Optimizely CMS | .NET target |
+| --- | --- |
+| 12.18 or later in the 12.x series | .NET 8 |
+| 13.x | .NET 10 |
 
 ## Discussions and feedback
 

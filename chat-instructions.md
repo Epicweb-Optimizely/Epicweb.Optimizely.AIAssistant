@@ -4,7 +4,7 @@ The AI Chat is a powerful conversational interface that brings AI assistance dir
 
 ## What is AI Chat?
 
-AI Chat is a standalone chat window that can be opened from anywhere in the Optimizely CMS interface. It provides:
+AI Chat opens in a side pane in Optimizely CMS when chat is enabled and you have access. It provides:
 
 - **Conversational AI assistance** - Ask questions and get intelligent responses
 - **Context-aware help** - Understands the content you're working with
@@ -17,23 +17,21 @@ AI Chat is a standalone chat window that can be opened from anywhere in the Opti
 
 ### From the CMS Interface
 
-1. Look for the **AI Chat** button in the Optimizely CMS toolbar
-2. Click the button to open the chat window
-3. The chat opens in a floating window that you can move and resize
+1. Click **AI** in the Optimizely CMS toolbar to open the chat pane.
+2. Start with the current page, choose **Ask me anything** to start without page context, or select an available assistant.
 
 ### Chat Window Features
 
-- **Movable and resizable** - Position it anywhere on your screen
-- **Minimizable** - Hide it when not needed
-- **Persistent** - Stays open while you navigate through CMS
-- **Session-based** - History is maintained during your work session
+- Drag the divider to resize the side pane.
+- Click the toolbar button again to hide or reopen the pane.
+- Chat history is stored for the current browser tab session.
 
 ## Basic Chat Usage
 
 ### Starting a Conversation
 
 1. Type your question or request in the input field at the bottom
-2. Press **Enter** or click the **Send** button
+2. Press **Enter** or click **Send**. Use **Shift+Enter** to add a line break.
 3. The AI will process your request and respond
 
 ### Example Questions
@@ -59,14 +57,15 @@ The chat can understand and work with content through the **Context System**.
 
 ### Setting Context
 
-#### Automatic Context
-When you open chat from a content item, it automatically becomes the context.
+#### Start with a content item
+
+Choose the option to start with the current page on the chat start screen. Use the context overlay to switch the active content during the conversation.
 
 #### Manual Context (Using Context Overlay)
 1. Click the **status text** in the chat header (shows current context/attachments)
 2. The **Context Overlay** opens
-3. Drag content from CMS or use the context drop zone
-4. It auto saves when you close the overlay
+3. Drag a CMS item to the context drop zone.
+4. Click **Save Changes** to apply the new context.
 
 ### Context File vs Attached Files
 
@@ -87,7 +86,7 @@ When you open chat from a content item, it automatically becomes the context.
 #### Reorder Files
 - **Drag & drop** - Use the handle (≡) to reorder
 - **Arrow buttons** - Use ⬆️ and ⬇️ to move one position
-- Files at the top have higher priority for AI processing
+- The order is saved when you click **Save Changes**.
 
 #### Remove Files
 - Click trash icon (🗑️) on individual files
@@ -119,12 +118,14 @@ The AI Assistant comes with several tool packs:
 
 | Tool Pack | Purpose |
 |-----------|---------|
-| **Core Tools** | Always available - basic content operations |
-| **Work Content** | Read and search content, get properties |
-| **Update** | Update content properties and fields |
-| **Publish** | Publishing and scheduling operations |
-| **Create** | Create new pages, blocks, and content |
-| **Image** | Image analysis and manipulation |
+| `ContentLookup` | Find and browse CMS content |
+| `ContentDetails` | Read properties and versions |
+| `Update` | Update content properties |
+| `Publish` | Publish, unpublish, schedule, or create a language version |
+| `Create` | Discover content types and create pages or blocks |
+| `Image` | Analyze images and read image properties |
+
+Use `ListAvailableToolPacks` to see which packs are available in your installation.
 
 ### Loading Tool Packs
 
@@ -164,7 +165,7 @@ In property fields with AI assistance:
 #### Content Reading
 ```
 "Get the MainBody property from this page"
-→ Uses GetContentProperty tool
+→ Uses GetContentProperties to read the available fields and values
 
 "Show all child pages"
 → Uses GetChildContent tool
@@ -176,7 +177,7 @@ In property fields with AI assistance:
 #### Content Updates
 ```
 "Update the page heading to 'Welcome to Our Site'"
-→ Uses UpdateContentProperty tool
+→ Uses UpdateMultiplePropertiesOnPageOrBlock
 
 "Change the preamble text"
 → Uses content update tools
@@ -185,7 +186,7 @@ In property fields with AI assistance:
 #### Publishing
 ```
 "Publish this page"
-→ Uses PublishContent tool
+→ Uses PublishOrUnpublishContent
 
 "Schedule this page for tomorrow at 10am"
 → Uses scheduling tools
@@ -199,11 +200,10 @@ The AI behavior is controlled by a priority-based instruction system.
 
 | Category | Purpose | Example |
 |----------|---------|---------|
-| **Global** | Overall chat behavior | How to respond, tone, guidelines |
-| **Context** | How to handle context | When to fetch content, what to include |
-| **General** | Content editing guidelines | SEO, accessibility, formatting |
-| **ContentType** | Page/block specific rules | Instructions for ProductPage, NewsPage |
-| **Field** | Property-specific guidance | Rules for specific properties |
+| `Chat/Global` | Chat without page context | Instructions for **Ask me anything** |
+| `Chat/Context` | Chat started with a page | Editorial guidelines for working with CMS context |
+| `General/Default` | General instructions appended to chat instructions | Brand voice and content guidelines |
+| `ContentType/<key>` | Instructions for an annotated page or block model | Rules for pages marked with `[AIInstructions(Key = "ProductPage")]` |
 
 ### How Instructions Work
 
@@ -221,15 +221,16 @@ Create markdown files in your project:
 ```
 YourProject/
   Instructions/
-    chat/
-      global.md          # Overall chat behavior
-      general.md         # General guidelines
-      context.md         # Context handling
+    Chat/
+      Global.md          # Chat without page context
+      Context.md         # Chat started with a page
+    General/
+      Default.md         # Instructions shared across chat modes
     ContentType/
-      ProductPage.md     # Product-specific rules
-    Field/
-      MainBody.md        # Field-specific rules
+      ProductPage.md     # Rules for a content type with the ProductPage instruction key
 ```
+
+To apply `ProductPage.md` in chat, add `[AIInstructions(Key = "ProductPage")]` to the page model.
 
 #### 2. Mark as Embedded Resources
 
@@ -255,7 +256,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Example Custom Instruction
 
-**Instructions/chat/global.md**
+**Instructions/Chat/Global.md**
 ```markdown
 # Company Chat Guidelines
 
@@ -309,10 +310,7 @@ The chat maintains conversation history:
 
 ### Clearing History
 
-```
-"Clear chat history"
-"Start a new conversation"
-```
+Click **Reset chat** in the chat header to clear the message history and return to the start screen.
 
 ## Chat Settings
 
@@ -324,7 +322,7 @@ Access settings by clicking the **settings/gear icon** in the chat window header
 
 **Display System Messages**
 - **Purpose**: Show or hide technical system messages and tool execution details
-- **Default**: Enabled
+- **Default**: Disabled
 - **Use case**: Enable to see what tools the AI is using and how it's processing requests. Disable for a cleaner chat experience.
 
 **Custom Instructions**
@@ -344,15 +342,15 @@ Access settings by clicking the **settings/gear icon** in the chat window header
 1. Open the chat window
 2. Click the **⚙️ Settings** icon in the chat header
 3. Adjust preferences as needed
-4. Settings are saved automatically when you change them
+4. Toggle changes save immediately. Close **Preferences** to save changes to **Custom Instructions**.
 
 ### Custom Instructions Usage
 
 When you first start a chat, the default instructions populate the Custom Instructions field. You can:
 - **View** the current instructions being used
 - **Edit** them to customize AI behavior for this session
-- **Clear** them to revert to defaults
-- Instructions are **session-specific** - they don't affect other users or persist after browser refresh
+- **Clear** them to use the configured defaults on subsequent requests.
+- The browser keeps custom instructions in the current tab session, including across a refresh.
 
 **Example Custom Instructions:**
 ```
@@ -396,10 +394,7 @@ When Console Debug Mode is enabled, you'll see detailed logs including:
 
 ### Working with Selected Text
 
-1. Select text in a content property
-2. Open chat
-3. The selected text becomes available to the AI
-4. Ask to improve, translate, or modify it
+Paste the text into chat when you want to work with an excerpt. To edit a selection directly in TinyMCE, use the AI controls in the editor toolbar.
 
 ### Bulk Operations
 
@@ -443,12 +438,12 @@ The chat works alongside property-level AI assistance:
 ### Tool Loading Fails
 
 1. **Check tool registration** - Verify tools are registered in `Startup.cs`
-2. **Check scope** - Ensure tools are registered for chat scope
+2. **Check scope and tool pack** - Ensure the tool is available to chat and load its pack when required
 3. **Review logs** - Look for tool scanning errors
 
 ### Performance Issues
 
-1. **Reduce history** - Lower `MaxHistoryMessages` in settings
+1. **Start a fresh chat** when the previous conversation is no longer relevant
 2. **Optimize context** - Only attach necessary content
 3. **Use specific requests** - Avoid overly broad questions
 
@@ -499,7 +494,7 @@ AI: [Publishes] "Spanish version published."
 
 ```
 You: "Optimize SEO for all product pages"
-AI: [Loads Work Content tools] "Found 25 product pages. Should I analyze?"
+AI: [Loads ContentLookup and ContentDetails] "Found 25 product pages. Should I analyze?"
 You: "Yes"
 AI: [Analyzes] "Here are recommendations: ..."
 You: "Apply to pages with missing descriptions"
@@ -510,7 +505,7 @@ AI: [Displays content] "Here's the first page: ..."
 
 ## Next Steps
 
-- **Explore Tools** - Learn about [AI Tools and Function Calling](Tools.md)
+- **Explore Tools** - Learn about [AI Tools and Function Calling](tools.md)
 - **Customize Instructions** - Create project-specific guidelines
 - **Configure Providers** - Set up Azure, Gemini, or custom AI
 - **Learn Shortcuts** - [Speed up common tasks with shortcuts](./promptshortcuts.md)
@@ -519,7 +514,7 @@ AI: [Displays content] "Here's the first page: ..."
 ## Additional Resources
 
 - [Main Documentation](README.md)
-- [AI Tools Reference](Tools.md)
+- [AI Tools Reference](tools.md)
 - [Configuration Guide](configuration.md)
 - [User Manual](user-manual.md)
 - [FAQ](faq.md)

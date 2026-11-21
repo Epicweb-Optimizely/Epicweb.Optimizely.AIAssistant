@@ -1,13 +1,11 @@
 # Bring your own AI to the AI-Assistant
 
-This allows you to incorporate custom logic and utilize your preferred Large Language Models (LLMs) such as Meta Llama AI, Google Gemini AI, Anthropic Claude AI, or any other AI that offers a REST API in cloud or on prem.
+Use the `CustomAI` provider to route AI Assistant requests to a service you operate. That service can call a language model or implement your own processing.
 
 ## How it works
 
-The plugin in Optimizely is easily configured so it will talk to your Azure Function service where your company can implement any AI or any custom logic
+The Optimizely plugin sends its request to the Epicweb AI service, including the configured provider, `ServiceUrl`, and any `CustomJson`. The Custom AI endpoint specified by `ServiceUrl` must be reachable from the AI service.
 
 ## Dev documentation
 
-We do offer a repository with a Azure Function boilerplate template for integrating a Custom AI or custom implementation of the AI-Assistant within Optimizely
-
-[Read how to config CustomAI-provider](src/Epicweb.Azure.Function.CustomAI/readme.md)
+The [Azure Function sample](src/Epicweb.Azure.Function.CustomAI/readme.md) shows the request and response contracts and how to set `Epicweb:AIAssistant:ProviderName` to `CustomAI`.

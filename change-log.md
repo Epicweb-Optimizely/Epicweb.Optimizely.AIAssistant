@@ -1,5 +1,12 @@
 # Change log
 
+## 5.5 - 2026-11-25 
+
+- Introducing SEO Manager
+
+## 5.4.2.1 - 2026-11-15 CMS 13
+
+- Updated Visual Builder styling. [Optimizely package release notes](https://nuget.optimizely.com/packages/epicweb.optimizely.aiassistant/5.4.2.1)
 
 ## 5.4.2 - 2026-10-18 CMS 13
 - Compatibility with GPT-6 versions
@@ -15,6 +22,10 @@
 
 - CMS 13 specific package for Optimizely Content Cloud 13.x and .NET 10
 
+## 4.5 - 2026-11-25 
+
+- Introducing SEO Manager
+
 ## 4.4.2 - 2026-10-18 CMS 12
 - Compatibility with GPT-6 versions
 - new tools for create blocks and pages
@@ -27,7 +38,7 @@
 
 ## 4.4.0 - 2026-09-25
 
-- CMS 12 specific package for Optimizely Content Cloud 12.x compat with .net 8 and 10
+- Separate CMS 12 package with a .NET 8 target.
 
 ## 4.2.4 - 2026-09-17
 - Bugfix, path to plugin wrong in some configurations
