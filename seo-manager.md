@@ -2,6 +2,22 @@
 
 SEO Manager is part of Epicweb AI Assistant. It lets editors scan a site or a section of the page tree for missing or overly long SEO titles and meta descriptions, review AI suggestions based on the page content, and save the changes as Optimizely drafts.
 
+## Screen shots
+
+### Scanning site
+
+<img width="1382" height="749" alt="image" src="https://github.com/user-attachments/assets/a11ef6a0-3102-4cb5-a794-2ce884cb51be" />
+
+
+### Review the list, one page at the time
+
+<img width="1384" height="881" alt="image" src="https://github.com/user-attachments/assets/885f6f90-9684-4926-abbe-d7b2728f7a64" />
+
+### Review the SEO fields
+
+<img width="386" height="815" alt="image" src="https://github.com/user-attachments/assets/92bd894f-4ad5-41e7-9591-3f4c08146bd3" />
+
+
 ## Enable SEO Manager
 
 SEO Manager works with AI Chat turned off. If this is the site's first AI Assistant feature, install the `Epicweb.Optimizely.AIAssistant` NuGet package for your CMS version and register it in startup. If the site already calls `AddAIAssistant()`, reuse that registration. It includes SignalR and the background scan service. See the [package installation guide](installation.md).
