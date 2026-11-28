@@ -85,12 +85,37 @@ public virtual string MetaDescription { get; set; }
 
 Each mapped property must be a readable and writable `string`. Map each `SeoFieldType` at most once per page type. Pages without mapped SEO properties are skipped. The scan reads the common draft for the selected language when one exists, with the published version as a fallback. It checks mapped titles for missing values and lengths over 60 characters, and mapped descriptions for missing values and lengths over 160 characters. You can map an optional keywords field with `[SeoField(SeoFieldType.Keywords)]`.
 
+### Description fallbacks
+
+Declare fallbacks on the mapped metadata property, in the order your site uses them. A base page model can include fields that exist only on specific page types.
+
+```csharp
+[CultureSpecific]
+[SeoField(SeoFieldType.Description, nameof(TeaserText), nameof(StandardPage.Excerpt))]
+public virtual string MetaDescription { get; set; }
+```
+
+In this example, both page types inherit `MetaDescription` and `TeaserText`. Only `StandardPage` defines `Excerpt`.
+
+| Page type | Fields checked in order |
+| --- | --- |
+| `StandardPage` | `MetaDescription`, `TeaserText`, `Excerpt` |
+| `LandingPage` | `MetaDescription`, `TeaserText` |
+
+Scan and Review use the first value containing text on the selected language version. SEO Manager skips fallback properties absent from the current page type. Each fallback property present on that type must be a publicly readable, non-indexed `string` distinct from the mapped field.
+
+Review shows the active fallback source. Saving an override updates `MetaDescription`. Clearing it restores the fallback. To render the same description in the public page template, use `ISeoFieldResolver.Resolve(type).GetEffectiveValue(page, SeoFieldType.Description)`.
+
+An empty effective description is missing. A description of 1 to 69 trimmed characters gets the editorial reminder **Review description**. This reminder allows saving and publishing.
+
+## Customize AI suggestions
+
+For each suggestion request, SEO Manager first loads the general assistant instructions through `IAssistantInstructionsResolver.GetInstructions(page.Language)`. It then appends the SEO metadata instructions and response rules. Suggested metadata uses the page language. Analysis comments use the editor's preferred UI language, with English as the default.
+
+To customize the SEO instructions, override `Instructions/SeoManager/Metadata.md` or add a language-specific file such as `Metadata.sv.md`. See the [SEO Manager metadata prompt setup](chat-instructions.md#seo-manager-metadata-prompts).
+
 ## Find pages and review metadata
 
 1. Open **SEO Manager** in the **AI Assistant** menu. Choose a site and language, narrow the scope by subtree or page type as needed, and click **Find pages**.
 2. Open a result to review its metadata. Edit the draft values directly or use **Analyse and suggest** to review suggestions for the mapped fields. Use **Generate** or **Regenerate** to request a suggestion for an individual field.
 3. Click **Use suggestion** to copy a suggestion into the draft value, then click **Save draft**. Users with publish access can publish the saved draft from SEO Manager after the language version has been published at least once in the CMS.
-
-## Customize AI suggestions
-
-SEO Manager generates suggestions in the page's language. To adapt the wording to your brand or market, override `Instructions/SeoManager/Metadata.md` or add a language-specific file such as `Metadata.sv.md`. See the [SEO Manager metadata prompt setup](chat-instructions.md#seo-manager-metadata-prompts).
